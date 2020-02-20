@@ -1,3 +1,12 @@
+
+Libraries required for OpenGL:
+
+sudo apt-get install freeglut3
+sudo apt-get install freeglut3-dev
+
+
+Some stuff from original author.
+
 Copyright Notice:
 -----------------
 The files within this zip file are copyrighted by Lazy Foo' Productions (2004-2013)
