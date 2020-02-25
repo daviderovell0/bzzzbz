@@ -1,3 +1,7 @@
+g++ LUtil.cpp main.cpp -w -lGL -lGLU -lglut -o 01_hello_freeglut
+
+
+
 Copyright Notice:
 -----------------
 The files within this zip file are copyrighted by Lazy Foo' Productions (2004-2013)
