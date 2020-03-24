@@ -1,6 +1,12 @@
 g++ LUtil.cpp main.cpp -w -lGL -lGLU -lglut -o 01_hello_freeglut
 
+Libraries required for OpenGL:
 
+sudo apt-get install freeglut3
+sudo apt-get install freeglut3-dev
+
+
+Some stuff from original author.
 
 Copyright Notice:
 -----------------

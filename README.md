@@ -7,3 +7,7 @@ The device will use a Raspberry Pi to process incoming audio and elaborate real-
 ### Source code
 *Device under development*
 
+### Dependencies
+Third party packages needed to run some software features in the Raspbian Environment.
+
+...
