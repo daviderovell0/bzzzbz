@@ -5,4 +5,4 @@
 ## 10.241.0.10  pi
 # 2 - Run the following script or line
 
-rsync -r ../bzzzbz pi@pi:~/test
+rsync -r ../bzzzbz pi@pi:~/test 
