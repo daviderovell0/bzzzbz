@@ -1,3 +1,7 @@
+# Output files
 *.exe
 *.out
+*.o
+
+# VScode local settings for my machine
 .vscode

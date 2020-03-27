@@ -1,6 +1,8 @@
 CC	= gcc
-CFLAGS	= -O2 -Wall `pkg-config --cflags --libs jack` -lm
+CFLAGS	= -O2 -Wall -lm
 
-audioin: simple_jack_client.c
-		${CC} ${CFLAGS} -o audioin.o simple_jack_client.c
+pi: simple_jack_client.c
+		${CC} ${CFLAGS} `pkg-config --cflags --libs jack` -o audioin.o simple_jack_client.c
 
+ubuntu: simple_jack_client.c
+		${CC} -o audioin.o simple_jack_client.c /usr/lib/x86_64-linux-gnu/libjack.so ${CFLAGS}
