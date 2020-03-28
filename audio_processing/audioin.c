@@ -54,6 +54,7 @@ process (jack_nframes_t nframes, void *arg)
     memcpy (out2, in, sizeof (jack_default_audio_sample_t) * nframes);*/
     for( i=0; i<nframes; i++ )
 	{
+        fprintf(stdout,"%f\n", in[i]);
 		out1[i] = in[i];  /* left */
 		out2[i] = in[i];  /* right */
 	}
