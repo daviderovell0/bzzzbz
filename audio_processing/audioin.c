@@ -1,7 +1,10 @@
-/** @file simple_client.c
+/** @file audioin.c
  *
- * @brief This simple client demonstrates the basic features of JACK
- * as they would be used by many applications.
+ * @brief Test program using the JACK audio processing flow (client, ports and callback process) on
+ *  a normal laptop. Takes a *mic input* and sends it to the output ports.
+ *  Based on simple_client.c example on the offical JACK2 audio repository.
+ * 
+ * @author Davide Rovelli (daviderovell0)
  */
 
 #include <stdio.h>
@@ -15,22 +18,12 @@
 #endif
 #include <jack/jack.h>
 
+/* Initalise the ports and client variables to be used in the main program. */
+jack_port_t *input_port;    //MIC ? mono input. 
 jack_port_t *output_port1, *output_port2;
 jack_client_t *client;
 
-#ifndef M_PI
-#define M_PI  (3.14159265)
-#endif
-
-#define TABLE_SIZE   (200)
-typedef struct
-{
-	float sine[TABLE_SIZE];
-	int left_phase;
-	int right_phase;
-}
-paTestData;
-
+/* When receiving ctrl-C */
 static void signal_handler(int sig)
 {
 	jack_client_close(client);
@@ -44,30 +37,26 @@ static void signal_handler(int sig)
  *
  * This client follows a simple rule: when the JACK transport is
  * running, copy the input port to the output.  When it stops, exit.
- * ^^ FALSE : no data is taken from input (where is the input port?)
- *  Instead a sine is generated and sent to L R channel with different freq. daviderovell0
+ * 
  */
 
 int
 process (jack_nframes_t nframes, void *arg)
 {
-	jack_default_audio_sample_t *out1, *out2;
-	paTestData *data = (paTestData*)arg;
+	jack_default_audio_sample_t *out1, *out2, *in;
 	int i;
 
+    in = (jack_default_audio_sample_t*)jack_port_get_buffer (input_port, nframes);
 	out1 = (jack_default_audio_sample_t*)jack_port_get_buffer (output_port1, nframes);
 	out2 = (jack_default_audio_sample_t*)jack_port_get_buffer (output_port2, nframes);
 
-	for( i=0; i<nframes; i++ )
+	/*memcpy (out1, in, sizeof (jack_default_audio_sample_t) * nframes);
+    memcpy (out2, in, sizeof (jack_default_audio_sample_t) * nframes);*/
+    for( i=0; i<nframes; i++ )
 	{
-		out1[i] = data->sine[data->left_phase];  /* left */
-		out2[i] = data->sine[data->right_phase];  /* right */
-		data->left_phase += 1;
-		if( data->left_phase >= TABLE_SIZE ) data->left_phase -= TABLE_SIZE;
-		data->right_phase += 3; /* higher pitch so we can distinguish left and right. */
-		if( data->right_phase >= TABLE_SIZE ) data->right_phase -= TABLE_SIZE;
+		out1[i] = in[i];  /* left */
+		out2[i] = in[i];  /* right */
 	}
-    
 	return 0;      
 }
 
@@ -89,8 +78,6 @@ main (int argc, char *argv[])
 	const char *server_name = NULL;
 	jack_options_t options = JackNullOption;
 	jack_status_t status;
-	paTestData data;
-	int i;
 
 	if (argc >= 2) {		/* client name specified? */
 		client_name = argv[1];
@@ -107,14 +94,6 @@ main (int argc, char *argv[])
 			client_name++;
 		}
 	}
-
-	for( i=0; i<TABLE_SIZE; i++ )
-	{
-		data.sine[i] = 0.2 * (float) sin( ((double)i/(double)TABLE_SIZE) * M_PI * 2. );
-	}
-	data.left_phase = data.right_phase = 0;
-  
-
 	/* open a client connection to the JACK server */
 
 	client = jack_client_open (client_name, options, &status, server_name);
@@ -138,7 +117,7 @@ main (int argc, char *argv[])
 	   there is work to be done.
 	*/
 
-	jack_set_process_callback (client, process, &data);
+	jack_set_process_callback (client, process, 0); //no args so set to 0
 
 	/* tell the JACK server to call `jack_shutdown()' if
 	   it ever shuts down, either entirely, or if it
@@ -147,7 +126,10 @@ main (int argc, char *argv[])
 
 	jack_on_shutdown (client, jack_shutdown, 0);
 
-	/* create two ports */
+	/* register the ports */
+    input_port = jack_port_register (client, "input",
+					 JACK_DEFAULT_AUDIO_TYPE,
+					 JackPortIsInput, 0);
 
 	output_port1 = jack_port_register (client, "output1",
 					  JACK_DEFAULT_AUDIO_TYPE,
@@ -164,7 +146,6 @@ main (int argc, char *argv[])
 
 	/* Tell the JACK server that we are ready to roll.  Our
 	 * process() callback will start running now. */
-
 	if (jack_activate (client)) {
 		fprintf (stderr, "cannot activate client");
 		exit (1);
@@ -177,24 +158,41 @@ main (int argc, char *argv[])
 	 * "input" to the backend, and capture ports are "output" from
 	 * it.
 	 */
+
+    /* Get the input port (micIN) */
+    ports = jack_get_ports (client, NULL, NULL,
+				JackPortIsPhysical|JackPortIsOutput);
+	if (ports == NULL) {
+		fprintf(stderr, "no physical capture ports\n");
+		exit (1);
+	}
+    /* Connect the input port (micIN) */
+	if (jack_connect (client, ports[0], jack_port_name (input_port))) {
+		fprintf (stderr, "cannot connect input ports\n");
+	}
+    /* Deallocate memory */
+	free (ports);
  	
+    /* Get the out ports (stereo, therefore L & R) */
 	ports = jack_get_ports (client, NULL, NULL,
 				JackPortIsPhysical|JackPortIsInput);
 	if (ports == NULL) {
 		fprintf(stderr, "no physical playback ports\n");
 		exit (1);
 	}
-
+    /* Connect the first output port (LLineOUT?) */
 	if (jack_connect (client, jack_port_name (output_port1), ports[0])) {
 		fprintf (stderr, "cannot connect output ports\n");
 	}
-
+    /* Connect the second output port (RLineOUT?) */
 	if (jack_connect (client, jack_port_name (output_port2), ports[1])) {
 		fprintf (stderr, "cannot connect output ports\n");
 	}
-
+    /* Deallocate memory */
 	jack_free (ports);
-    
+
+
+   
     /* install a signal handler to properly quits jack client */
 #ifdef WIN32
 	signal(SIGINT, signal_handler);
@@ -207,8 +205,7 @@ main (int argc, char *argv[])
 	signal(SIGINT, signal_handler);
 #endif
 
-	/* keep running until the Ctrl+C */
-
+	/* MAIN loop with interrupts (process callback): keep running until the Ctrl+C */
 	while (1) {
 	#ifdef WIN32 
 		Sleep(1000);
