@@ -24,8 +24,8 @@
 #include "MCP3008Comm.h"
 
 class MCP3008printSampleCallback : public MCP3008callback {
-	virtual void hasSample(int v) {
-		printf("v = %d\n",v);
+	virtual void hasSample(int v, int c) {
+		printf("CH%d, value = %d\n",c,v);
 	}
 };
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     MCP3008printSampleCallback print_cb;
     m->setCallback(&print_cb);
     m->start();
-    
+
     getchar();
     m->stop();
     delete m;

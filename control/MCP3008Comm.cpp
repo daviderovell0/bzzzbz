@@ -52,14 +52,18 @@ int MCP3008Comm::readData(int fd, uint8_t ch) {
 
 
 void MCP3008Comm::run(MCP3008Comm* mcp3008comm) {
+	int channel = 0;
 	mcp3008comm->running = 1;
 	while (mcp3008comm->running) {
 		
-		// read the data register by performing two 8 bit reads
-		int value = mcp3008comm->readData(mcp3008comm->fd, mcp3008comm->SINGLE_CHANNEL[0]);
-		if (mcp3008comm->mcp3008callback) {
-			mcp3008comm->mcp3008callback->hasSample(value);
+		for (channel; channel< 3; channel++) {
+			// read the data register by performing two 8 bit reads
+			int value = mcp3008comm->readData(mcp3008comm->fd, mcp3008comm->SINGLE_CHANNEL[channel]);
+			if (mcp3008comm->mcp3008callback) {
+				mcp3008comm->mcp3008callback->hasSample(value, channel);
+			}
 		}
+	channel = 0;
 	}
 	close(mcp3008comm->fd);
 }
