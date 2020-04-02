@@ -7,6 +7,7 @@
 
 int main(){
     char line[10];
+    float mag = 0;
     // number of samples
     int nfft = 1024;
     // Open file with data from the ADC 
@@ -14,7 +15,7 @@ int main(){
     f.open("samples/sample_sines.txt", std::ifstream::in);
     // Open output FFT file
     std::ofstream out;
-    out.open("samples/sine_phases.txt", std::ofstream::out);
+    out.open("samples/sine_magnitudes.txt", std::ofstream::out);
 
 
     // Real valued FFT data structures init. 
@@ -37,7 +38,9 @@ int main(){
 
         // print it to file here
         for (int k = 0; k < nfft/2+1; k++){
-            out << cx_out[k].i;
+            // calculate magnitude of complex pair
+            mag = sqrt(pow(cx_out[k].i, 2) + pow(cx_out[k].r,2));
+            out << mag;
             out << "\n";
         }
         
