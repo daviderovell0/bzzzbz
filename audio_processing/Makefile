@@ -16,3 +16,6 @@ audioin_pi: audioin.c
 
 audioin_ubuntu: audioin.c
 		${CC} -o audioin.o audioin.c /usr/lib/x86_64-linux-gnu/libjack.so ${CFLAGS}
+
+fft: kiss_fft_test.cpp
+		g++ kiss_fft_test.cpp -o fft_test.o -lkiss-fft
