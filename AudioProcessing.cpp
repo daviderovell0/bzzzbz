@@ -1,17 +1,25 @@
 #include "AudioProcessing.h"
 
-/* When receiving ctrl-C */
-/*void AudioProcessing::signal_handler(int sig)
-{
-	jack_client_close(client);
-	fprintf(stderr, "signal received, exiting...\n");
-	exit(0);
-}*/
 
 void AudioProcessing::jack_shutdown(void *arg){
     exit (1);
 }
 
+double *AudioProcessing::runFFT(kiss_fft_scalar *buffer, double *fft_magnitudes){
+	int nfft = sizeof(buffer)*8;
+	// Real valued FFT data structures init. 
+    kiss_fftr_cfg cfg = kiss_fftr_alloc(nfft, 0, 0, 0);
+	kiss_fft_cpx *cx_out = new kiss_fft_cpx[nfft/2+1];
+
+	//fft here
+    kiss_fftr( cfg , buffer , cx_out );
+
+	for (int k = 0; k < nfft/2+1; k++){
+            // calculate magnitude of complex pair
+            fft_magnitudes[k] = sqrt(pow(cx_out[k].i, 2) + pow(cx_out[k].r,2));
+        }
+	return fft_magnitudes;
+}
 
 void AudioProcessing::setCallback(AudioProcessingCallback* cb) {
     apcallback = cb;

@@ -12,6 +12,7 @@
 #include <signal.h>
 
 #include <jack/jack.h>
+#include "kiss_fftr.h"
 
 class AudioProcessingCallback {
 public:
@@ -19,9 +20,6 @@ public:
      * Process the incoming audio
      */
     virtual void process(float sample) = 0;
-
-private:
-    //jack_default_audio_sample_t *out1, *out2, *in;
 };
 
 
@@ -30,6 +28,16 @@ public:
     void setCallback(AudioProcessingCallback* cb);
     void start();
     void stop();
+    /**
+     * Real signal to complex freq. FFT using a mixed-radix library
+     * (https://github.com/berndporr/kiss-fft). 
+     * 
+     * @returns a buffer with magnitudes of each complex pair
+     * 
+     * @param kiss_fft_scalar *buffer - the input buffer with real samples (double).
+     * 
+     */
+    double *runFFT(kiss_fft_scalar *buffer, double *fft_magnitudes);
 
 private:
     const char **ports;
