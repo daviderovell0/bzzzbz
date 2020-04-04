@@ -27,11 +27,6 @@ private:
 
 class AudioProcessing {
 public:
-    /**
-     * Constuctor 
-     */
-    //AudioProcessing();
-
     void setCallback(AudioProcessingCallback* cb);
     void start();
     void stop();
@@ -47,8 +42,9 @@ private:
     /**
      * Set the input and the output ports for the audio card.
      * 
-     * For our current chip WM8731 we only need the LineIn input, since the audio output
+     * For our current chip WM8731 we only need the LineIn inputs, since the audio output
      * is provided by the chip built in BYPASS mode
+     * 
      * @TODO add extra port for stereo input
      */
     jack_port_t *input_port;
@@ -63,14 +59,16 @@ private:
      * special realtime thread once for each audio cycle.
      * 
      */
-    int run(jack_nframes_t nframes, void *arg);
+    static int run(jack_nframes_t nframes, void *arg);
 
     /**
+     * TODO: 
      * Handle termination signal input from the user (i.e. ctrl-C)
+     * Very tricky to use since it has to be static and also
      * */
-    static void signal_handler(int sig, jack_client_t *client);
+    static void signal_handler(int sig);
     /**
      * Defines the shutdown routine when the JACK server is terminated.
      */
-    void jack_shutdown();
+    static void jack_shutdown(void *arg);
 };
