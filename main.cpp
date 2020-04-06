@@ -37,7 +37,7 @@ class TriggerFFT : public AudioProcessingCallback {
         if (i == nfft -1 ) {
             
             ap->runFFT(buffer, fft_frame);
-            printf("\nffft frame 0: %f\n", fft_frame[33]);
+            printf("\nffft frame 0: %f\n", fft_frame[32]);
             printf("ffft frame size: %lu\n\n", sizeof(fft_frame));
             i = 0;
         }
