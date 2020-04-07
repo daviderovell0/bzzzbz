@@ -14,10 +14,12 @@ double *AudioProcessing::runFFT(kiss_fft_scalar *buffer, double *fft_magnitudes)
 	//fft here
     kiss_fftr( cfg , buffer , cx_out );
 
-	for (int k = 0; k < nfft/2+1; k++){
+
+	for (int k = 1; k < nfft/2+1; k++){
             // calculate magnitude of complex pair
             fft_magnitudes[k] = sqrt(pow(cx_out[k].i, 2) + pow(cx_out[k].r,2));
         }
+	fft_magnitudes[0] = 0;
 	return fft_magnitudes;
 }
 
