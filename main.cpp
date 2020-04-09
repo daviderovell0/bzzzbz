@@ -1,5 +1,3 @@
-#include "AudioProcessing.h"
-#include <stdio.h>
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -7,31 +5,23 @@
 #include <math.h>
 // Use glew.h or gl.h but first declares all prototypes
 #include <GL/glew.h>
-
 #include <GL/freeglut.h>
-
-// #define GLM_MESSAGES
-#define GLM_FORCE_RADIANS
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "AudioProcessing.h"
 #include "shader_utils.h"
 
 // GLOBAL VARIABLES
-GLuint vbo_triangle;
+GLuint vbo_window;
 GLuint program;
-GLint attribute_coord3d, attribute_v_color;
-GLint uniform_m_transform;
-GLint uniform_fade;
-GLint uniform_red;
-GLint uniform_green;
-GLint uniform_blue;
-
-GLfloat BPM=112.0;
+GLint attribute_coord3d;
+GLint uniform_width;
+GLint uniform_height;
+GLint uniform_A;
+GLint uniform_pA;
+GLint uniform_pB;
+GLint uniform_pC;
 
 struct attributes {
   GLfloat coord3d[3];
-  GLfloat v_color[3];
 };
 
 
@@ -87,23 +77,27 @@ class TriggerFFT : public AudioProcessingCallback {
 
 // OPENGL FUNCTIONS
 int init_resources()
-{
-  struct attributes triangle_attributes[] = {
-    {{ 0.0,  0.4, 0.0}, {1.0, 0.6, 0.5}},
-    {{-0.4, -0.4, 0.0}, {0.5, 1.0, 0.6}},
-    {{ 0.4, -0.4, 0.0}, {0.6, 0.5, 1.0}}
+{ 
+  //vertices, z=0
+  struct attributes window_attributes[] = {
+    {{ -1.0,  1.0, 0.0}},
+    {{-1.0, -1.0, 0.0}},
+    {{ 1.0, -1.0, 0.0}},
+    {{ 1.0, 1.0, 0.0}},
+    {{ -1.0, 1.0, 0.0}}
   };
-
-  glGenBuffers(1, &vbo_triangle);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(triangle_attributes), triangle_attributes, GL_STATIC_DRAW);
+  
+  glGenBuffers(1, &vbo_window);
+  glBindBuffer(GL_ARRAY_BUFFER, vbo_window);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(window_attributes), window_attributes, GL_STATIC_DRAW);
 
   GLint link_ok = GL_FALSE;
 
   GLuint vs, fs;
-  if ((vs = create_shader("shaders/triangle.v.glsl", GL_VERTEX_SHADER))   == 0) return 0;
-  if ((fs = create_shader("shaders/triangle.f.glsl", GL_FRAGMENT_SHADER)) == 0) return 0;
-
+  if ((vs = create_shader("shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
+  if ((fs = create_shader("shaders/cells_waves.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader >> change to filename_read to be able to switch
+  
+  //unique program object for each shader or one program and shaders are changed...as this is done in init_resources, probably multiple programs
   program = glCreateProgram();
   glAttachShader(program, vs);
   glAttachShader(program, fs);
@@ -115,131 +109,104 @@ int init_resources()
     return 0;
   }
 
-  const char* attribute_name;
-  attribute_name = "coord3d";
+  const char* attribute_name = "coord3d";
   attribute_coord3d = glGetAttribLocation(program, attribute_name);
   if (attribute_coord3d == -1) {
     fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
     return 0;
   }
-  attribute_name = "v_color";
-  attribute_v_color = glGetAttribLocation(program, attribute_name);
-  if (attribute_v_color == -1) {
-    fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
-    return 0;
-  }
+  //if multiple program we can choose which uniforms are bound where
   const char* uniform_name;
-  uniform_name = "m_transform";
-  uniform_m_transform = glGetUniformLocation(program, uniform_name);
-  if (uniform_m_transform == -1) {
-    fprintf(stderr, "Could not bind uniform_m_transform %s\n", uniform_name);
+  uniform_name = "H";
+  uniform_height = glGetUniformLocation(program, uniform_name);
+  if (uniform_height == -1) {
+    fprintf(stderr, "Could not bind uniform_height %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "fade";
-  uniform_fade = glGetUniformLocation(program, uniform_name);
-  if (uniform_fade == -1) {
-    fprintf(stderr, "Could not bind uniform_fade %s\n", uniform_name);
+  uniform_name = "W";
+  uniform_width = glGetUniformLocation(program, uniform_name);
+  if (uniform_width == -1) {
+    fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "red";
-  uniform_red = glGetUniformLocation(program, uniform_name);
-  if (uniform_red == -1) {
-    fprintf(stderr, "Could not bind uniform_red %s\n", uniform_name);
+  uniform_name = "c_A";
+  uniform_A = glGetUniformLocation(program, uniform_name);
+  if (uniform_A == -1) {
+    fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "green";
-  uniform_green = glGetUniformLocation(program, uniform_name);
-  if (uniform_green == -1) {
-    fprintf(stderr, "Could not bind uniform_green %s\n", uniform_name);
+  uniform_name = "FREQ";
+  uniform_pA = glGetUniformLocation(program, uniform_name);
+  if (uniform_pA == -1) {
+    fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "blue";
-  uniform_blue = glGetUniformLocation(program, uniform_name);
-  if (uniform_blue == -1) {
-    fprintf(stderr, "Could not bind uniform_blue %s\n", uniform_name);
+  uniform_name = "PERIOD";
+  uniform_pB = glGetUniformLocation(program, uniform_name);
+  if (uniform_pB == -1) {
+    fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
     return 0;
   }
-
+  uniform_name = "EXPONENT";
+  uniform_pC = glGetUniformLocation(program, uniform_name);
+  if (uniform_pC == -1) {
+    fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
+    return 0;
+  }
   return 1;
 }
 
 void onIdle() {
-  float cur_fade = cosf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*3.14) * BPM / 60 ) / 4 + 0.5; // 0->1->0 every 5 seconds
-  float move = sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*3.14) * BPM / 60 / 8); // -1<->+1 every 10 seconds
-  //float angle = glutGet(GLUT_ELAPSED_TIME) / 1000.0 * 30;  // 30° per second
-  float angle = fft_frame[1];
-  glm::vec3 axis_z(0, 0, 1);
+  float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
+  float window_height=glutGet(GLUT_WINDOW_HEIGHT);
+  //float dyn_A=0.0;
+  float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
+  //uniforms for control variables
+  float pot_A=0.25;
+  float pot_B=15.0; // actual period??
+  float pot_C=0.2;
   
-  /*glm::mat4 m_transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.4 * move, 0.6 * sinf(move), 0.0))
-     * glm::rotate(glm::mat4(1.0f), glm::radians(angle), axis_z);*/
 
-  glm::mat4 m_transform;
-  float direction=sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*3.14) * BPM / 60 / 8);
-  if (direction >= 0 )
-  {
-   m_transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.4 * move, 0.6 * sinf(move), 0.0))
-     * glm::rotate(glm::mat4(1.0f), glm::radians(angle), axis_z);
-   }
-   else 
-   {
-    m_transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.4 * move, 0.6 * sinf(move), 0.0))
-     * glm::rotate(glm::mat4(1.0f), -1.0f * glm::radians(angle), axis_z);
-   }
-
-  float red = sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*3.14) * BPM / 60 / 2 ) / 4 + 0.5;
-  float green = sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*3.14) * BPM / 60 / 4) / 4 + 0.5;
-  float blue = sinf(glutGet(GLUT_ELAPSED_TIME) / 1000.0 * (2*3.14) * BPM / 60 / 8 ) / 4 + 0.5;
-
+  //when switching modes change program accordingly
   glUseProgram(program);
-
-  glUniform1f(uniform_fade, cur_fade);
-  glUniform1f(uniform_red, red);
-  glUniform1f(uniform_green, green);
-  glUniform1f(uniform_blue, blue);
-  glUniformMatrix4fv(uniform_m_transform, 1, GL_FALSE, glm::value_ptr(m_transform));
+  glUniform1f(uniform_width, window_width);
+  glUniform1f(uniform_height, window_height);
+  glUniform1f(uniform_A, dyn_A);
+  glUniform1f(uniform_pA, pot_A);
+  glUniform1f(uniform_pB, pot_B);
+  glUniform1f(uniform_pC, pot_C);
   glutPostRedisplay();
 }
 
 void onDisplay()
 {
-  glClearColor(1.0, 1.0, 1.0, 1.0);
+  glClearColor(1.0, 1.0, 1.0, 1.0); // empty == white
   glClear(GL_COLOR_BUFFER_BIT);
-  
-  glUseProgram(program);
+  glUseProgram(program); //must be changed from modes
+  //same for all programs, as attribute_coord3d is always bound
   glEnableVertexAttribArray(attribute_coord3d);
-  glEnableVertexAttribArray(attribute_v_color);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
+  glBindBuffer(GL_ARRAY_BUFFER, vbo_window);
   glVertexAttribPointer(
     attribute_coord3d,   // attribute
     3,                   // number of elements per vertex, here (x,y,z)
     GL_FLOAT,            // the type of each element
     GL_FALSE,            // take our values as-is
-    sizeof(struct attributes),  // next coord3d appears every 5 floats
+    0,                  //every element appears...
     0                    // offset of first element
   );
-  glVertexAttribPointer(
-    attribute_v_color,      // attribute
-    3,                      // number of elements per vertex, here (r,g,b)
-    GL_FLOAT,               // the type of each element
-    GL_FALSE,               // take our values as-is
-    sizeof(struct attributes),  // stride
-    (void*) offsetof(struct attributes, v_color)  // offset
-  );
 
-  /* Push each element in buffer_vertices to the vertex shader */
+  // Push each element in buffer_vertices to the vertex shader, create rectangle
   glDrawArrays(GL_TRIANGLES, 0, 3);
-
+  glDrawArrays(GL_TRIANGLES, 2, 3);
   glDisableVertexAttribArray(attribute_coord3d);
-  glDisableVertexAttribArray(attribute_v_color);
   glutSwapBuffers();
 }
 
-void free_resources()
-{
+void free_resources() //free up memory, all programs used should be deleted.
+{   
   glDeleteProgram(program);
-  glDeleteBuffers(1, &vbo_triangle);
+  glDeleteBuffers(1, &vbo_window);
 }
-
 
 int main(int argc, char *argv[]){
     // Set the exit routine: Keep running until exit signal (ctrl+C) received.
@@ -253,29 +220,28 @@ int main(int argc, char *argv[]){
     ap->start();
 
     // opengl
+    //init context
     glutInit(&argc, argv);
     glutInitContextVersion(2,0);
     glutInitDisplayMode(GLUT_RGBA|GLUT_ALPHA|GLUT_DOUBLE|GLUT_DEPTH);
-    glutInitWindowSize(900, 900);
-    glutCreateWindow("Fade, rotate, move Triangle");
-
+    glutInitWindowSize(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+    glutCreateWindow("BZZZBZ");
+    //error handling, important for non-Pi implementations
     GLenum glew_status = glewInit();
     if (glew_status != GLEW_OK) {
         fprintf(stderr, "Error: %s\n", glewGetErrorString(glew_status));
         return 1;
-    }
-
+    } 
     if (!GLEW_VERSION_2_0) {
         fprintf(stderr, "Error: your graphic card does not support OpenGL 2.0\n");
         return 1;
     }
-
+    //main loop if init_resources returns 1
     if (init_resources()) {
         glutDisplayFunc(onDisplay);
         glutIdleFunc(onIdle);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        // start openGL loop
         glutMainLoop();
     }
 
