@@ -1,3 +1,5 @@
+
+// Standards libraries
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -6,8 +8,22 @@
 // Use glew.h or gl.h but first declares all prototypes
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+
+
+// For SPI
+#include <stdint.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <linux/types.h>
+#include <linux/spi/spidev.h>
+
+
+// Custom classes
+#include "MCP3008Comm.h"
 #include "AudioProcessing.h"
 #include "shader_utils.h"
+
 
 // GLOBAL VARIABLES
 GLuint vbo_window;
@@ -19,6 +35,12 @@ GLint uniform_A;
 GLint uniform_pA;
 GLint uniform_pB;
 GLint uniform_pC;
+
+//uniforms for control variables
+float pot_A=0.0;
+float pot_B=0.0; // actual period??
+float pot_C=0.0;
+
 
 struct attributes {
   GLfloat coord3d[3];
@@ -39,8 +61,8 @@ double *fft_frame = (double *) malloc((nfft/2+1)*sizeof(double));
 */
 void signal_handler(int sig)
 {
-	fprintf(stderr, "signal received, closing JACK client...\n");
-    ap->stop();
+	//fprintf(stderr, "signal received, closing JACK client...\n");
+    //ap->stop();
     free(fft_frame);
 }
 
@@ -71,6 +93,34 @@ class TriggerFFT : public AudioProcessingCallback {
             buffer[i] = sample;
             i++;
         }
+	}
+};
+
+/**
+ * SPI sample callback class
+ * Processing the output samples coming from the MCP3008 ADC 
+ **/
+
+class MCP3008printSampleCallback : public MCP3008callback {
+	virtual void hasSample(int value, int channel) {
+		switch (channel)
+    {
+    case 0:
+      pot_A = value/1024.0;
+      break;
+    
+    case 1:
+      pot_B = value/1024.0;
+      break;
+    
+    case 2:
+      pot_C = value/1024.0;
+      break;
+    
+    default:
+      break;
+    };
+    printf("value: %d, channel: %d\n", value, channel);
 	}
 };
 
@@ -161,10 +211,7 @@ void onIdle() {
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
   //float dyn_A=0.0;
   float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
-  //uniforms for control variables
-  float pot_A=0.25;
-  float pot_B=15.0; // actual period??
-  float pot_C=0.2;
+
   
 
   //when switching modes change program accordingly
@@ -209,15 +256,22 @@ void free_resources() //free up memory, all programs used should be deleted.
 }
 
 int main(int argc, char *argv[]){
+    
     // Set the exit routine: Keep running until exit signal (ctrl+C) received.
     signal(SIGQUIT, signal_handler);
 	  signal(SIGTERM, signal_handler);
 	  signal(SIGHUP, signal_handler);
 	  signal(SIGINT, signal_handler);
 
-    TriggerFFT cb;
+    //Instantiate SPI related classes and start readouts
+    MCP3008Comm* m = new MCP3008Comm();
+    MCP3008printSampleCallback print_cb;
+    m->setCallback(&print_cb);
+    m->start();
+
+    /*TriggerFFT cb;
     ap->setCallback(&cb);
-    ap->start();
+    ap->start();*/
 
     // opengl
     //init context
@@ -245,8 +299,10 @@ int main(int argc, char *argv[]){
         glutMainLoop();
     }
 
-    // Terminate threads, free resources 
-    ap->stop();
+    // Terminate threads, free resources
+    m->stop();
+    delete m;
+    //ap->stop();
     free(fft_frame);
     free_resources();
     return 0;

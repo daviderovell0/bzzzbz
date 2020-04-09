@@ -35,7 +35,7 @@ public:
 	/**
 	 * Called after a sample has arrived.
 	 **/
-	virtual void hasSample(int sample, int channel) = 0;
+	virtual void hasSample(int value, int channel) = 0;
 };
 
 
