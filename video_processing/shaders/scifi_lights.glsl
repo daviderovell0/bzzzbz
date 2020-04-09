@@ -21,9 +21,9 @@ void main(void) {
     	
     vec3 col = vec3(0.2, 0.3, 0.4);
     vec3 c = vec3(0.0);	
-    c += col / (abs(tan(hash(p.x) + cos(1.5 + p.y)))); 
-    c += col / (abs(tan(hash(p.y) + cos(1.5 + p.x))));
-    c /= 5.0+c_A;	
+    c += col / (abs(tan(hash(p.x) + cos(1.5*c_A + p.y)))); 
+    c += col / (abs(tan(hash(p.y) + cos(1.5*c_A + p.x))));
+    c /= 5.0;	
 	
     gl_FragColor = vec4(c, 1.0);
 }
