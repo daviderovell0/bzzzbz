@@ -61,9 +61,9 @@ double *fft_frame = (double *) malloc((nfft/2+1)*sizeof(double));
 */
 void signal_handler(int sig)
 {
-	//fprintf(stderr, "signal received, closing JACK client...\n");
-    //ap->stop();
-    free(fft_frame);
+	fprintf(stderr, "signal received, closing JACK client...\n");
+  ap->stop();
+  free(fft_frame);
 }
 
 
@@ -210,8 +210,8 @@ void onIdle() {
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
   //float dyn_A=0.0;
-  float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
-
+  //float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
+  float dyn_A=fft_frame[0];
   
 
   //when switching modes change program accordingly
@@ -269,9 +269,9 @@ int main(int argc, char *argv[]){
     m->setCallback(&print_cb);
     m->start();
 
-    /*TriggerFFT cb;
+    TriggerFFT cb;
     ap->setCallback(&cb);
-    ap->start();*/
+    ap->start();
 
     // opengl
     //init context
@@ -302,7 +302,7 @@ int main(int argc, char *argv[]){
     // Terminate threads, free resources
     m->stop();
     delete m;
-    //ap->stop();
+    ap->stop();
     free(fft_frame);
     free_resources();
     return 0;
