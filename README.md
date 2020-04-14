@@ -6,7 +6,9 @@ This product is meant to be a simpler and cheaper alternative to commercial anal
 The device will use a Raspberry Pi to process incoming audio and elaborate real-time graphical patterns. The Raspberry Pi will be also connected to a control surface that allows the user to modify the graphics dynamically.
 ## Installation
 On Raspberry Pi 3B+: 
-- Install openGL libraries: 
+- Install OpenGL libraries: freeglut3, freeglut3-dev, libgl1-mesa-dev, mesa-common-dev, libglew-dev
+- Turn on FKMS in raspi-config to enable GPU acceleration
+- install raspberrypi-kernel-headers
 - Compile kissFFT
 - cmake, make install
 ### Source code
