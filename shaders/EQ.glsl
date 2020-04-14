@@ -1,6 +1,6 @@
 uniform float H;
 uniform float W;
-uniform float fft[33];
+uniform float fft[513];
 
 
 void main( void ) {
@@ -12,11 +12,11 @@ void main( void ) {
 	float c= 0.0;
 	
 	
-	for(int i=0; i<=32; i++){
+	for(int i=0; i < 513; i+=16){
 	
-		if( mod(X,1.0/32.0) < 0.02 && X < c/32.0 && X > (c-1.0)/32.0 ){
+		if(mod(X,1.0/32.0)<0.02 && X<c/32.0 && X > (c-1.0)/32.0){
 		
-			if( Y < fft[i] ){
+			if(Y<fft[i]){
 			
 				color+=0.5;
 				

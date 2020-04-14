@@ -5,8 +5,7 @@ void AudioProcessing::jack_shutdown(void *arg){
     exit (1);
 }
 
-float *AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes){
-	int nfft = sizeof(buffer)*8;
+float *AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, int nfft){
 	// Real valued FFT data structures init. 
     kiss_fftr_cfg cfg = kiss_fftr_alloc(nfft, 0, 0, 0);
 	kiss_fft_cpx *cx_out = new kiss_fft_cpx[nfft/2+1];
@@ -17,7 +16,7 @@ float *AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes){
 
 	for (int k = 1; k < nfft/2+1; k++){
             // calculate magnitude of complex pair
-            fft_magnitudes[k] = sqrt(pow(cx_out[k].i, 2) + pow(cx_out[k].r,2));
+            fft_magnitudes[k] = sqrt(pow(cx_out[k].i, 2) + pow(cx_out[k].r,2))/10; // /10 is a temp normalisation
         }
 	fft_magnitudes[0] = 0;
 	return fft_magnitudes;
@@ -67,7 +66,7 @@ void AudioProcessing::start(){
 	   there is work to be done. Callback is automatically in a thread.
 	*/
 
-	jack_set_process_callback (client, this->run, this); // passing run only is not type compatible with JACK API
+	jack_set_process_callback (client, this->run, this); // passing non-static run is not type compatible with JACK API
 
     /* tell the JACK server to call `jack_shutdown()' if
 	   it ever shuts down, either entirely, or if it
@@ -112,13 +111,6 @@ void AudioProcessing::start(){
 	}
     /* Deallocate memory */
 	free (ports);
-
-    // handle termination inputs for the user
-    /*signal(SIGQUIT, signal_h);
-	signal(SIGTERM, signal_handler);
-	signal(SIGHUP, signal_handler);
-	signal(SIGINT, signal_handler);*/
-
 }
 
 

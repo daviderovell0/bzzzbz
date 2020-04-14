@@ -51,7 +51,7 @@ struct attributes {
 // Initalise audio processing instance with default constructor 
 AudioProcessing *ap = new AudioProcessing(); 
 // Initialise FFT buffer as global variable for access during video mapping
-int nfft = 1024;
+const int nfft = 1024;
 float *fft_frame = (float *) malloc((nfft/2+1)*sizeof(float));
 
 
@@ -82,12 +82,12 @@ class TriggerFFT : public AudioProcessingCallback {
 	virtual void process(float sample) {
         // run the fft when the buffer is full
         if (i == nfft -1 ) {
-            ap->runFFT(buffer, fft_frame);
+            ap->runFFT(buffer, fft_frame,nfft);
             i = 0;
-            /*for(int j=0;j< nfft/2+1;j++){
+            for(int j=0;j< nfft/2+1;j++){
                 fprintf(stdout,"%f\n",fft_frame[j]);
             }
-            printf("--\n");*/
+            printf("--\n");
         }
         // fill it otherwise
         else {
@@ -187,7 +187,6 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-
   /*uniform_name = "c_A";
   uniform_A = glGetUniformLocation(program, uniform_name);
   if (uniform_A == -1) {
@@ -221,7 +220,6 @@ void onIdle() {
   //float dyn_A=0.0;
   //float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
   /*float dyn_A=fft_frame[1];*/
-  
 
   //when switching modes change program accordingly
   glUseProgram(program);
@@ -231,7 +229,7 @@ void onIdle() {
   glUniform1f(uniform_pA, pot_A);
   glUniform1f(uniform_pB, pot_B);
   glUniform1f(uniform_pC, pot_C);*/
-  glUniform1fv(uniform_fft, 513,fft_frame);
+  glUniform1fv(uniform_fft, nfft/2+3,fft_frame);
   glutPostRedisplay();
 }
 
@@ -274,10 +272,10 @@ int main(int argc, char *argv[]){
 	  signal(SIGINT, signal_handler);
 
     //Instantiate SPI related classes and start readouts
-    MCP3008Comm* m = new MCP3008Comm();
+    /*MCP3008Comm* m = new MCP3008Comm();
     MCP3008printSampleCallback print_cb;
     m->setCallback(&print_cb);
-    m->start();
+    m->start();*/
 
     TriggerFFT cb;
     ap->setCallback(&cb);
@@ -310,8 +308,8 @@ int main(int argc, char *argv[]){
     }
 
     // Terminate threads, free resources
-    m->stop();
-    delete m;
+    //m->stop();
+    //delete m;
     ap->stop();
     free(fft_frame);
     free_resources();
