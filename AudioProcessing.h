@@ -42,7 +42,7 @@ public:
 private:
     const char **ports;
 	const char *client_name = "bzzzbz";
-	const char *server_name = NULL;
+	const char *server_name = "jserver";
     jack_options_t options = JackNullOption;
 	jack_status_t status;
 

@@ -44,7 +44,7 @@ int AudioProcessing::run(jack_nframes_t nframes, void *arg){
 
 
 void AudioProcessing::start(){
-	printf("open client...\n");
+	printf("opening Jack client...\n");
     /* open a client connection to the JACK server */
 	client = jack_client_open (client_name, options, &status, server_name);
 	if (client == NULL) {
