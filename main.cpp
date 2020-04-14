@@ -51,7 +51,7 @@ struct attributes {
 // Initalise audio processing instance with default constructor 
 AudioProcessing *ap = new AudioProcessing(); 
 // Initialise FFT buffer as global variable for access during video mapping
-int nfft = 64;
+int nfft = 1024;
 float *fft_frame = (float *) malloc((nfft/2+1)*sizeof(float));
 
 
@@ -231,7 +231,7 @@ void onIdle() {
   glUniform1f(uniform_pA, pot_A);
   glUniform1f(uniform_pB, pot_B);
   glUniform1f(uniform_pC, pot_C);*/
-  glUniform1fv(uniform_fft, 33,fft_frame);
+  glUniform1fv(uniform_fft, 513,fft_frame);
   glutPostRedisplay();
 }
 
