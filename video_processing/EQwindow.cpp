@@ -1,31 +1,25 @@
+/* OpenGL main, windowing for BZZZBZ
+ *
+ * Author: Peter Nagy
+ * Based on code by: Sylvain Beucler
+ */
 
-// Standards libraries
-#include <iostream>
-#include <fstream>
+
+/* TO DO!!!
+ * fix/implement viewport
+ * create different modes for the available shaders
+ * make proper control variables
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 // Use glew.h or gl.h but first declares all prototypes
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-
-
-// For SPI
-#include <stdint.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/types.h>
-#include <linux/spi/spidev.h>
-
-
-// Custom classes
-#include "MCP3008Comm.h"
-#include "AudioProcessing.h"
 #include "shader_utils.h"
 
-
-// GLOBAL VARIABLES
+//all global variables
 GLuint vbo_window;
 GLuint program;
 GLint attribute_coord3d;
@@ -37,96 +31,10 @@ GLint uniform_pB;
 GLint uniform_pC;
 GLint uniform_fft;
 
-//uniforms for control variables
-float pot_A=0.0;
-float pot_B=0.0; // actual period??
-float pot_C=0.0;
-
-
 struct attributes {
   GLfloat coord3d[3];
 };
 
-
-// Initalise audio processing instance with default constructor 
-AudioProcessing *ap = new AudioProcessing(); 
-// Initialise FFT buffer as global variable for access during video mapping
-int nfft = 64;
-double *fft_frame = (double *) malloc((nfft/2+1)*sizeof(double));
-
-
-
-/**
- *  Terminate the JACK client when exiting the program, to avoid errors in the 
- * following executions.
-*/
-void signal_handler(int sig)
-{
-	fprintf(stderr, "signal received, closing JACK client...\n");
-  ap->stop();
-  free(fft_frame);
-}
-
-
-/**
- * Define the audio process routine callback:
- * Run the FFT method every time the chosen buffer 
- * is filled. Buffer size/2+1 = number of bins.
- * Take FFT accuracy vs. execution speed into account when choosing the buffer size. 
- */
-class TriggerFFT : public AudioProcessingCallback {
-    int i = 0;
-    // initalise the buffer to 64
-    kiss_fft_scalar *buffer = new kiss_fft_scalar[nfft];
-
-	virtual void process(float sample) {
-        // run the fft when the buffer is full
-        if (i == nfft -1 ) {
-            ap->runFFT(buffer, fft_frame);
-            i = 0;
-            /*for(int j=0;j< nfft/2+1;j++){
-                fprintf(stdout,"%f\n",fft_frame[j]);
-            }
-            printf("--\n");*/
-        }
-        // fill it otherwise
-        else {
-            buffer[i] = sample;
-            i++;
-        }
-	}
-};
-
-/**
- * SPI sample callback class
- * Processing the output samples coming from the MCP3008 ADC 
- **/
-
-class MCP3008printSampleCallback : public MCP3008callback {
-	virtual void hasSample(int value, int channel) {
-		switch (channel)
-    {
-    case 0:
-      pot_A = value/1024.0;
-      break;
-    
-    case 1:
-      pot_B = value/1024.0;
-      break;
-    
-    case 2:
-      pot_C = value/1024.0;
-      break;
-    
-    default:
-      break;
-    };
-    printf("value: %d, channel: %d\n", value, channel);
-	}
-};
-
-
-// OPENGL FUNCTIONS
 int init_resources()
 { 
   //vertices, z=0
@@ -180,14 +88,12 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-
   uniform_name = "fft";
   uniform_fft = glGetUniformLocation(program, uniform_name);
   if (uniform_fft == -1) {
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-
   /*uniform_name = "c_A";
   uniform_A = glGetUniformLocation(program, uniform_name);
   if (uniform_A == -1) {
@@ -218,20 +124,24 @@ int init_resources()
 void onIdle() {
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
+  float fft[21]= {0.0,1.0,0.7,0.0,0.0,0.0,0.0,0.0,0.5,0.0,0.0,0.0,0.0,0.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
   //float dyn_A=0.0;
-  //float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
-  /*float dyn_A=fft_frame[1];*/
+  float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
+  //uniforms for control variables
+  float pot_A=0.25;
+  float pot_B=15.0; // actual period??
+  float pot_C=0.2;
   
 
   //when switching modes change program accordingly
   glUseProgram(program);
   glUniform1f(uniform_width, window_width);
   glUniform1f(uniform_height, window_height);
+  glUniform1fv(uniform_fft, 21,fft);
   /*glUniform1f(uniform_A, dyn_A);
   glUniform1f(uniform_pA, pot_A);
   glUniform1f(uniform_pB, pot_B);
   glUniform1f(uniform_pC, pot_C);*/
-  glUniform1fv(uniform_fft, 33,fft_frame);
   glutPostRedisplay();
 }
 
@@ -265,55 +175,38 @@ void free_resources() //free up memory, all programs used should be deleted.
   glDeleteBuffers(1, &vbo_window);
 }
 
-int main(int argc, char *argv[]){
-    
-    // Set the exit routine: Keep running until exit signal (ctrl+C) received.
-    signal(SIGQUIT, signal_handler);
-	  signal(SIGTERM, signal_handler);
-	  signal(SIGHUP, signal_handler);
-	  signal(SIGINT, signal_handler);
+int main(int argc, char* argv[])
+{
+  //init context
+  glutInit(&argc, argv);
+  glutInitContextVersion(2,0);
+  glutInitDisplayMode(GLUT_RGBA|GLUT_ALPHA|GLUT_DOUBLE|GLUT_DEPTH);
+  glutInitWindowSize(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+  glutCreateWindow("BZZZBZ");
+  //error handling, important for non-Pi implementations
+  GLenum glew_status = glewInit();
+  if (glew_status != GLEW_OK) {
+    fprintf(stderr, "Error: %s\n", glewGetErrorString(glew_status));
+    return 1;
+  }
+  if (!GLEW_VERSION_2_0) {
+    fprintf(stderr, "Error: your graphic card does not support OpenGL 2.0\n");
+    return 1;
+  }
+  //main loop if init_resources returns 1
+  if (init_resources()) {
+    glutDisplayFunc(onDisplay);
+    glutIdleFunc(onIdle);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glutMainLoop();
+  }
 
-    //Instantiate SPI related classes and start readouts
-    MCP3008Comm* m = new MCP3008Comm();
-    MCP3008printSampleCallback print_cb;
-    m->setCallback(&print_cb);
-    m->start();
-
-    TriggerFFT cb;
-    ap->setCallback(&cb);
-    ap->start();
-
-    // opengl
-    //init context
-    glutInit(&argc, argv);
-    glutInitContextVersion(2,0);
-    glutInitDisplayMode(GLUT_RGBA|GLUT_ALPHA|GLUT_DOUBLE|GLUT_DEPTH);
-    glutInitWindowSize(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
-    glutCreateWindow("BZZZBZ");
-    //error handling, important for non-Pi implementations
-    GLenum glew_status = glewInit();
-    if (glew_status != GLEW_OK) {
-        fprintf(stderr, "Error: %s\n", glewGetErrorString(glew_status));
-        return 1;
-    } 
-    if (!GLEW_VERSION_2_0) {
-        fprintf(stderr, "Error: your graphic card does not support OpenGL 2.0\n");
-        return 1;
-    }
-    //main loop if init_resources returns 1
-    if (init_resources()) {
-        glutDisplayFunc(onDisplay);
-        glutIdleFunc(onIdle);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glutMainLoop();
-    }
-
-    // Terminate threads, free resources
-    m->stop();
-    delete m;
-    ap->stop();
-    free(fft_frame);
-    free_resources();
-    return 0;
+  free_resources();
+  return 0;
 }
+
+  
+
+
+
