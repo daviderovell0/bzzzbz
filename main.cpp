@@ -52,7 +52,7 @@ struct attributes {
 AudioProcessing *ap = new AudioProcessing(); 
 // Initialise FFT buffer as global variable for access during video mapping
 int nfft = 64;
-double *fft_frame = (double *) malloc((nfft/2+1)*sizeof(double));
+float *fft_frame = (float *) malloc((nfft/2+1)*sizeof(float));
 
 
 

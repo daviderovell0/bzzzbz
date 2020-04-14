@@ -37,7 +37,7 @@ public:
      * @param kiss_fft_scalar *buffer - the input buffer with real samples (double).
      * 
      */
-    double *runFFT(kiss_fft_scalar *buffer, double *fft_magnitudes);
+    float *runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes);
 
 private:
     const char **ports;

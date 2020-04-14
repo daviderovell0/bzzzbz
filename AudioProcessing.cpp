@@ -5,7 +5,7 @@ void AudioProcessing::jack_shutdown(void *arg){
     exit (1);
 }
 
-double *AudioProcessing::runFFT(kiss_fft_scalar *buffer, double *fft_magnitudes){
+float *AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes){
 	int nfft = sizeof(buffer)*8;
 	// Real valued FFT data structures init. 
     kiss_fftr_cfg cfg = kiss_fftr_alloc(nfft, 0, 0, 0);
