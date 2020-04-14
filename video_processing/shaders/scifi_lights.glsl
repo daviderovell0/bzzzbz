@@ -2,7 +2,7 @@
 
 uniform float W;
 uniform float H;
-uniform float c_A;
+uniform float c_A; //c_A is GLUT_ELAPSED_TIME and as such its value is increasing, taking up more and more memory
 const float pi=3.141596;
 
 float hash (float v) {

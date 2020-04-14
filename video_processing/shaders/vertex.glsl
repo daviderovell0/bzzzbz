@@ -1,3 +1,5 @@
+//simple vertex shader, only static coordinates, no transformations etc
+
 attribute vec3 coord3d;
 
 void main(void) {

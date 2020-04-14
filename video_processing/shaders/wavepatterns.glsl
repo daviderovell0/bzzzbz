@@ -1,6 +1,9 @@
+//Author: Marcell Illyes
+
+
 uniform float H;
 uniform float W;
-uniform float c_A;
+uniform float c_A; //c_A is GLUT_ELAPSED_TIME >> constanstly increasing, risk of memory overflow on pi
 const float pi = 3.141596;
 
 float BPM = 120.0;
