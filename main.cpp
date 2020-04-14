@@ -211,7 +211,7 @@ void onIdle() {
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
   //float dyn_A=0.0;
   //float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
-  float dyn_A=fft_frame[0];
+  float dyn_A=fft_frame[1];
   
 
   //when switching modes change program accordingly
