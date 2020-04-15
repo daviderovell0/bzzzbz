@@ -12,7 +12,7 @@ void main( void ) {
 	float c= 0.0;
 	
 	
-	for(int i=0; i < 513; i+=16){
+	for(int i=0; i < 513; i+=8){
 	
 		if(mod(X,1.0/32.0)<0.02 && X<c/32.0 && X > (c-1.0)/32.0){
 		
