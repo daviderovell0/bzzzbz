@@ -1,5 +1,5 @@
 
-// Standards libraries
+// Standard libraries
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -9,7 +9,6 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-
 // For SPI
 #include <stdint.h>
 #include <unistd.h>
@@ -18,14 +17,13 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-
 // Custom classes
 #include "MCP3008Comm.h"
 #include "AudioProcessing.h"
 #include "shader_utils.h"
 
 
-// GLOBAL VARIABLES
+/***** OpenGL globals *****/
 GLuint vbo_window;
 GLuint program;
 GLint attribute_coord3d;
@@ -37,23 +35,31 @@ GLint uniform_pB;
 GLint uniform_pC;
 GLint uniform_fft;
 
-//uniforms for control variables
-float pot_A=0.0;
-float pot_B=0.0; // actual period??
-float pot_C=0.0;
-
-
 struct attributes {
   GLfloat coord3d[3];
 };
 
+/***** Control interface *****/
+float pot_A=0.0;
+float pot_B=0.0;
+float pot_C=0.0;
+
+/***** Audio processing globals *****/
 
 // Initalise audio processing instance with default constructor 
 AudioProcessing *ap = new AudioProcessing(); 
-// Initialise FFT buffer as global variable for access during video mapping
-const int nfft = 1024;
-float *fft_frame = (float *) malloc((nfft/2+1)*sizeof(float));
 
+// length of the FFT buffer is determined by the number of frames set by JACK server.
+// here it is started with default settings: sr=48KHz, frames=1024, period=2, driver=alsa
+const int nfft = 1024;
+// audio buffer
+float *audio_buffer = (float *) malloc(nfft*sizeof(float));
+// lock for buffer transfer
+bool audio_locked = false;
+//input fft buffer
+float *fft_buffer_in = new kiss_fft_scalar[nfft];
+// output values to be used in the video
+float *fft_frame_out = (float *) malloc((nfft/2+1)*sizeof(float));
 
 
 /**
@@ -64,44 +70,29 @@ void signal_handler(int sig)
 {
 	fprintf(stderr, "signal received, closing JACK client...\n");
   ap->stop();
-  free(fft_frame);
+  free(fft_frame_out);
 }
 
-
 /**
- * Define the audio process routine callback:
- * Run the FFT method every time the chosen buffer 
- * is filled. Buffer size/2+1 = number of bins.
- * Take FFT accuracy vs. execution speed into account when choosing the buffer size. 
+ * Define the audio process routine callback.
+ * Get the lock and copy the buffer over. Don't do anything with the output
+ * as it is already bypassed by the chip
  */
-class TriggerFFT : public AudioProcessingCallback {
-    int i = 0;
-    // initalise the buffer to 64
-    kiss_fft_scalar *buffer = new kiss_fft_scalar[nfft];
-
-	virtual void process(float sample) {
-        // run the fft when the buffer is full
-        if (i == nfft -1 ) {
-            ap->runFFT(buffer, fft_frame,nfft);
-            i = 0;
-            for(int j=0;j< nfft/2+1;j++){
-                fprintf(stdout,"%f\n",fft_frame[j]);
-            }
-            printf("--\n");
-        }
-        // fill it otherwise
-        else {
-            buffer[i] = sample;
-            i++;
-        }
-	}
+class ReadBuffer : public AudioProcessingCallback {    
+    virtual void process(float* in_buffer, float* out_buffer) {
+      // don't wait for the FFT buffer copy, keep reading audio
+      if(!audio_locked){
+        audio_locked = true;
+        memcpy(audio_buffer,in_buffer, nfft*sizeof(float));
+        audio_locked = false;
+      }
+    }
 };
 
 /**
  * SPI sample callback class
  * Processing the output samples coming from the MCP3008 ADC 
  **/
-
 class MCP3008printSampleCallback : public MCP3008callback {
 	virtual void hasSample(int value, int channel) {
 		switch (channel)
@@ -215,12 +206,21 @@ int init_resources()
 }
 
 void onIdle() {
+  
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
   //float dyn_A=0.0;
   //float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
-  /*float dyn_A=fft_frame[1];*/
+  
+  while(audio_locked); // wait audio processing callback to finish
+  audio_locked = true;
+  memcpy(fft_buffer_in,audio_buffer, nfft*sizeof(float));
+  audio_locked = false;
+  
+  // compute fft
+  ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
 
+  // Pass values to shader
   //when switching modes change program accordingly
   glUseProgram(program);
   glUniform1f(uniform_width, window_width);
@@ -229,7 +229,7 @@ void onIdle() {
   glUniform1f(uniform_pA, pot_A);
   glUniform1f(uniform_pB, pot_B);
   glUniform1f(uniform_pC, pot_C);*/
-  glUniform1fv(uniform_fft, nfft/2+3,fft_frame);
+  glUniform1fv(uniform_fft, nfft/2+1,fft_frame_out);
   glutPostRedisplay();
 }
 
@@ -277,8 +277,9 @@ int main(int argc, char *argv[]){
     m->setCallback(&print_cb);
     m->start();*/
 
-    TriggerFFT cb;
+    ReadBuffer cb;
     ap->setCallback(&cb);
+
     ap->start();
 
     // opengl
@@ -300,6 +301,7 @@ int main(int argc, char *argv[]){
     }
     //main loop if init_resources returns 1
     if (init_resources()) {
+      
         glutDisplayFunc(onDisplay);
         glutIdleFunc(onIdle);
         glEnable(GL_BLEND);
@@ -311,7 +313,9 @@ int main(int argc, char *argv[]){
     //m->stop();
     //delete m;
     ap->stop();
-    free(fft_frame);
+    free(audio_buffer);
+    free(fft_buffer_in);
+    free(fft_frame_out);
     free_resources();
     return 0;
 }

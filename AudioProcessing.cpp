@@ -5,7 +5,9 @@ void AudioProcessing::jack_shutdown(void *arg){
     exit (1);
 }
 
-float *AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, int nfft){
+
+
+void AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, int nfft){
 	// Real valued FFT data structures init. 
     kiss_fftr_cfg cfg = kiss_fftr_alloc(nfft, 0, 0, 0);
 	kiss_fft_cpx *cx_out = new kiss_fft_cpx[nfft/2+1];
@@ -13,14 +15,16 @@ float *AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, i
 	//fft here
     kiss_fftr( cfg , buffer , cx_out );
 
-
 	for (int k = 1; k < nfft/2+1; k++){
             // calculate magnitude of complex pair
             fft_magnitudes[k] = sqrt(pow(cx_out[k].i, 2) + pow(cx_out[k].r,2))/10; // /10 is a temp normalisation
         }
 	fft_magnitudes[0] = 0;
-	return fft_magnitudes;
+	free(cfg);
 }
+
+
+
 
 void AudioProcessing::setCallback(AudioProcessingCallback* cb) {
     apcallback = cb;
@@ -28,15 +32,13 @@ void AudioProcessing::setCallback(AudioProcessingCallback* cb) {
 
 int AudioProcessing::run(jack_nframes_t nframes, void *arg){
     AudioProcessing *ap = (AudioProcessing *) arg;
-    jack_default_audio_sample_t *in;
-    in = (jack_default_audio_sample_t*)jack_port_get_buffer (ap->input_port, nframes);
-    unsigned int i;
+    jack_default_audio_sample_t *in, *out;
 
-    for( i=0; i<nframes; i++ )
-	{
-		if (ap->apcallback) {
-				ap->apcallback->process(in[i]);
-			}
+    in = (jack_default_audio_sample_t*)jack_port_get_buffer (ap->input_port, nframes);
+	out = (jack_default_audio_sample_t*)jack_port_get_buffer (ap->output_portL, nframes);
+
+	if (ap->apcallback) {
+		ap->apcallback->process(in, out);
 	}
 	return 0;      
 }
@@ -75,14 +77,24 @@ void AudioProcessing::start(){
 
 	jack_on_shutdown (client, this->jack_shutdown, 0);
 
-    /* register the port */
+    /* register the ports */
     input_port = jack_port_register (client, "input",
 					 JACK_DEFAULT_AUDIO_TYPE,
 					 JackPortIsInput, 0);
-    if (input_port == NULL) {
-        fprintf(stderr, "no more JACK ports available\n");
+
+	output_portL = jack_port_register (client, "output1",
+					  JACK_DEFAULT_AUDIO_TYPE,
+					  JackPortIsOutput, 0);
+	output_portR = jack_port_register (client, "output2",
+					  JACK_DEFAULT_AUDIO_TYPE,
+					  JackPortIsOutput, 0);		
+
+    if (input_port == NULL || output_portL == NULL || output_portR == NULL){
+        fprintf(stderr, "Error in ports registration\n");
 		exit (1);
     }
+
+	
 
     /* Start the client. AudioProcessing::run starts now. */
 	if (jack_activate (client)) {
@@ -99,17 +111,28 @@ void AudioProcessing::start(){
      */
 
     /* Get the input port */
-    ports = jack_get_ports (client, NULL, NULL,
-				JackPortIsPhysical|JackPortIsOutput);
+    ports = jack_get_ports (client, NULL, NULL,JackPortIsPhysical|JackPortIsOutput);
 	if (ports == NULL) {
 		fprintf(stderr, "no physical capture ports\n");
 		exit (1);
 	}
-    /* Connect the input port (micIN) */
+
 	if (jack_connect (client, ports[0], jack_port_name (input_port))) {
-		fprintf (stderr, "cannot connect input ports\n");
+		fprintf (stderr, "Cannot connect to input ports\n");
 	}
-    /* Deallocate memory */
+	
+	/* Get the output ports */
+	ports = jack_get_ports (client, NULL, NULL,JackPortIsPhysical|JackPortIsInput);
+	if (ports == NULL) {
+		fprintf(stderr, "no physical capture ports\n");
+		exit (1);
+	}
+	if (jack_connect (client, jack_port_name (output_portL),ports[0])) {
+		fprintf (stderr, "Cannot connect to output port\n");
+	}
+	if (jack_connect (client, jack_port_name (output_portR),ports[1])) {
+		fprintf (stderr, "Cannot connect to output port\n");
+	}
 	free (ports);
 }
 
