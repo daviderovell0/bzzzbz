@@ -29,7 +29,6 @@ GLuint program;
 GLint attribute_coord3d;
 GLint uniform_width;
 GLint uniform_height;
-GLint uniform_A;
 GLint uniform_pA;
 GLint uniform_pB;
 GLint uniform_pC;
@@ -40,9 +39,9 @@ struct attributes {
 };
 
 /***** Control interface *****/
-float pot_A=0.0;
-float pot_B=0.0;
-float pot_C=0.0;
+float pot_A=0.9;
+float pot_B=0.7;
+float pot_C=0.6;
 
 /***** Audio processing globals *****/
 
@@ -137,7 +136,7 @@ int init_resources()
 
   GLuint vs, fs;
   if ((vs = create_shader("shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
-  if ((fs = create_shader("shaders/EQ.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader >> change to filename_read to be able to switch
+  if ((fs = create_shader("shaders/cells.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader >> change to filename_read to be able to switch
   
   //unique program object for each shader or one program and shaders are changed...as this is done in init_resources, probably multiple programs
   program = glCreateProgram();
@@ -178,30 +177,24 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-  /*uniform_name = "c_A";
-  uniform_A = glGetUniformLocation(program, uniform_name);
-  if (uniform_A == -1) {
-    fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
-    return 0;
-  }
-  uniform_name = "FREQ";
+  uniform_name = "A";
   uniform_pA = glGetUniformLocation(program, uniform_name);
   if (uniform_pA == -1) {
     fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "PERIOD";
+  uniform_name = "B";
   uniform_pB = glGetUniformLocation(program, uniform_name);
   if (uniform_pB == -1) {
     fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "EXPONENT";
+  uniform_name = "C";
   uniform_pC = glGetUniformLocation(program, uniform_name);
   if (uniform_pC == -1) {
     fprintf(stderr, "Could not bind uniform_A %s\n", uniform_name);
     return 0;
-  }*/
+  }
   return 1;
 }
 
@@ -209,8 +202,6 @@ void onIdle() {
   
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
-  //float dyn_A=0.0;
-  //float dyn_A=glutGet(GLUT_ELAPSED_TIME)/1000.0/2.0; //dummy dynamic variable, 4sec, 0.0-1.0
   
   while(audio_locked); // wait audio processing callback to finish
   audio_locked = true;
@@ -225,10 +216,9 @@ void onIdle() {
   glUseProgram(program);
   glUniform1f(uniform_width, window_width);
   glUniform1f(uniform_height, window_height);
-  /*glUniform1f(uniform_A, dyn_A);
   glUniform1f(uniform_pA, pot_A);
   glUniform1f(uniform_pB, pot_B);
-  glUniform1f(uniform_pC, pot_C);*/
+  glUniform1f(uniform_pC, pot_C);
   glUniform1fv(uniform_fft, nfft/2+1,fft_frame_out);
   glutPostRedisplay();
 }

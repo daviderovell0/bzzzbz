@@ -1,0 +1,4 @@
+/usr/local/lib/libkiss-fft.a
+/usr/local/include/kiss_fft.h
+/usr/local/include/kiss_fftr.h
+/usr/local/include/_kiss_fft_guts.h

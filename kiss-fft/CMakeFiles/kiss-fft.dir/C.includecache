@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/_kiss_fft_guts.h
+kiss_fft.h
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fft.h
+limits.h
+-
+alloca.h
+-
+
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fft.c
+_kiss_fft_guts.h
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/_kiss_fft_guts.h
+
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fft.h
+stdlib.h
+-
+stdio.h
+-
+math.h
+-
+string.h
+-
+sys/types.h
+-
+
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fftr.c
+kiss_fftr.h
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fftr.h
+_kiss_fft_guts.h
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/_kiss_fft_guts.h
+
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fftr.h
+kiss_fft.h
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/kiss_fft.h
+

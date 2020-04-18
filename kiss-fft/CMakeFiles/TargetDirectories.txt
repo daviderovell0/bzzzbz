@@ -1,0 +1,7 @@
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/install/strip.dir
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/edit_cache.dir
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/kiss-fft.dir
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/rebuild_cache.dir
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/list_install_components.dir
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/install/local.dir
+/home/peter/Desktop/RealTime/bzzzbz/kiss-fft/CMakeFiles/install.dir
