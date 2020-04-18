@@ -45,13 +45,13 @@ process (jack_nframes_t nframes, void *arg)
 {
 	jack_default_audio_sample_t *out1, *out2, *in;
 	int i;
-
     in = (jack_default_audio_sample_t*)jack_port_get_buffer (input_port, nframes);
 	out1 = (jack_default_audio_sample_t*)jack_port_get_buffer (output_port1, nframes);
 	out2 = (jack_default_audio_sample_t*)jack_port_get_buffer (output_port2, nframes);
 
     for( i=0; i<nframes; i++ )
 	{
+		
         fprintf(stdout,"%f\n", in[i]);
 		out1[i] = in[i];  /* left */
 		out2[i] = in[i];  /* right */
@@ -78,7 +78,7 @@ main (int argc, char *argv[])
 	jack_options_t options = JackNullOption;
 	jack_status_t status;
 
-    /* Command line options: client and server name (for inter-app communication */
+    /* Command line options: client and server name (for inter-app communication) */
     if (argc >= 2) {		/* client name specified? */
 		client_name = argv[1];
 		if (argc >= 3) {	/* server name specified? */
@@ -95,7 +95,6 @@ main (int argc, char *argv[])
 		}
 	}
 
-	/* open a client connection to the JACK server */
 	client = jack_client_open (client_name, options, &status, server_name);
 	if (client == NULL) {
 		fprintf (stderr, "jack_client_open() failed, "
