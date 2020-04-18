@@ -8,52 +8,53 @@ uniform float W;
 uniform float A;
 uniform float B;
 uniform float C;
-uniform float fft[513]
+uniform float fft[513];
 
 
 const float pi = 3.141596;
 
 //Separate function for averaging parts of the spectrum. This is because in GLSL only constants are allowed in for loops
 //currently first 6 octaves are considered, F#+17ct (?)
-float sub(float FFT){
+/*float sub(float fft[513]){
         float sum=0.0;
         for (int i=1; i <= 2; i++){
+            float sum += fft[i];
+        }
+        return sum/2.0;
+}
+
+
+float bass(float *FFT){
+        float sum=0.0;
+        for (int i=3; i <= 4; i++){
             float sum += FFT[i];
         }
         return sum/2.0;
 }
 
-float bass(float FFT){
+float lowmid(float *FFT){
         float sum=0.0;
-        for (int i=3, i <= 4; i++){
-            float sum += FFT[i];
-        }
-        return sum/2.0;
-}
-
-float lowmid(float FFT){
-        float sum=0.0;
-        for (int i=5, i <= 8; i++){
+        for (int i=5; i <= 8; i++){
             float sum += FFT[i];
         }
         return sum/4.0;
 }
 
-float mid(float FFT){
+float mid(float *FFT){
         float sum=0.0;
-        for (int i=9, i <= 16; i++){
+        for (int i=9; i <= 16; i++){
             float sum += FFT[i];
         }
         return sum/8.0;
 }
 
-float high(float FFT){
+float high(float *FFT){
         float sum=0.0;
-        for (int i=17, i <= 32; i++){
+        for (int i=17; i <= 32; i++){
             float sum += FFT[i];
         }
         return sum/16.0;
-}
+}*/
 
  
 void main( void ) {
@@ -79,12 +80,18 @@ void main( void ) {
         //5 variables based on incoming FFT, bins averaged so that variables are associated with different ranges of the spectrum
         //names reflect timing
 
-        //FIX!!, WRITE FUNCTION.
-        float env16=sub(fft);
-        float env8=bass(fft);
+        
+        //float env16=sub(fft);
+        /*float env8=bass(fft);
         float env1=low(fft);
-        float env3=mid(fft);;
-        float env01=high(fft);
+        float env3=mid(fft);
+        float env01=high(fft);*/
+
+        float env16=fft[1];
+        float env12=fft[4];
+        float env1=fft[6];
+        float env3=fft[8];
+        float env01=fft[12];
 	    
         //find global minimum distance for each pixel from any point
        	for (int i = 0; i < 5; i++) 
