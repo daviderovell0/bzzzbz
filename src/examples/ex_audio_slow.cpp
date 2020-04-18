@@ -1,10 +1,11 @@
-/** @file main.cpp
+/** @file ex_audio.cpp
+ * 
+ * @brief TO WRITE demonstrate audio-reactive audio
  *
- *  @brief implementation file of BZZZBZ main
- *
- * @author Marcell Illyes (marcellillyes), Peter Nagy (deetrone), Davide Rovelli (daviderovell0)
- *
+ * @author BZZZBZ
+ * 
  */
+
 
 // Standard libraries
 #include <iostream>
@@ -16,18 +17,9 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-// For SPI
-#include <stdint.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/types.h>
-#include <linux/spi/spidev.h>
-
 // Custom classes
-#include "MCP3008Comm.h"
-#include "AudioProcessing.h"
-#include "shader_utils.h"
+#include "../AudioProcessing.h"
+#include "../shader_utils.h"
 
 
 /***** OpenGL globals *****/
@@ -36,19 +28,12 @@ GLuint program;
 GLint attribute_coord3d;
 GLint uniform_width;
 GLint uniform_height;
-GLint uniform_pA;
-GLint uniform_pB;
-GLint uniform_pC;
 GLint uniform_fft;
+
 
 struct attributes {
   GLfloat coord3d[3];
 };
-
-/***** Control interface *****/
-float pot_A=0.9;
-float pot_B=0.7;
-float pot_C=0.6;
 
 /***** Audio processing globals *****/
 
@@ -95,38 +80,10 @@ class ReadBuffer : public AudioProcessingCallback {
     }
 };
 
-/**
- * SPI sample callback class
- * Processing the output samples coming from the MCP3008 ADC 
- **/
-class MCP3008printSampleCallback : public MCP3008callback {
-	virtual void hasSample(int value, int channel) {
-		switch (channel)
-    {
-    case 0:
-      pot_A = value/1024.0;
-      break;
-    
-    case 1:
-      pot_B = value/1024.0;
-      break;
-    
-    case 2:
-      pot_C = value/1024.0;
-      break;
-    
-    default:
-      break;
-    };
-    printf("value: %d, channel: %d\n", value, channel);
-	}
-};
-
-
 // OPENGL FUNCTIONS
 int init_resources()
 { 
-  //vertices, z=0
+  // vertices to be stored in VBO, to create rectangle in vertex shader
   struct attributes window_attributes[] = {
     {{ -1.0,  1.0, 0.0}},
     {{-1.0, -1.0, 0.0}},
@@ -140,19 +97,21 @@ int init_resources()
   glBufferData(GL_ARRAY_BUFFER, sizeof(window_attributes), window_attributes, GL_STATIC_DRAW);
 
   GLuint vs, fs;
-  if ((vs = create_shader("shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
-  if ((fs = create_shader("shaders/cells.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
+  if ((vs = create_shader("../shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
+  if ((fs = create_shader("../shaders/spectrum_slow.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
   
   program = create_program(program, vs, fs);
 
+  //bind attribute (coordinates)
   const char* attribute_name = "coord3d";
   attribute_coord3d = glGetAttribLocation(program, attribute_name);
   if (attribute_coord3d == -1) {
     fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
     return 0;
   }
-  //if multiple program we can choose which uniforms are bound where
+  //bind all uniforms from fragment shaders (associated program object)
   const char* uniform_name;
+  //width and height, should be same
   uniform_name = "H";
   uniform_height = glGetUniformLocation(program, uniform_name);
   if (uniform_height == -1) {
@@ -165,39 +124,20 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-
+  // time control uniform
   uniform_name = "fft";
   uniform_fft = glGetUniformLocation(program, uniform_name);
   if (uniform_fft == -1) {
-    fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
-    return 0;
-  }
-  uniform_name = "A";
-  uniform_pA = glGetUniformLocation(program, uniform_name);
-  if (uniform_pA == -1) {
-    fprintf(stderr, "Could not bind uniform_pA %s\n", uniform_name);
-    return 0;
-  }
-  uniform_name = "B";
-  uniform_pB = glGetUniformLocation(program, uniform_name);
-  if (uniform_pB == -1) {
-    fprintf(stderr, "Could not bind uniform_pB %s\n", uniform_name);
-    return 0;
-  }
-  uniform_name = "C";
-  uniform_pC = glGetUniformLocation(program, uniform_name);
-  if (uniform_pC == -1) {
-    fprintf(stderr, "Could not bind uniform_pC %s\n", uniform_name);
+    fprintf(stderr, "Could not bind uniform_fft %s\n", uniform_name);
     return 0;
   }
   return 1;
 }
 
 void onIdle() {
-  
-  float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
+  float window_width=glutGet(GLUT_WINDOW_HEIGHT);
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
-  
+
   while(audio_locked); // wait audio processing callback to finish
   audio_locked = true;
   memcpy(fft_buffer_in,audio_buffer, nfft*sizeof(float));
@@ -206,14 +146,9 @@ void onIdle() {
   // compute fft
   ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
 
-  // Pass values to shader
-  //when switching modes change program accordingly
   glUseProgram(program);
   glUniform1f(uniform_width, window_width);
   glUniform1f(uniform_height, window_height);
-  glUniform1f(uniform_pA, pot_A);
-  glUniform1f(uniform_pB, pot_B);
-  glUniform1f(uniform_pC, pot_C);
   glUniform1fv(uniform_fft, nfft/2+1,fft_frame_out);
   glutPostRedisplay();
 }
@@ -222,17 +157,16 @@ void onDisplay()
 {
   glClearColor(1.0, 1.0, 1.0, 1.0); // empty == white
   glClear(GL_COLOR_BUFFER_BIT);
-  glUseProgram(program); //must be changed from modes
-  //same for all programs, as attribute_coord3d is always bound
+  glUseProgram(program);
   glEnableVertexAttribArray(attribute_coord3d);
   glBindBuffer(GL_ARRAY_BUFFER, vbo_window);
   glVertexAttribPointer(
-    attribute_coord3d,   // attribute
-    3,                   // number of elements per vertex, here (x,y,z)
-    GL_FLOAT,            // the type of each element
-    GL_FALSE,            // take our values as-is
-    0,                  //every element appears...
-    0                    // offset of first element
+    attribute_coord3d,  // attribute
+    3,                  // number of elements per vertex, here (x,y,z)
+    GL_FLOAT,           // the type of each element
+    GL_FALSE,           // take values as-is
+    0,                  // every element appears...
+    0                   // offset of first element
   );
 
   // Push each element in buffer_vertices to the vertex shader, create rectangle
@@ -256,11 +190,6 @@ int main(int argc, char *argv[]){
 	  signal(SIGHUP, signal_handler);
 	  signal(SIGINT, signal_handler);
 
-    //Instantiate SPI related classes and start readouts
-    /*MCP3008Comm* m = new MCP3008Comm();
-    MCP3008printSampleCallback print_cb;
-    m->setCallback(&print_cb);
-    m->start();*/
 
     ReadBuffer cb;
     ap->setCallback(&cb);
@@ -295,8 +224,6 @@ int main(int argc, char *argv[]){
     }
 
     // Terminate threads, free resources
-    //m->stop();
-    //delete m;
     ap->stop();
     free(audio_buffer);
     free(fft_buffer_in);
@@ -304,3 +231,8 @@ int main(int argc, char *argv[]){
     free_resources();
     return 0;
 }
+
+  
+
+
+

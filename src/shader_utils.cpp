@@ -1,8 +1,9 @@
-/* Utility for reading, compiling, debugging shaders
+/** @file shader_utils.cpp
  *
- * Author: Peter Nagy
- * Based on code by: Sylvain Beucler
- * Original from the OpenGL Programming wikibook. This file is in the public domain.
+ *  @brief Utility for reading, compiling shaders and program object creation.
+ *
+ * @author Sylvain Beucler (OpenGL Programming wikibook), Peter Nagy (deetrone)
+ *
  */
 
 #include <stdio.h>
@@ -35,7 +36,6 @@ char* file_read(const char* filename)
   return res;
 }
 
-//
 void print_log(GLuint object)
 {
   GLint log_length = 0;
@@ -51,7 +51,7 @@ void print_log(GLuint object)
   {
     fprintf(stderr, "printlog: Not a shader or a program\n");
     return;
-  }
+}
 
   char* log = (char*)malloc(log_length);
 
@@ -68,7 +68,7 @@ void print_log(GLuint object)
   free(log);
 }
 
-//Create and compile shaders from "filename" using create_shader function
+//Create and compile shaders from "filename"
 GLuint create_shader(const char* filename, GLenum type)
 {
   //read strings from "filename" and make new variable "source"
@@ -94,9 +94,9 @@ GLuint create_shader(const char* filename, GLenum type)
     "#endif                           \n"
      : ""
      ,
-    source }; //append "source" >> basically just dynamically finishes the shader src
+    source };
 
-  glShaderSource(res, 3, sources, NULL); //3 bc version, precision stuff, source
+  glShaderSource(res, 3, sources, NULL); 
   free((void*)source); //free memory allocated to source void* pointer to unknown datatype
   glCompileShader(res);
   //some error handling
@@ -106,11 +106,27 @@ GLuint create_shader(const char* filename, GLenum type)
   {
     fprintf(stderr, "%s:", filename);
     print_log(res);
-    glDeleteShader(res); //deletes it if error in compilation
+    glDeleteShader(res);
     return 0;
   }
-  return res; //returns "res" object which is the compiled shader coming from "filename"
-  //need to return as it is defined within function, is of type GLuint
+  return res; //GLuint "res" returned == shader object in window.cpp
+}
+
+
+//function that takes in "empty program" and vertex+fragment shader, and returns a program object with attached shaders 
+GLuint create_program(GLuint program, GLuint vert ,GLuint frag){
+    GLint link_ok = GL_FALSE;
+    program = glCreateProgram();
+    glAttachShader(program, vert);
+    glAttachShader(program, frag);
+    glLinkProgram(program);
+    glGetProgramiv(program, GL_LINK_STATUS, &link_ok);
+    if (!link_ok) {
+        fprintf(stderr, "glLinkProgram:");
+        print_log(program);
+        return 0;
+    }
+    return program;
 }
 
 

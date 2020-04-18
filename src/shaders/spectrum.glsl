@@ -1,3 +1,12 @@
+/** @file spectrum.glsl
+ * 
+ * @brief Example shader demonstrating audio reactive capabilites. Can be used either on the Raspberry Pi or a desktop environment.
+ *
+ * @author Marcell Illyes (marcellillyes), Davide Rovelli (daviderovell0)
+ * 
+ */
+
+
 uniform float H;
 uniform float W;
 uniform float fft[513];
@@ -23,8 +32,6 @@ void main( void ) {
 	if (Y <= fft[bin]){
 		level += 1.0;
 	}
-		
 
 	gl_FragColor = vec4( vec3(level), 1.0 );
-
 }

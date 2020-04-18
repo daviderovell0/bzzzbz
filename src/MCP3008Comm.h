@@ -1,3 +1,11 @@
+/** @file MCP3008Comm.h
+ * 
+ * @brief TO WRITE 
+ *
+ * @author BZZZBZ
+ * 
+ */
+
 #ifndef __MCP3008COMM_H
 #define __MCP3008COMM_H
 

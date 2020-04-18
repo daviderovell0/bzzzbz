@@ -1,20 +1,24 @@
-//"Creation" by Danilo Guanabara
-//Original: https://www.shadertoy.com/view/XsXXDn ; last accessed 08/04/2020
-//Port: Peter Nagy
+/** @file creation.glsl
+ * 
+ * @brief Example shader that runs without any inputs, perfect for the desktop environment. Original: https://www.shadertoy.com/view/XsXXDn 
+ *
+ * @author Danilo Guanabara, Port: Peter Nagy (deetrone)
+ * 
+ */
 
 uniform float W;
 uniform float H;
-uniform float c_A;
-const float pi=3.141596;
+uniform float time;
+const float pi=3.1415926;
 
 void main(){
 
     float X=gl_FragCoord.x/W;
     float Y=gl_FragCoord.y/H;
-    vec2 pos=vec2(X-0.45,Y);
+    vec2 pos=vec2(X-0.46,Y);
     vec2 u, p=pos;
     vec3 c;
-    float l, z=c_A; //z==dynamic
+    float l, z=time; 
     for(int i=0;i<3;i++){
          p=pos;
          u=p;

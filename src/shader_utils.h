@@ -1,13 +1,11 @@
-/* HEADER: Utility for reading, compiling, debugging shaders
+/** @file  shader_utils.h
  *
- * Author: Peter Nagy
- * Based on code by: Sylvain Beucler
- * Original from the OpenGL Programming wikibook. This file is in the public domain.
+ *  @brief Header for functions to read and create shaders and program object.
+ *
+ *  @author Peter Nagy (deetrone)
  */
 
-#ifndef _CREATE_SHADER_H
-#define _CREATE_SHADER_H
 char* file_read(const char* filename);
 void print_log(GLuint object);
 GLuint create_shader(const char* filename, GLenum type);
-#endif
+GLuint create_program(GLuint program, GLuint vert, GLuint frag);

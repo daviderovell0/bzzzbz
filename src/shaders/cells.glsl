@@ -1,5 +1,8 @@
-/*Author: Peter Nagy
+/** @file cells.glsl
+ * 
+ * @brief Example shader used to demonstrate BZZZBZ. Audio reactive and can also be controlled via SPI.
  *
+ * @author Peter Nagy (deetrone)
  * 
  */
 
@@ -10,8 +13,7 @@ uniform float B;
 uniform float C;
 uniform float fft[513];
 
-
-const float pi = 3.141596;
+const float pi = 3.1415926;
 
 //Separate function for averaging parts of the spectrum. This is because in GLSL only constants are allowed in for loops
 //currently first 6 octaves are considered, F#+17ct (?)
