@@ -76,7 +76,7 @@ private:
 	const uint8_t DIFF_CHANNEL [8] = {0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70};
 	const uint16_t MASK = 1023; /* 10bit mask to filter useful data */
 	const uint8_t CS = 8;
-	const uint8_t mode = SPI_CPHA | SPI_CPOL;
+	const uint8_t mode = SPI_CPHA | SPI_CPOL; /* Set SPI mode to (1,1) */
 	const uint32_t speed = 500000;
 	const uint16_t delay = 0;
 	const uint8_t bpw   = 8;
