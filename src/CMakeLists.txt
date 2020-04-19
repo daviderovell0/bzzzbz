@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project (bz)
+add_library (AudioProcessing AudioProcessing.cpp AudioProcessing.h)
 add_executable(bz main.cpp shader_utils.cpp AudioProcessing.cpp gpio-sysfs.cpp MCP3008Comm.cpp)
 
 set (CMAKE_CXX_STANDARD 11)
