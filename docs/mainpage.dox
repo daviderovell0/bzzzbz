@@ -1,0 +1,4 @@
+/*! \mainpage 
+ *
+ * This is the main page of the source code documentation of BZZZBZ, a digital video synthesizer based on Raspberry Pi. This documentation details classes and methods used in the software. An in-depth guide is provided on our github repository's wiki page, accessed at https://github.com/daviderovell0/bzzzbz/wiki .
+ */

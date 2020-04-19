@@ -21,6 +21,7 @@ const float FREQ = 5.0;
 
 
 void main( void ) {
+    /**The 'if' statement is used to draw the shapes*/
     	float X = gl_FragCoord.x/W;
     	float Y = gl_FragCoord.y/H;
 	    float color = 0.0;

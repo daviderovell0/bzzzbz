@@ -1,7 +1,6 @@
 /** @file creation.glsl
  * 
- * @brief Example shader that runs without any inputs, perfect for the desktop environment. Original: https://www.shadertoy.com/view/XsXXDn 
- *
+ * @brief Example shader that runs without any inputs, perfect for the desktop environment. 
  * @author Danilo Guanabara, Port: Peter Nagy (deetrone)
  * 
  */
@@ -12,6 +11,8 @@ uniform float time;
 const float pi=3.1415926;
 
 void main(){
+  /**Shows circular ripples/waves, the animation speed can be slowed down by adjusting the variable in the idle function in the associated implmentation file, ex_opengl.cpp. Original: https://www.shadertoy.com/view/XsXXDn 
+ */
 
     float X=gl_FragCoord.x/W;
     float Y=gl_FragCoord.y/H;

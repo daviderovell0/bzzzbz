@@ -1,6 +1,6 @@
 /** @file ex_SPI.cpp
  *
- *  @brief TOWRITE example showing SPI control
+ *  @brief Implementation file to demonstrate external control using potentiometers. Uses the fragment shader wavepatterns.glsl 
  *
  * @author BZZZBZ
  *

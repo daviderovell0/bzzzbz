@@ -12,6 +12,10 @@ uniform float fft[513];
 
 
 void main( void ) {
+   /**Shows the audio spectrum. The 'for' loop used here leads to serious performance issues on the Pi but generally runs fine on more powerful desktop environments. 
+    *
+    *
+    */
 	
 	float X=gl_FragCoord.x/W;
     float Y=gl_FragCoord.y/H;
