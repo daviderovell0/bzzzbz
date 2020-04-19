@@ -55,7 +55,7 @@ float pot_C=0.6;
 
 
 TestLatency *test = new TestLatency(26,0); //Test on gpio 26 with initial state LOW=0
-test->change_state(26);
+
 
 
 
@@ -154,7 +154,7 @@ int init_resources()
 
   GLuint vs, fs;
   if ((vs = create_shader("shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
-  if ((fs = create_shader("shaders/cells.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
+  if ((fs = create_shader("shaders/spectrum.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
   
   program = create_program(program, vs, fs);
 
@@ -185,7 +185,7 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "A";
+  /*uniform_name = "A";
   uniform_pA = glGetUniformLocation(program, uniform_name);
   if (uniform_pA == -1) {
     fprintf(stderr, "Could not bind uniform_pA %s\n", uniform_name);
@@ -202,7 +202,7 @@ int init_resources()
   if (uniform_pC == -1) {
     fprintf(stderr, "Could not bind uniform_pC %s\n", uniform_name);
     return 0;
-  }
+  }*/
   return 1;
 }
 
@@ -221,7 +221,10 @@ void onIdle() {
   
   // compute fft
   ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
-
+  
+  if(fft_frame_out[5]>0.2){
+    test->change_state(26);
+  }
   // Pass values to shader
   //when switching modes change program accordingly
   glUseProgram(program);
@@ -260,7 +263,7 @@ void onDisplay()
   glDrawArrays(GL_TRIANGLES, 2, 3);
   glDisableVertexAttribArray(attribute_coord3d);
   glutSwapBuffers();
-
+ 
 
 }
 
