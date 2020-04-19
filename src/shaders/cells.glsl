@@ -1,5 +1,7 @@
-/*Author: Peter Nagy
- *
+/** @file cells.glsl
+ * 
+ * @brief Example shader used to demonstrate BZZZBZ. Audio reactive and can also be controlled with potentiometers. 
+ * @author Peter Nagy (deetrone)
  * 
  */
 
@@ -10,8 +12,7 @@ uniform float B;
 uniform float C;
 uniform float fft[513];
 
-
-const float pi = 3.141596;
+const float pi = 3.1415926;
 
 //Separate function for averaging parts of the spectrum. This is because in GLSL only constants are allowed in for loops
 //currently first 6 octaves are considered, F#+17ct (?)
@@ -58,6 +59,10 @@ float high(float *FFT){
 
  
 void main( void ) {
+    /**
+     *   The pattern is based on five cells (cellular noise) created with the loop and the interaction of shaping functions. The two variables, 'color' and 'var' can be explored and modified to create new visuals while the hue can be changed by modifying the coefficients of the parameters of the gl_FragColor function.
+     *
+     */    
         //normalise screen coordinates and adjust position
         float X=gl_FragCoord.x/W -0.42;
     	float Y=gl_FragCoord.y/H + 0.2;

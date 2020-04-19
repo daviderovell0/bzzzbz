@@ -1,15 +1,13 @@
-Real Time Embedded Programming 5 repository. Team 9 - Davide Rovelli, Marcell Illyes, Peter Nagy. 
-# bzzzbz - Digital Video Synthesizer
+![bzzzbz Logo](/media/bzzzbz_logo.jpg)
 **bzzzbz** is a video synthesizer that dynamically reacts to an audio input to create images and visuals that can be manipulated for integrated audio-visual performances.  <br>
 This product is meant to be a simpler and cheaper alternative to commercial analog video synthesizers, still providing a flexible interface to enhance musical expression.
-## Specifications
-The device will use a Raspberry Pi to process incoming audio and elaborate real-time graphical patterns. The Raspberry Pi will be also connected to a control surface that allows the user to modify the graphics dynamically.
-## Installation
-On Raspberry Pi 3B+: 
-- Install OpenGL libraries: freeglut3, freeglut3-dev, libgl1-mesa-dev, mesa-common-dev, libglew-dev
-- Turn on FKMS in raspi-config to enable GPU acceleration
-- install raspberrypi-kernel-headers
-- Compile kissFFT
-- cmake, make install
-### Source code
-*Device under development*
+
+If you are a musician, a visual artist or are curious about the mesmerizing videos on the wall of your local techno club, build and use  **bzzzbz** to experiment and play with audio-reactive visuals! Among its main features, this open-source video synth gives you the live control of video parameters and the possibility of creating your own mappings and patterns for immersive audiovisual performances.
+## Documentation
+Visit our [wiki](https://github.com/daviderovell0/bzzzbz/wiki) for the full documentation. 
+## Contributions
+Real Time Embedded Programming 5 repository. Team 9:
+- Davide Rovelli (daviderovell0) - 2202008r
+- Peter Nagy (deetrone)- 2202553n
+- Marcell Illyes (marcellillyes)- 2148723i 
+

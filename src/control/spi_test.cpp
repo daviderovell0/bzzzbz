@@ -1,3 +1,11 @@
+/** @file spi_test.cpp
+ * 
+ * @brief TO WRITE
+ *
+ * @author BZZZBZ
+ * 
+ */
+
 /*
  * AD7705 test/demo program for the Raspberry PI
  *
@@ -21,7 +29,7 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-#include "MCP3008Comm.h"
+#include "../MCP3008Comm.h"
 
 class MCP3008printSampleCallback : public MCP3008callback {
 	virtual void hasSample(int v, int c) {
