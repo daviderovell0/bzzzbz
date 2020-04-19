@@ -72,8 +72,7 @@ float *fft_frame_out = (float *) malloc((nfft/2+1)*sizeof(float));
  *  Terminate the JACK client when exiting the program, to avoid errors in the 
  * following executions.
 */
-void signal_handler(int sig)
-{
+void signal_handler(int sig){
 	fprintf(stderr, "signal received, closing JACK client...\n");
   ap->stop();
   free(fft_frame_out);
@@ -124,6 +123,9 @@ class MCP3008printSampleCallback : public MCP3008callback {
 
 
 // OPENGL FUNCTIONS
+/**
+*Initialise all resources for OpenGL: Vertex Buffer Object, create shaders and attach to program object and bind attributes and uniforms
+**/
 int init_resources()
 { 
   //vertices, z=0
@@ -194,6 +196,9 @@ int init_resources()
 }
 
 void onIdle() {
+/**
+*Idling function of OpenGL renderer. Wait for audio buffer to fill then copy buffer and run fft. Update uniforms such as screen size, controls, fft. Callback to display function
+**/
   
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
@@ -220,6 +225,10 @@ void onIdle() {
 
 void onDisplay()
 {
+/** 
+* Display function of OpenGL renderer. Select program, and draw arrays from VBO. Swap between front and back buffer.
+**/
+
   glClearColor(1.0, 1.0, 1.0, 1.0); // empty == white
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(program); //must be changed from modes
@@ -240,21 +249,29 @@ void onDisplay()
   glDrawArrays(GL_TRIANGLES, 2, 3);
   glDisableVertexAttribArray(attribute_coord3d);
   glutSwapBuffers();
+
+
 }
 
-void free_resources() //free up memory, all programs used should be deleted.
+void free_resources() 
 {   
+/**
+* Delete program object(s) and VBO to free up memory.
+**/
   glDeleteProgram(program);
   glDeleteBuffers(1, &vbo_window);
 }
 
 int main(int argc, char *argv[]){
+/**
+* Main loop. TOWRITE
+**/
     
     // Set the exit routine: Keep running until exit signal (ctrl+C) received.
     signal(SIGQUIT, signal_handler);
-	  signal(SIGTERM, signal_handler);
-	  signal(SIGHUP, signal_handler);
-	  signal(SIGINT, signal_handler);
+	signal(SIGTERM, signal_handler);
+	signal(SIGHUP, signal_handler);
+	signal(SIGINT, signal_handler);
 
     //Instantiate SPI related classes and start readouts
     /*MCP3008Comm* m = new MCP3008Comm();

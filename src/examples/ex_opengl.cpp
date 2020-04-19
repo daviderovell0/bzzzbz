@@ -1,6 +1,6 @@
 /** @file ex_opengl.cpp
  * 
- * @brief TO WRITE demonstrate video w/o any inputs
+ * @brief Implementation file to demonstrate the OpenGL rendering without any external inputs. Uses the fragment shader creation.glsl 
  *
  * @author Peter Nagy (deetrone)
  * 

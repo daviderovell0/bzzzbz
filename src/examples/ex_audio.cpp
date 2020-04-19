@@ -1,6 +1,6 @@
 /** @file ex_audio.cpp
  * 
- * @brief TO WRITE demonstrate audio-reactive audio
+ * @brief Implementation file to demonstrate the audio response. Uses the fragment shader spectrum.glsl 
  *
  * @author BZZZBZ
  * 
