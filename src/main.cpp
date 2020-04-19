@@ -54,8 +54,8 @@ float pot_C=0.6;
 
 
 
-TestLatency *test = new TestLatency(26,0);
-//test->change_state();
+TestLatency *test = new TestLatency(26,0); //Test on gpio 26 with initial state LOW=0
+test->change_state(26);
 
 
 
