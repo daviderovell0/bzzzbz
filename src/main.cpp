@@ -28,6 +28,8 @@
 #include "MCP3008Comm.h"
 #include "AudioProcessing.h"
 #include "shader_utils.h"
+#include "TestLatency.h"
+
 
 
 /***** OpenGL globals *****/
@@ -49,6 +51,15 @@ struct attributes {
 float pot_A=0.9;
 float pot_B=0.7;
 float pot_C=0.6;
+
+
+
+TestLatency *test = new TestLatency(26,0);
+//test->change_state();
+
+
+
+
 
 /***** Audio processing globals *****/
 
