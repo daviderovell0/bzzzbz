@@ -101,7 +101,7 @@ class ReadBuffer : public AudioProcessingCallback {
  * SPI sample callback class
  * Processing the output samples coming from the MCP3008 ADC 
  **/
-class MCP3008printSampleCallback : public MCP3008callback {
+class MCP3008pollChannelsCallback : public MCP3008callback {
 	virtual void hasSample(int value, int channel) {
 		switch (channel)
     {
@@ -116,7 +116,6 @@ class MCP3008printSampleCallback : public MCP3008callback {
     default:
       break;
     };
-   // printf("value: %d, channel: %d\n", value, channel);
 	}
 };
 
@@ -274,8 +273,8 @@ int main(int argc, char *argv[]){
 
     //Instantiate SPI related classes and start readouts
     MCP3008Comm* m = new MCP3008Comm();
-    MCP3008printSampleCallback print_cb;
-    m->setCallback(&print_cb);
+    MCP3008pollChannelsCallback poll_cb;
+    m->setCallback(&poll_cb);
     m->start();
 
     ReadBuffer cb;

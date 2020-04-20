@@ -23,9 +23,6 @@ void AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, int
 	free(cfg);
 }
 
-
-
-
 void AudioProcessing::setCallback(AudioProcessingCallback* cb) {
     apcallback = cb;
 }
