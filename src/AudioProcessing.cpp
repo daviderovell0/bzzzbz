@@ -136,8 +136,7 @@ void AudioProcessing::start(){
 	free (ports);
 }
 
-
-void AudioProcessing::stop(){
-    jack_client_close (client);
+int AudioProcessing::stop(){
+    return jack_client_close (client);
 	exit (0);
 }

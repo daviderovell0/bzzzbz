@@ -10,6 +10,6 @@ add_executable(bz main.cpp shader_utils.cpp AudioProcessing.cpp gpio-sysfs.cpp M
 
 set (CMAKE_CXX_STANDARD 11)
 find_package (Threads)
+target_link_libraries(AudioProcessing kiss-fft jack)
 target_link_libraries(bz rt m ${CMAKE_THREAD_LIBS_INIT} 
-                      jack GL glut GLEW kiss-fft
-                      AudioProcessing)
+                      GL glut GLEW AudioProcessing)
