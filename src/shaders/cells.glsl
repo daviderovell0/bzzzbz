@@ -10,7 +10,7 @@ uniform float W;
 uniform float A;
 uniform float B;
 uniform float C;
-uniform float fft[513];
+//uniform float fft[513];
 
 const float pi = 3.1415926;
 
@@ -92,11 +92,16 @@ void main( void ) {
         float env3=mid(fft);
         float env01=high(fft);*/
 
-        float env16=fft[1];
+        /*float env16=fft[1];
         float env12=fft[4];
         float env1=fft[6];
         float env3=fft[8];
-        float env01=fft[12];
+        float env01=fft[12];*/
+        float env16 = 0.1;
+        float env12= 0.3;
+        float env1 = 0.4;
+        float env3 = 0.6;
+        float env01 = 0.1;
 	    
         //find global minimum distance for each pixel from any point
        	for (int i = 0; i < 5; i++) 

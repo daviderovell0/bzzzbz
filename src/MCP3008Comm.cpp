@@ -1,11 +1,3 @@
-/** @file MCP3008Comm.cpp
- * 
- * @brief TO WRITE
- *
- * @author Marcell Illyes (marcellillyes), Davide Rovelli (daviderovell0)
- * 
- */
-
 #include "MCP3008Comm.h"
 
 

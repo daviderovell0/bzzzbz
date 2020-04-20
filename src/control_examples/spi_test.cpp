@@ -1,8 +1,8 @@
 /** @file spi_test.cpp
  * 
- * @brief TO WRITE
+ * @brief Implementation file to test SPI data readout.
  *
- * @author BZZZBZ
+ * @author Davide Rovelli (daviderovell0)
  * 
  */
 

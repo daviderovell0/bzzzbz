@@ -1,8 +1,8 @@
 /** @file MCP3008Comm.h
  * 
- * @brief TO WRITE 
+ * @brief Class for acquiring data from the MCP3008 ADC. 
  *
- * @author BZZZBZ
+ * @author Marcell Illyes (marcellillyes), Davide Rovelli (daviderovell0)
  * 
  */
 
