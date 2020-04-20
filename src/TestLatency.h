@@ -13,16 +13,16 @@
 #include "gpio-sysfs.h"
 
 /**
- * \class TestLatency
- * \brief Accesses the state of a dedicated GPIO pin
+ * @class TestLatency
+ * @brief Accesses the state of a dedicated GPIO pin
  **/
 
 class TestLatency{
 public:
     /**
-	 * \brief Constructor to initialize a GPIO pin with a given state
-	 * \param unsigned int pin - Choose the GPIO pin to test with
-     * \param unsigned int state - initialize state with 0 or 1
+	 * @brief Constructor to initialize a GPIO pin with a given state
+	 * @param unsigned int pin - Choose the GPIO pin to test with
+     * @param unsigned int state - initialize state with 0 or 1
 	 **/
     TestLatency(unsigned int pin , unsigned int state);
 
