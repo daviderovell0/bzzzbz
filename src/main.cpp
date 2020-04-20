@@ -263,7 +263,7 @@ void free_resources()
 
 int main(int argc, char *argv[]){
 /**
-* Main loop. TOWRITE
+* Main loop. Initialises classes, register callbacks. Starts threads and video rendering. Free resources on stop.
 **/
     
     // Set the exit routine: Keep running until exit signal (ctrl+C) received.
