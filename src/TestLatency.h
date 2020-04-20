@@ -1,6 +1,6 @@
 /** @file TestLatency.h
  *
- * @brief Class for letency test using an oscilloscope and a dedicated gpio pin.
+ * @brief Class for latency test using an oscilloscope and a dedicated gpio pin.
  * 
  * @author Marcell Illyes (marcellillyes)
  */
@@ -12,13 +12,22 @@
 
 #include "gpio-sysfs.h"
 
+/**
+ * \class TestLatency
+ * \brief Accesses the state of a dedicated GPIO pin
+ **/
+
 class TestLatency{
 public:
-
+    /**
+	 * \brief Constructor to initialize a GPIO pin with a given state
+	 * \param unsigned int pin - Choose the GPIO pin to test with
+     * \param unsigned int state - initialize state with 0 or 1
+	 **/
     TestLatency(unsigned int pin , unsigned int state);
 
     /**
-     * Change the state of the test pin
+     * Changes the state of the test pin
      */
     void change_state(unsigned int pin);
 
