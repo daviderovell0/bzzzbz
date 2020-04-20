@@ -3,8 +3,8 @@ include_directories (../src
                      ${Boost_INCLUDE_DIRS}
                      )
 add_definitions (-DBOOST_TEST_DYN_LINK)
-add_executable (aptests testAudioProcessing.cpp)
-target_link_libraries (aptests
+add_executable (APtest.o testAudioProcessing.cpp)
+target_link_libraries (APtest.o
                        AudioProcessing
                        ${Boost_FILESYSTEM_LIBRARY}
                        ${Boost_SYSTEM_LIBRARY}

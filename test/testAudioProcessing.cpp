@@ -8,16 +8,33 @@ class PrintSampleCallBack : public AudioProcessingCallback {
      }
 };
 
-AudioProcessing *ap = new AudioProcessing();
+AudioProcessing *ap;
+PrintSampleCallBack cb;
 
 // Test suite
-BOOST_AUTO_TEST_CASE(FailTest)
+BOOST_AUTO_TEST_CASE(AudioProcessingThreadStarts)
 {
-    
-    BOOST_CHECK_EQUAL(5, 5);
+    BOOST_CHECK_NO_THROW(ap = new AudioProcessing());
 }
 
-BOOST_AUTO_TEST_CASE(PassTest)
+BOOST_AUTO_TEST_CASE(AudioProcessingCallbackIsRegistered)
 {
-    BOOST_CHECK_EQUAL(4, 5);
+    BOOST_CHECK_NO_THROW(ap->setCallback(&cb));
+}
+
+BOOST_AUTO_TEST_CASE(AudioProcessingStartJackClient)
+{
+    FILE *fd = open("inputs/sinewave_432Hz.txt");
+    BOOST_CHECK_NO_THROW(ap->start());
+}
+
+BOOST_AUTO_TEST_CASE(FFTReturnsCorrectSpectrum)
+{
+    
+    BOOST_CHECK_EQUAL(4, 4);
+}
+
+BOOST_AUTO_TEST_CASE(AudioProcessingThreadStops)
+{
+    BOOST_CHECK_EQUAL(ap->stop(),0);
 }

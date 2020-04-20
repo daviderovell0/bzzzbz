@@ -38,7 +38,7 @@ class AudioProcessing {
 public:
     void setCallback(AudioProcessingCallback* cb);
     void start();
-    void stop();
+    int stop();
     /**
      * Real signal to complex freq. FFT using a mixed-radix library
      * (https://github.com/berndporr/kiss-fft). 
