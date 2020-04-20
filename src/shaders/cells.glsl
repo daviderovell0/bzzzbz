@@ -1,7 +1,6 @@
 /** @file cells.glsl
  * 
- * @brief Example shader used to demonstrate BZZZBZ. Audio reactive and can also be controlled via SPI.
- *
+ * @brief Example shader used to demonstrate BZZZBZ. Audio reactive and can also be controlled with potentiometers. 
  * @author Peter Nagy (deetrone)
  * 
  */
@@ -60,6 +59,10 @@ float high(float *FFT){
 
  
 void main( void ) {
+    /**
+     *   The pattern is based on five cells (cellular noise) created with the loop and the interaction of shaping functions. The two variables, 'color' and 'var' can be explored and modified to create new visuals while the hue can be changed by modifying the coefficients of the parameters of the gl_FragColor function.
+     *
+     */    
         //normalise screen coordinates and adjust position
         float X=gl_FragCoord.x/W -0.42;
     	float Y=gl_FragCoord.y/H + 0.2;

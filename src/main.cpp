@@ -28,6 +28,8 @@
 #include "MCP3008Comm.h"
 #include "AudioProcessing.h"
 #include "shader_utils.h"
+#include "TestLatency.h"
+
 
 
 /***** OpenGL globals *****/
@@ -49,6 +51,15 @@ struct attributes {
 float pot_A=0.9;
 float pot_B=0.7;
 float pot_C=0.6;
+
+
+
+TestLatency *test = new TestLatency(26,0); //Test on gpio 26 with initial state LOW=0
+
+
+
+
+
 
 /***** Audio processing globals *****/
 
@@ -72,8 +83,7 @@ float *fft_frame_out = (float *) malloc((nfft/2+1)*sizeof(float));
  *  Terminate the JACK client when exiting the program, to avoid errors in the 
  * following executions.
 */
-void signal_handler(int sig)
-{
+void signal_handler(int sig){
 	fprintf(stderr, "signal received, closing JACK client...\n");
   ap->stop();
   free(fft_frame_out);
@@ -124,6 +134,9 @@ class MCP3008printSampleCallback : public MCP3008callback {
 
 
 // OPENGL FUNCTIONS
+/**
+*Initialise all resources for OpenGL: Vertex Buffer Object, create shaders and attach to program object and bind attributes and uniforms
+**/
 int init_resources()
 { 
   //vertices, z=0
@@ -141,7 +154,7 @@ int init_resources()
 
   GLuint vs, fs;
   if ((vs = create_shader("shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
-  if ((fs = create_shader("shaders/cells.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
+  if ((fs = create_shader("shaders/spectrum.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
   
   program = create_program(program, vs, fs);
 
@@ -172,7 +185,7 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-  uniform_name = "A";
+  /*uniform_name = "A";
   uniform_pA = glGetUniformLocation(program, uniform_name);
   if (uniform_pA == -1) {
     fprintf(stderr, "Could not bind uniform_pA %s\n", uniform_name);
@@ -189,11 +202,14 @@ int init_resources()
   if (uniform_pC == -1) {
     fprintf(stderr, "Could not bind uniform_pC %s\n", uniform_name);
     return 0;
-  }
+  }*/
   return 1;
 }
 
 void onIdle() {
+/**
+*Idling function of OpenGL renderer. Wait for audio buffer to fill then copy buffer and run fft. Update uniforms such as screen size, controls, fft. Callback to display function
+**/
   
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
@@ -205,7 +221,10 @@ void onIdle() {
   
   // compute fft
   ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
-
+  
+  if(fft_frame_out[5]>0.2){
+    test->change_state(26);
+  }
   // Pass values to shader
   //when switching modes change program accordingly
   glUseProgram(program);
@@ -220,6 +239,10 @@ void onIdle() {
 
 void onDisplay()
 {
+/** 
+* Display function of OpenGL renderer. Select program, and draw arrays from VBO. Swap between front and back buffer.
+**/
+
   glClearColor(1.0, 1.0, 1.0, 1.0); // empty == white
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(program); //must be changed from modes
@@ -240,21 +263,29 @@ void onDisplay()
   glDrawArrays(GL_TRIANGLES, 2, 3);
   glDisableVertexAttribArray(attribute_coord3d);
   glutSwapBuffers();
+ 
+
 }
 
-void free_resources() //free up memory, all programs used should be deleted.
+void free_resources() 
 {   
+/**
+* Delete program object(s) and VBO to free up memory.
+**/
   glDeleteProgram(program);
   glDeleteBuffers(1, &vbo_window);
 }
 
 int main(int argc, char *argv[]){
+/**
+* Main loop. TOWRITE
+**/
     
     // Set the exit routine: Keep running until exit signal (ctrl+C) received.
     signal(SIGQUIT, signal_handler);
-	  signal(SIGTERM, signal_handler);
-	  signal(SIGHUP, signal_handler);
-	  signal(SIGINT, signal_handler);
+	signal(SIGTERM, signal_handler);
+	signal(SIGHUP, signal_handler);
+	signal(SIGINT, signal_handler);
 
     //Instantiate SPI related classes and start readouts
     /*MCP3008Comm* m = new MCP3008Comm();

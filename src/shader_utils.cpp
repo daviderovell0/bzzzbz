@@ -51,7 +51,7 @@ void print_log(GLuint object)
   {
     fprintf(stderr, "printlog: Not a shader or a program\n");
     return;
-}
+  }
 
   char* log = (char*)malloc(log_length);
 

@@ -2,6 +2,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 project (bz)
+
 # Chain kiss-fft build since library needed for audio processing  
 add_subdirectory (kiss-fft) 
 add_library (AudioProcessing AudioProcessing.cpp AudioProcessing.h)
