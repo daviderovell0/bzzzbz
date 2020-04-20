@@ -53,14 +53,6 @@ float pot_B=0.7;
 float pot_C=0.6;
 
 
-
-TestLatency *test = new TestLatency(26,0); //Test on gpio 26 with initial state LOW=0
-
-
-
-
-
-
 /***** Audio processing globals *****/
 
 // Initalise audio processing instance with default constructor 
@@ -113,22 +105,18 @@ class MCP3008printSampleCallback : public MCP3008callback {
 	virtual void hasSample(int value, int channel) {
 		switch (channel)
     {
-    case 0:
+    case 4:
       pot_A = value/1024.0;
       break;
     
-    case 1:
+    case 5:
       pot_B = value/1024.0;
-      break;
-    
-    case 2:
-      pot_C = value/1024.0;
       break;
     
     default:
       break;
     };
-    printf("value: %d, channel: %d\n", value, channel);
+   // printf("value: %d, channel: %d\n", value, channel);
 	}
 };
 
@@ -179,12 +167,12 @@ int init_resources()
     return 0;
   }
 
-  /*uniform_name = "fft";
+  uniform_name = "fft";
   uniform_fft = glGetUniformLocation(program, uniform_name);
   if (uniform_fft == -1) {
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
-  }*/
+  }
   uniform_name = "A";
   uniform_pA = glGetUniformLocation(program, uniform_name);
   if (uniform_pA == -1) {
@@ -214,17 +202,14 @@ void onIdle() {
   float window_width=glutGet(GLUT_WINDOW_HEIGHT); //fix viewport for correct division and no stretching
   float window_height=glutGet(GLUT_WINDOW_HEIGHT);
   
-  /*while(audio_locked); // wait audio processing callback to finish
+  while(audio_locked); // wait audio processing callback to finish
   audio_locked = true;
   memcpy(fft_buffer_in,audio_buffer, nfft*sizeof(float));
   audio_locked = false;
   
   // compute fft
   ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
-  
-  if(fft_frame_out[5]>0.2){
-    test->change_state(26);
-  }*/
+ 
   // Pass values to shader
   //when switching modes change program accordingly
   glUseProgram(program);
@@ -233,7 +218,7 @@ void onIdle() {
   glUniform1f(uniform_pA, pot_A);
   glUniform1f(uniform_pB, pot_B);
   glUniform1f(uniform_pC, pot_C);
-  //glUniform1fv(uniform_fft, nfft/2+1,fft_frame_out);
+  glUniform1fv(uniform_fft, nfft/2+1,fft_frame_out);
   glutPostRedisplay();
 }
 
@@ -281,22 +266,22 @@ int main(int argc, char *argv[]){
 * Main loop. TOWRITE
 **/
     
-    /*// Set the exit routine: Keep running until exit signal (ctrl+C) received.
+    // Set the exit routine: Keep running until exit signal (ctrl+C) received.
     signal(SIGQUIT, signal_handler);
 	signal(SIGTERM, signal_handler);
 	signal(SIGHUP, signal_handler);
-	signal(SIGINT, signal_handler);*/
+	signal(SIGINT, signal_handler);
 
     //Instantiate SPI related classes and start readouts
-    /*MCP3008Comm* m = new MCP3008Comm();
+    MCP3008Comm* m = new MCP3008Comm();
     MCP3008printSampleCallback print_cb;
     m->setCallback(&print_cb);
-    m->start();*/
+    m->start();
 
-    /*ReadBuffer cb;
+    ReadBuffer cb;
     ap->setCallback(&cb);
 
-    ap->start();*/
+    ap->start();
 
     // opengl
     //init context
@@ -326,12 +311,12 @@ int main(int argc, char *argv[]){
     }
 
     // Terminate threads, free resources
-    //m->stop();
-    //delete m;
-    /*ap->stop();
+    m->stop();
+    delete m;
+    ap->stop();
     free(audio_buffer);
     free(fft_buffer_in);
-    free(fft_frame_out);*/
+    free(fft_frame_out);
     free_resources();
     return 0;
 }
