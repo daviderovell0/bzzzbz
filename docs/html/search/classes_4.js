@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readbuffer',['ReadBuffer',['../classReadBuffer.html',1,'']]]
+  ['testlatency',['TestLatency',['../classTestLatency.html',1,'']]]
 ];

@@ -53,14 +53,6 @@ float pot_B=0.7;
 float pot_C=0.6;
 
 
-
-TestLatency *test = new TestLatency(26,0); //Test on gpio 26 with initial state LOW=0
-
-
-
-
-
-
 /***** Audio processing globals *****/
 
 // Initalise audio processing instance with default constructor 
@@ -113,22 +105,18 @@ class MCP3008printSampleCallback : public MCP3008callback {
 	virtual void hasSample(int value, int channel) {
 		switch (channel)
     {
-    case 0:
+    case 4:
       pot_A = value/1024.0;
       break;
     
-    case 1:
+    case 5:
       pot_B = value/1024.0;
-      break;
-    
-    case 2:
-      pot_C = value/1024.0;
       break;
     
     default:
       break;
     };
-    printf("value: %d, channel: %d\n", value, channel);
+   // printf("value: %d, channel: %d\n", value, channel);
 	}
 };
 
@@ -154,7 +142,7 @@ int init_resources()
 
   GLuint vs, fs;
   if ((vs = create_shader("shaders/vertex.glsl", GL_VERTEX_SHADER))   == 0) return 0;
-  if ((fs = create_shader("shaders/spectrum.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
+  if ((fs = create_shader("shaders/cells.glsl", GL_FRAGMENT_SHADER)) == 0) return 0; //must be set manually for correct shader
   
   program = create_program(program, vs, fs);
 
@@ -185,7 +173,7 @@ int init_resources()
     fprintf(stderr, "Could not bind uniform_width %s\n", uniform_name);
     return 0;
   }
-  /*uniform_name = "A";
+  uniform_name = "A";
   uniform_pA = glGetUniformLocation(program, uniform_name);
   if (uniform_pA == -1) {
     fprintf(stderr, "Could not bind uniform_pA %s\n", uniform_name);
@@ -202,7 +190,7 @@ int init_resources()
   if (uniform_pC == -1) {
     fprintf(stderr, "Could not bind uniform_pC %s\n", uniform_name);
     return 0;
-  }*/
+  }
   return 1;
 }
 
@@ -221,10 +209,7 @@ void onIdle() {
   
   // compute fft
   ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
-  
-  if(fft_frame_out[5]>0.2){
-    test->change_state(26);
-  }
+ 
   // Pass values to shader
   //when switching modes change program accordingly
   glUseProgram(program);
@@ -288,10 +273,10 @@ int main(int argc, char *argv[]){
 	signal(SIGINT, signal_handler);
 
     //Instantiate SPI related classes and start readouts
-    /*MCP3008Comm* m = new MCP3008Comm();
+    MCP3008Comm* m = new MCP3008Comm();
     MCP3008printSampleCallback print_cb;
     m->setCallback(&print_cb);
-    m->start();*/
+    m->start();
 
     ReadBuffer cb;
     ap->setCallback(&cb);
@@ -326,8 +311,8 @@ int main(int argc, char *argv[]){
     }
 
     // Terminate threads, free resources
-    //m->stop();
-    //delete m;
+    m->stop();
+    delete m;
     ap->stop();
     free(audio_buffer);
     free(fft_buffer_in);
