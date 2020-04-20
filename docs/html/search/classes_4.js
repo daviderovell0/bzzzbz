@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['testlatency',['TestLatency',['../classTestLatency.html',1,'']]]
+  ['testlatency_61',['TestLatency',['../classTestLatency.html',1,'']]]
 ];

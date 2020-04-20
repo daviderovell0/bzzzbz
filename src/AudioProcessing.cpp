@@ -100,7 +100,7 @@ void AudioProcessing::start(){
 	}
 
     /**
-     * Notes to avoid confusion:
+     * \note to avoid confusion:
      * - ports need to be connected before the client is started
 	 * - the orientation of the driver backend ports is "flipped": playback ports are
 	 * "input" to the backend, and capture ports are "output" from

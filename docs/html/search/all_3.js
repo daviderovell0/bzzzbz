@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['file_5fread',['file_read',['../shader__utils_8cpp.html#a1d3d3e19c901e5237f4abea4c0a49ef6',1,'file_read(const char *filename):&#160;shader_utils.cpp'],['../shader__utils_8h.html#a1d3d3e19c901e5237f4abea4c0a49ef6',1,'file_read(const char *filename):&#160;shader_utils.cpp']]],
-  ['free_5fresources',['free_resources',['../main_8cpp.html#ad92db8ac5dbcb1f4c8f57c5b3ea87473',1,'main.cpp']]]
+  ['ex_5faudio_2ecpp_12',['ex_audio.cpp',['../ex__audio_8cpp.html',1,'']]],
+  ['ex_5fopengl_2ecpp_13',['ex_opengl.cpp',['../ex__opengl_8cpp.html',1,'']]],
+  ['ex_5fspi_2ecpp_14',['ex_SPI.cpp',['../ex__SPI_8cpp.html',1,'']]]
 ];

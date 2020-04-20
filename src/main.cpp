@@ -16,7 +16,7 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-// For SPI
+// SPI-related libraries
 #include <stdint.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -122,7 +122,8 @@ class MCP3008pollChannelsCallback : public MCP3008callback {
 
 // OPENGL FUNCTIONS
 /**
-*Initialise all resources for OpenGL: Vertex Buffer Object, create shaders and attach to program object and bind attributes and uniforms
+* \brief Initialise all resources for OpenGL: Vertex Buffer Object, 
+* create shaders and attach to program object and bind attributes and uniforms
 **/
 int init_resources()
 { 

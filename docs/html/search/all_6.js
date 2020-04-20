@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jack_5fshutdown',['jack_shutdown',['../audioin_8c.html#ac4d1f0b712a872cb5c24c5c3f8d00bd5',1,'audioin.c']]]
+  ['init_5fresources_18',['init_resources',['../main_8cpp.html#aa2c51dae2d54ddcfce022ef0ef78191b',1,'main.cpp']]]
 ];

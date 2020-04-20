@@ -22,44 +22,55 @@
 #include "gpio-sysfs.h"
 
 /**
- * Callback for new samples which needs to be implemented by the main program.
- * The function hasSample needs to be overloaded in the main program.
+ * \class MCP3008callback
+ * 
+ * \brief Callback attached to the MCP3008Comm class running in a separate 
+ * data acquisition thread.
  **/
 class MCP3008callback {
 public:
 	/**
-	 * Called after a sample has arrived.
+	 * \brief Called after a sample has arrived.
+	 * 
+	 * \param int value - value from the ADC
+	 * \param int channel - ADC input channel associated with the value
 	 **/
 	virtual void hasSample(int value, int channel) = 0;
 };
 
 
 /**
- * This class reads data from the AD7705 in the background (separate
+ * \class MCP3008Comm
+ * \brief This class reads data from the AD7705 in the background (separate
  * thread) and calls a callback function whenever data is available.
  **/
 class MCP3008Comm {
 
 public:
 	/**
-	 * Constructor with the spiDevice. The default device
+	 * \brief Constructor with the spiDevice. The default device
 	 * is /dev/spidev0.0.
+	 * 
+	 * \param const char* spiDevice - the SPI interface of the Raspberry Pi.
 	 **/
 	MCP3008Comm(const char* spiDevice = "/dev/spidev0.0");
 
 	/**
-	 * Sets the callback which is called whenever there is a sample
+	 * \brief Sets the callback which is called whenever there is a sample
+	 * 
+	 * \param MCP3008callback* cb - Pointer to the callback instance.
 	 **/
 	void setCallback(MCP3008callback* cb);
 
 	/**
-	 * Starts the data acquisition in the background and the
+	 * \brief Starts the data acquisition in the background and the
 	 * callback is called with new samples
+	 * 
 	 **/
 	void start();
 
 	/**
-	 * Stops the data acquistion
+	 * \brief Stops the data acquistion and frees data structures
 	 **/
 	void stop();
 
