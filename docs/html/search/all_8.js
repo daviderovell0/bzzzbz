@@ -4,7 +4,7 @@ var searchData=
   ['main_2ecpp',['main.cpp',['../main_8cpp.html',1,'']]],
   ['mcp3008callback',['MCP3008callback',['../classMCP3008callback.html',1,'']]],
   ['mcp3008comm',['MCP3008Comm',['../classMCP3008Comm.html',1,'MCP3008Comm'],['../classMCP3008Comm.html#ac23ae4d95aa80947a81566e5ee4d89e3',1,'MCP3008Comm::MCP3008Comm()']]],
-  ['mcp3008comm_2ecpp',['MCP3008Comm.cpp',['../MCP3008Comm_8cpp.html',1,'']]],
   ['mcp3008comm_2eh',['MCP3008Comm.h',['../MCP3008Comm_8h.html',1,'']]],
+  ['mcp3008pollchannelscallback',['MCP3008pollChannelsCallback',['../classMCP3008pollChannelsCallback.html',1,'']]],
   ['mcp3008printsamplecallback',['MCP3008printSampleCallback',['../classMCP3008printSampleCallback.html',1,'']]]
 ];

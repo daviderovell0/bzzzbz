@@ -23,9 +23,6 @@ void AudioProcessing::runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, int
 	free(cfg);
 }
 
-
-
-
 void AudioProcessing::setCallback(AudioProcessingCallback* cb) {
     apcallback = cb;
 }
@@ -103,7 +100,7 @@ void AudioProcessing::start(){
 	}
 
     /**
-     * Notes to avoid confusion:
+     * \note to avoid confusion:
      * - ports need to be connected before the client is started
 	 * - the orientation of the driver backend ports is "flipped": playback ports are
 	 * "input" to the backend, and capture ports are "output" from
@@ -136,8 +133,7 @@ void AudioProcessing::start(){
 	free (ports);
 }
 
-
-void AudioProcessing::stop(){
-    jack_client_close (client);
+int AudioProcessing::stop(){
+    return jack_client_close (client);
 	exit (0);
 }

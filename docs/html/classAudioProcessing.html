@@ -66,21 +66,30 @@ $(function() {
 <div class="title">AudioProcessing Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class for audio data acquisition and processing. It uses JACK audio client to connect with the underlying hardware.  
+ <a href="classAudioProcessing.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="AudioProcessing_8h_source.html">AudioProcessing.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae01e0ec563f377653bd60f3fae6d6dc0"><td class="memItemLeft" align="right" valign="top"><a id="ae01e0ec563f377653bd60f3fae6d6dc0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallback</b> (<a class="el" href="classAudioProcessingCallback.html">AudioProcessingCallback</a> *cb)</td></tr>
+<tr class="memitem:ae01e0ec563f377653bd60f3fae6d6dc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioProcessing.html#ae01e0ec563f377653bd60f3fae6d6dc0">setCallback</a> (<a class="el" href="classAudioProcessingCallback.html">AudioProcessingCallback</a> *cb)</td></tr>
+<tr class="memdesc:ae01e0ec563f377653bd60f3fae6d6dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the callback of the <a class="el" href="classAudioProcessing.html" title="Class for audio data acquisition and processing. It uses JACK audio client to connect with the underl...">AudioProcessing</a> class.  <a href="#ae01e0ec563f377653bd60f3fae6d6dc0">More...</a><br /></td></tr>
 <tr class="separator:ae01e0ec563f377653bd60f3fae6d6dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae147b687071eed27cc5cb83891d7d5ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioProcessing.html#ae147b687071eed27cc5cb83891d7d5ee">start</a> ()</td></tr>
+<tr class="memdesc:ae147b687071eed27cc5cb83891d7d5ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the JACK client and start the callback thread.  <a href="#ae147b687071eed27cc5cb83891d7d5ee">More...</a><br /></td></tr>
 <tr class="separator:ae147b687071eed27cc5cb83891d7d5ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d22a382ca50394d4677d78ed39d3c3e"><td class="memItemLeft" align="right" valign="top"><a id="a5d22a382ca50394d4677d78ed39d3c3e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
-<tr class="separator:a5d22a382ca50394d4677d78ed39d3c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce0e46b4a254e9c90d3de3aa843a12c"><td class="memItemLeft" align="right" valign="top"><a id="a2ce0e46b4a254e9c90d3de3aa843a12c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioProcessing.html#a2ce0e46b4a254e9c90d3de3aa843a12c">stop</a> ()</td></tr>
+<tr class="memdesc:a2ce0e46b4a254e9c90d3de3aa843a12c"><td class="mdescLeft">&#160;</td><td class="mdescRight">close the JACK client and free resources. <br /></td></tr>
+<tr class="separator:a2ce0e46b4a254e9c90d3de3aa843a12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19800a0d0121fa4f107a8fde0ea3215c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioProcessing.html#a19800a0d0121fa4f107a8fde0ea3215c">runFFT</a> (kiss_fft_scalar *buffer, float *fft_magnitudes, int nfft)</td></tr>
 <tr class="separator:a19800a0d0121fa4f107a8fde0ea3215c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for audio data acquisition and processing. It uses JACK audio client to connect with the underlying hardware. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a19800a0d0121fa4f107a8fde0ea3215c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19800a0d0121fa4f107a8fde0ea3215c">&#9670;&nbsp;</a></span>runFFT()</h2>
 
@@ -116,7 +125,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
 <dl class="section return"><dt>Returns</dt><dd>a buffer with magnitudes of each complex pair</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">kiss_fft_scalar</td><td>*buffer - the input buffer with real samples (double). </td></tr>
+    <tr><td class="paramname">kiss_fft_scalar</td><td>*buffer - the input buffer with real samples (float). </td></tr>
+    <tr><td class="paramname">float</td><td>*fft_magnitudes - the output buffer that will be filled complex frequencies. </td></tr>
+    <tr><td class="paramname">int</td><td>nfft - FFT buffer size </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae01e0ec563f377653bd60f3fae6d6dc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae01e0ec563f377653bd60f3fae6d6dc0">&#9670;&nbsp;</a></span>setCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioProcessing::setCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAudioProcessingCallback.html">AudioProcessingCallback</a> *&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the callback of the <a class="el" href="classAudioProcessing.html" title="Class for audio data acquisition and processing. It uses JACK audio client to connect with the underl...">AudioProcessing</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">AudioProcessingCallback*</td><td>cb - Pointer to the callback instance. </td></tr>
   </table>
   </dd>
 </dl>
@@ -137,10 +174,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Notes to avoid confusion:</p><ul>
+
+<p>Initialise the JACK client and start the callback thread. </p>
+<dl class="section note"><dt>Note</dt><dd>to avoid confusion:<ul>
 <li>ports need to be connected before the client is started</li>
 <li>the orientation of the driver backend ports is "flipped": playback ports are "input" to the backend, and capture ports are "output" from it.</li>
 </ul>
+</dd></dl>
 
 </div>
 </div>

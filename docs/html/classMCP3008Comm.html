@@ -67,21 +67,30 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>This class reads data from the MCP3008 in the background (separate thread) and calls a callback function whenever data is available.  
+ <a href="classMCP3008Comm.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="MCP3008Comm_8h_source.html">MCP3008Comm.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac23ae4d95aa80947a81566e5ee4d89e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008Comm.html#ac23ae4d95aa80947a81566e5ee4d89e3">MCP3008Comm</a> (const char *spiDevice=&quot;/dev/spidev0.0&quot;)</td></tr>
+<tr class="memdesc:ac23ae4d95aa80947a81566e5ee4d89e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the spiDevice. The default device is /dev/spidev0.0.  <a href="#ac23ae4d95aa80947a81566e5ee4d89e3">More...</a><br /></td></tr>
 <tr class="separator:ac23ae4d95aa80947a81566e5ee4d89e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57c0c1bd15dc759a3eeb816b40eb433d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008Comm.html#a57c0c1bd15dc759a3eeb816b40eb433d">setCallback</a> (<a class="el" href="classMCP3008callback.html">MCP3008callback</a> *cb)</td></tr>
+<tr class="memdesc:a57c0c1bd15dc759a3eeb816b40eb433d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the callback which is called whenever there is a sample.  <a href="#a57c0c1bd15dc759a3eeb816b40eb433d">More...</a><br /></td></tr>
 <tr class="separator:a57c0c1bd15dc759a3eeb816b40eb433d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9102672d84a525d1bcefafb923f38af0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008Comm.html#a9102672d84a525d1bcefafb923f38af0">start</a> ()</td></tr>
+<tr class="memitem:a9102672d84a525d1bcefafb923f38af0"><td class="memItemLeft" align="right" valign="top"><a id="a9102672d84a525d1bcefafb923f38af0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008Comm.html#a9102672d84a525d1bcefafb923f38af0">start</a> ()</td></tr>
+<tr class="memdesc:a9102672d84a525d1bcefafb923f38af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the data acquisition in the background and the callback is called with new samples. <br /></td></tr>
 <tr class="separator:a9102672d84a525d1bcefafb923f38af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9bcbd7a7c546e5c7d7453612818a6c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008Comm.html#af9bcbd7a7c546e5c7d7453612818a6c0">stop</a> ()</td></tr>
+<tr class="memitem:af9bcbd7a7c546e5c7d7453612818a6c0"><td class="memItemLeft" align="right" valign="top"><a id="af9bcbd7a7c546e5c7d7453612818a6c0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008Comm.html#af9bcbd7a7c546e5c7d7453612818a6c0">stop</a> ()</td></tr>
+<tr class="memdesc:af9bcbd7a7c546e5c7d7453612818a6c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the data acquistion and frees data structures. <br /></td></tr>
 <tr class="separator:af9bcbd7a7c546e5c7d7453612818a6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class reads data from the AD7705 in the background (separate thread) and calls a callback function whenever data is available. </p>
+<div class="textblock"><p>This class reads data from the MCP3008 in the background (separate thread) and calls a callback function whenever data is available. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac23ae4d95aa80947a81566e5ee4d89e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac23ae4d95aa80947a81566e5ee4d89e3">&#9670;&nbsp;</a></span>MCP3008Comm()</h2>
@@ -98,7 +107,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
 <p>Constructor with the spiDevice. The default device is /dev/spidev0.0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td>char* spiDevice - the SPI interface of the Raspberry Pi. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -118,49 +134,20 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the callback which is called whenever there is a sample </p>
 
-</div>
-</div>
-<a id="a9102672d84a525d1bcefafb923f38af0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9102672d84a525d1bcefafb923f38af0">&#9670;&nbsp;</a></span>start()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MCP3008Comm::start </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Starts the data acquisition in the background and the callback is called with new samples </p>
-
-</div>
-</div>
-<a id="af9bcbd7a7c546e5c7d7453612818a6c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9bcbd7a7c546e5c7d7453612818a6c0">&#9670;&nbsp;</a></span>stop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MCP3008Comm::stop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Stops the data acquistion </p>
+<p>Sets the callback which is called whenever there is a sample. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">MCP3008callback*</td><td>cb - Pointer to the callback instance. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="MCP3008Comm_8h_source.html">MCP3008Comm.h</a></li>
-<li>src/<a class="el" href="MCP3008Comm_8cpp.html">MCP3008Comm.cpp</a></li>
+<li>src/MCP3008Comm.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

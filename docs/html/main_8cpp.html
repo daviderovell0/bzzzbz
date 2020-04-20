@@ -91,6 +91,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="MCP3008Comm_8h_source.html">MCP3008Comm.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="AudioProcessing_8h_source.html">AudioProcessing.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="shader__utils_8h_source.html">shader_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="TestLatency_8h_source.html">TestLatency.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -98,14 +99,16 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReadBuffer.html">ReadBuffer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008pollChannelsCallback.html">MCP3008pollChannelsCallback</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6aa59f98cad89c73966351ad7afb303c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6aa59f98cad89c73966351ad7afb303c">signal_handler</a> (int sig)</td></tr>
 <tr class="separator:a6aa59f98cad89c73966351ad7afb303c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2c51dae2d54ddcfce022ef0ef78191b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa2c51dae2d54ddcfce022ef0ef78191b">init_resources</a> ()</td></tr>
+<tr class="memitem:aa2c51dae2d54ddcfce022ef0ef78191b"><td class="memItemLeft" align="right" valign="top"><a id="aa2c51dae2d54ddcfce022ef0ef78191b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa2c51dae2d54ddcfce022ef0ef78191b">init_resources</a> ()</td></tr>
+<tr class="memdesc:aa2c51dae2d54ddcfce022ef0ef78191b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise all resources for OpenGL: Vertex Buffer Object, create shaders and attach to program object and bind attributes and uniforms. <br /></td></tr>
 <tr class="separator:aa2c51dae2d54ddcfce022ef0ef78191b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb21e45e7e8603f05383f33eb6171ac4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#adb21e45e7e8603f05383f33eb6171ac4">onIdle</a> ()</td></tr>
 <tr class="separator:adb21e45e7e8603f05383f33eb6171ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,24 +198,6 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><b>fft_frame_out</b> 
 
 </div>
 </div>
-<a id="aa2c51dae2d54ddcfce022ef0ef78191b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2c51dae2d54ddcfce022ef0ef78191b">&#9670;&nbsp;</a></span>init_resources()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int init_resources </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Initialise all resources for OpenGL: Vertex Buffer Object, create shaders and attach to program object and bind attributes and uniforms </p>
-
-</div>
-</div>
 <a id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&nbsp;</a></span>main()</h2>
 
@@ -238,7 +223,7 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><b>fft_frame_out</b> 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Main loop. TOWRITE</p>
+<p>Main loop. Initialises classes, register callbacks. Starts threads and video rendering. Free resources on stop.</p>
 
 </div>
 </div>

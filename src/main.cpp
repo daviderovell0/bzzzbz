@@ -16,7 +16,7 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-// For SPI
+// SPI-related libraries
 #include <stdint.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -28,6 +28,8 @@
 #include "MCP3008Comm.h"
 #include "AudioProcessing.h"
 #include "shader_utils.h"
+#include "TestLatency.h"
+
 
 
 /***** OpenGL globals *****/
@@ -49,6 +51,7 @@ struct attributes {
 float pot_A=0.9;
 float pot_B=0.7;
 float pot_C=0.6;
+
 
 /***** Audio processing globals *****/
 
@@ -98,33 +101,29 @@ class ReadBuffer : public AudioProcessingCallback {
  * SPI sample callback class
  * Processing the output samples coming from the MCP3008 ADC 
  **/
-class MCP3008printSampleCallback : public MCP3008callback {
+class MCP3008pollChannelsCallback : public MCP3008callback {
 	virtual void hasSample(int value, int channel) {
 		switch (channel)
     {
-    case 0:
+    case 4:
       pot_A = value/1024.0;
       break;
     
-    case 1:
+    case 5:
       pot_B = value/1024.0;
-      break;
-    
-    case 2:
-      pot_C = value/1024.0;
       break;
     
     default:
       break;
     };
-    printf("value: %d, channel: %d\n", value, channel);
 	}
 };
 
 
 // OPENGL FUNCTIONS
 /**
-*Initialise all resources for OpenGL: Vertex Buffer Object, create shaders and attach to program object and bind attributes and uniforms
+* \brief Initialise all resources for OpenGL: Vertex Buffer Object, 
+* create shaders and attach to program object and bind attributes and uniforms
 **/
 int init_resources()
 { 
@@ -210,7 +209,7 @@ void onIdle() {
   
   // compute fft
   ap->runFFT(fft_buffer_in,fft_frame_out,nfft);
-
+ 
   // Pass values to shader
   //when switching modes change program accordingly
   glUseProgram(program);
@@ -249,7 +248,7 @@ void onDisplay()
   glDrawArrays(GL_TRIANGLES, 2, 3);
   glDisableVertexAttribArray(attribute_coord3d);
   glutSwapBuffers();
-
+ 
 
 }
 
@@ -264,7 +263,7 @@ void free_resources()
 
 int main(int argc, char *argv[]){
 /**
-* Main loop. TOWRITE
+* Main loop. Initialises classes, register callbacks. Starts threads and video rendering. Free resources on stop.
 **/
     
     // Set the exit routine: Keep running until exit signal (ctrl+C) received.
@@ -274,10 +273,10 @@ int main(int argc, char *argv[]){
 	signal(SIGINT, signal_handler);
 
     //Instantiate SPI related classes and start readouts
-    /*MCP3008Comm* m = new MCP3008Comm();
-    MCP3008printSampleCallback print_cb;
-    m->setCallback(&print_cb);
-    m->start();*/
+    MCP3008Comm* m = new MCP3008Comm();
+    MCP3008pollChannelsCallback poll_cb;
+    m->setCallback(&poll_cb);
+    m->start();
 
     ReadBuffer cb;
     ap->setCallback(&cb);
@@ -312,8 +311,8 @@ int main(int argc, char *argv[]){
     }
 
     // Terminate threads, free resources
-    //m->stop();
-    //delete m;
+    m->stop();
+    delete m;
     ap->stop();
     free(audio_buffer);
     free(fft_buffer_in);

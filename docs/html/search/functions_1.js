@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['file_5fread',['file_read',['../shader__utils_8cpp.html#a1d3d3e19c901e5237f4abea4c0a49ef6',1,'file_read(const char *filename):&#160;shader_utils.cpp'],['../shader__utils_8h.html#a1d3d3e19c901e5237f4abea4c0a49ef6',1,'file_read(const char *filename):&#160;shader_utils.cpp']]],
-  ['free_5fresources',['free_resources',['../main_8cpp.html#ad92db8ac5dbcb1f4c8f57c5b3ea87473',1,'main.cpp']]]
+  ['change_5fstate',['change_state',['../classTestLatency.html#a6fd8348d5250575862ee0399c71c9d72',1,'TestLatency']]],
+  ['create_5fprogram',['create_program',['../shader__utils_8cpp.html#a2f72e3bfd32e7ee1785295aa05fd2583',1,'create_program(GLuint program, GLuint vert, GLuint frag):&#160;shader_utils.cpp'],['../shader__utils_8h.html#a2f72e3bfd32e7ee1785295aa05fd2583',1,'create_program(GLuint program, GLuint vert, GLuint frag):&#160;shader_utils.cpp']]],
+  ['create_5fshader',['create_shader',['../shader__utils_8cpp.html#a817ffff746c59a7964cbb0538f75a567',1,'create_shader(const char *filename, GLenum type):&#160;shader_utils.cpp'],['../shader__utils_8h.html#a817ffff746c59a7964cbb0538f75a567',1,'create_shader(const char *filename, GLenum type):&#160;shader_utils.cpp']]]
 ];

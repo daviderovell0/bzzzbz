@@ -67,14 +67,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Inherited by <a class="el" href="classReadBuffer.html">ReadBuffer</a>, <a class="el" href="classReadBuffer.html">ReadBuffer</a>, and <a class="el" href="classReadBuffer.html">ReadBuffer</a>.</p>
+<p>Callback attached to the <a class="el" href="classAudioProcessing.html" title="Class for audio data acquisition and processing. It uses JACK audio client to connect with the underl...">AudioProcessing</a> class running in a separate real-time priority thread.  
+ <a href="classAudioProcessingCallback.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="AudioProcessing_8h_source.html">AudioProcessing.h</a>&gt;</code></p>
+
+<p>Inherited by <a class="el" href="classPrintSampleCallBack.html">PrintSampleCallBack</a>, <a class="el" href="classReadBuffer.html">ReadBuffer</a>, <a class="el" href="classReadBuffer.html">ReadBuffer</a>, and <a class="el" href="classReadBuffer.html">ReadBuffer</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d2951a33147f2bc0a7564d4336e0acc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioProcessingCallback.html#a4d2951a33147f2bc0a7564d4336e0acc">process</a> (float *in_buffer, float *out_buffer)=0</td></tr>
 <tr class="separator:a4d2951a33147f2bc0a7564d4336e0acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callback attached to the <a class="el" href="classAudioProcessing.html" title="Class for audio data acquisition and processing. It uses JACK audio client to connect with the underl...">AudioProcessing</a> class running in a separate real-time priority thread. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4d2951a33147f2bc0a7564d4336e0acc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d2951a33147f2bc0a7564d4336e0acc">&#9670;&nbsp;</a></span>process()</h2>
 
@@ -109,10 +116,13 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Process the incoming audio.</p>
-<ul>
-<li>in: the input buffer from one of the ports </li>
-<li>out: the output buffer to one of the ports</li>
-</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_buffer</td><td>the input buffer from one of the ports </td></tr>
+    <tr><td class="paramname">out_buffer</td><td>the output buffer to one of the ports</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>Ports represent physical inputs and outputs of a the system's soundcard. As of release v1.0, only two ports are used since most systems have at least 2 (i.e. microphone in and LEFT channel of line out for a laptop) </dd></dl>
 
 </div>

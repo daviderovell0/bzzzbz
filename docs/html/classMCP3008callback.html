@@ -67,17 +67,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Callback attached to the <a class="el" href="classMCP3008Comm.html" title="This class reads data from the MCP3008 in the background (separate thread) and calls a callback funct...">MCP3008Comm</a> class running in a separate data acquisition thread.  
+ <a href="classMCP3008callback.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="MCP3008Comm_8h_source.html">MCP3008Comm.h</a>&gt;</code></p>
 
-<p>Inherited by <a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a>, <a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a>, and <a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a>.</p>
+<p>Inherited by <a class="el" href="classMCP3008pollChannelsCallback.html">MCP3008pollChannelsCallback</a>, <a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a>, <a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a>, and <a class="el" href="classMCP3008printSampleCallback.html">MCP3008printSampleCallback</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4a241e4563eed40892304cd594a364ec"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCP3008callback.html#a4a241e4563eed40892304cd594a364ec">hasSample</a> (int value, int channel)=0</td></tr>
+<tr class="memdesc:a4a241e4563eed40892304cd594a364ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called after a sample has arrived.  <a href="#a4a241e4563eed40892304cd594a364ec">More...</a><br /></td></tr>
 <tr class="separator:a4a241e4563eed40892304cd594a364ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Callback for new samples which needs to be implemented by the main program. The function hasSample needs to be overloaded in the main program. </p>
+<div class="textblock"><p>Callback attached to the <a class="el" href="classMCP3008Comm.html" title="This class reads data from the MCP3008 in the background (separate thread) and calls a callback funct...">MCP3008Comm</a> class running in a separate data acquisition thread. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4a241e4563eed40892304cd594a364ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a241e4563eed40892304cd594a364ec">&#9670;&nbsp;</a></span>hasSample()</h2>
@@ -112,7 +116,15 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
 <p>Called after a sample has arrived. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>value - value from the ADC </td></tr>
+    <tr><td class="paramname">int</td><td>channel - ADC input channel associated with the value </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
