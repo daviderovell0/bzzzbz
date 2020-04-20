@@ -41,7 +41,7 @@ public:
 
 /**
  * \class MCP3008Comm
- * \brief This class reads data from the AD7705 in the background (separate
+ * \brief This class reads data from the MCP3008 in the background (separate
  * thread) and calls a callback function whenever data is available.
  **/
 class MCP3008Comm {
