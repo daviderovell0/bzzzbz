@@ -3,5 +3,16 @@
 *.out
 *.o
 
-# VScode local settings for my machine
+# Libraries
+*.a
+
+# CMake generated files. Adding them to the git causes confusion and compilation errors
+# for other platforms
+*CMakeFiles
+*Makefile
+*Testing
+*.cmake
+*CMakeCache.txt
+
+# VScode local settings for local machine
 .vscode

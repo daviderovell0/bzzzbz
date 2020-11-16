@@ -1,8 +1,8 @@
-/** @file AudioProcessing.h
+/** \file AudioProcessing.h
  *
- * @brief Class for incoming audio and FFT processing.
+ * \brief Classes for incoming audio and FFT processing.
  * 
- * @author Davide Rovelli (daviderovell0)
+ * \author Davide Rovelli (daviderovell0)
  */
 #define kiss_fft_scalar float
 
@@ -16,16 +16,22 @@
 #include <jack/jack.h>
 #include "kiss_fftr.h"
 
-
+/**
+ * \class AudioProcessingCallback
+ * 
+ * \brief Callback attached to the AudioProcessing class running in a separate 
+ * real-time priority thread.
+ * 
+ */ 
 class AudioProcessingCallback {
 public:
     /**
      * Process the incoming audio.
      * 
-     * @arg in: the input buffer from one of the ports
-     * @arg out: the output buffer to one of the ports
+     * \param in_buffer: the input buffer from one of the ports
+     * \param out_buffer: the output buffer to one of the ports
      * 
-     * @note Ports represent physical inputs and outputs of 
+     * \note Ports represent physical inputs and outputs of 
      * a the system's soundcard. As of release v1.0, only two 
      * ports are used since most systems have at least 2 (i.e. 
      * microphone in and LEFT channel of line out for a laptop)
@@ -34,23 +40,45 @@ public:
 };
 
 
+/**
+ * \class AudioProcessing
+ * 
+ * \brief Class for audio data acquisition and processing. It uses JACK audio
+ * client to connect with the underlying hardware. 
+ */ 
 class AudioProcessing {
 public:
+    /**
+     * \brief Set the callback of the AudioProcessing class.
+     * 
+     * \param AudioProcessingCallback* cb - Pointer to the callback instance.
+     */ 
     void setCallback(AudioProcessingCallback* cb);
+    /**
+     * 
+     * \brief Initialise the JACK client and start the callback thread.  
+     */ 
     void start();
-    void stop();
+    /**
+     * \brief close the JACK client and free resources. 
+     * 
+     */
+    int stop();
     /**
      * Real signal to complex freq. FFT using a mixed-radix library
      * (https://github.com/berndporr/kiss-fft). 
      * 
-     * @returns a buffer with magnitudes of each complex pair
+     * \returns a buffer with magnitudes of each complex pair
      * 
-     * @param kiss_fft_scalar *buffer - the input buffer with real samples (double).
+     * \param kiss_fft_scalar *buffer - the input buffer with real samples (float).
+     * \param float *fft_magnitudes - the output buffer that will be filled complex frequencies.
+     * \param int nfft - FFT buffer size
      * 
      */
     void runFFT(kiss_fft_scalar *buffer, float *fft_magnitudes, int nfft);
 
 private:
+
     const char **ports;
 	const char *client_name = "bzzzbz";
 	const char *server_name = "jserver";
