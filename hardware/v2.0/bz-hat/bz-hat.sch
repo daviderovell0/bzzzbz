@@ -4,7 +4,7 @@ EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
-Title ""
+Title "bzzzbz v2 - \"sombrero\" for RPi4"
 Date ""
 Rev ""
 Comp ""
@@ -905,8 +905,6 @@ Text Label 4000 9250 2    50   ~ 0
 SPI0_CS1
 Wire Wire Line
 	4000 9250 3600 9250
-Text Label 4000 9550 2    50   ~ 0
-MOSI0
 Wire Wire Line
 	4000 9550 3600 9550
 Text Label 4000 9450 2    50   ~ 0
@@ -935,12 +933,8 @@ Wire Wire Line
 	13950 2100 14350 2100
 Wire Wire Line
 	13950 2400 14350 2400
-Text Label 7650 5350 2    50   ~ 0
-MOSI0
 Wire Wire Line
 	7650 5350 7250 5350
-Text Label 7650 5250 2    50   ~ 0
-MISO0
 Text Label 7650 5150 2    50   ~ 0
 SCLK0
 Wire Wire Line
@@ -1562,4 +1556,86 @@ Wire Wire Line
 Connection ~ 10600 5200
 Wire Wire Line
 	10600 5200 10600 5250
+Text Label 4000 9550 2    50   ~ 0
+MOSI0
+Text Label 7650 5250 2    50   ~ 0
+MISO0
+Text Label 7650 5350 2    50   ~ 0
+MOSI0
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 603FCBE6
+P 4750 7900
+F 0 "#FLG0101" H 4750 7975 50  0001 C CNN
+F 1 "PWR_FLAG" H 4750 8073 50  0000 C CNN
+F 2 "" H 4750 7900 50  0001 C CNN
+F 3 "~" H 4750 7900 50  0001 C CNN
+	1    4750 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 60402265
+P 5200 7900
+F 0 "#FLG0102" H 5200 7975 50  0001 C CNN
+F 1 "PWR_FLAG" H 5200 8073 50  0000 C CNN
+F 2 "" H 5200 7900 50  0001 C CNN
+F 3 "~" H 5200 7900 50  0001 C CNN
+	1    5200 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0103
+U 1 1 6040261F
+P 5650 7900
+F 0 "#FLG0103" H 5650 7975 50  0001 C CNN
+F 1 "PWR_FLAG" H 5650 8073 50  0000 C CNN
+F 2 "" H 5650 7900 50  0001 C CNN
+F 3 "~" H 5650 7900 50  0001 C CNN
+	1    5650 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDA #PWR0137
+U 1 1 60402FDF
+P 5650 7900
+F 0 "#PWR0137" H 5650 7650 50  0001 C CNN
+F 1 "GNDA" H 5655 7727 50  0000 C CNN
+F 2 "" H 5650 7900 50  0001 C CNN
+F 3 "" H 5650 7900 50  0001 C CNN
+	1    5650 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDD #PWR0138
+U 1 1 60404413
+P 5200 7900
+F 0 "#PWR0138" H 5200 7650 50  0001 C CNN
+F 1 "GNDD" H 5204 7745 50  0000 C CNN
+F 2 "" H 5200 7900 50  0001 C CNN
+F 3 "" H 5200 7900 50  0001 C CNN
+	1    5200 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0139
+U 1 1 604062F7
+P 4750 7900
+F 0 "#PWR0139" H 4750 7750 50  0001 C CNN
+F 1 "+3.3V" H 4765 8073 50  0000 C CNN
+F 2 "" H 4750 7900 50  0001 C CNN
+F 3 "" H 4750 7900 50  0001 C CNN
+	1    4750 7900
+	-1   0    0    1   
+$EndComp
+Wire Notes Line
+	900  7300 900  10850
+Wire Notes Line
+	900  10850 6850 10850
+Wire Notes Line
+	6850 10850 6850 7300
+Wire Notes Line
+	6850 7300 900  7300
+Text Notes 6200 10800 0    50   ~ 0
+Controller: RPI4
 $EndSCHEMATC
