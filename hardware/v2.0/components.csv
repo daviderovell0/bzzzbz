@@ -1,10 +1,11 @@
-Components list,">>(watch out: we want GRAPHICS display modules, not CHATACTER)",
-,,
-,,
-Name,link,comments
-pi header,https://www.adafruit.com/product/1992,
-cool norns display,https://www.digikey.com/en/products/detail/newhaven-display-intl/NHD-2-7-12864WDW3/7355953,"not SPI left, parallel?"
-Same ^ but smaller,https://www.newhavendisplay.com/nhd22312832ucy3-p-3787.html,"I2S, SPI, "
-I2C euro qwicc sparkfun 128x128,https://www.sparkfun.com/products/15890,17 euro
-loads of bare oleds,https://it.rs-online.com/web/c/display-e-optoelettronica/display-e-monitor-industriali/display-oled/,
-4D systems colored small ,https://fr.rs-online.com/web/p/ecrans-tftlcd/1647079/,
+Components list,,,
+,,,
+Name,Unit price €,Product,Supplier
+pi header (tall),2.5,https://www.adafruit.com/product/1992,https://eu.mouser.com/ProductDetail/Adafruit/1992/?qs=GURawfaeGuBPldm8Estq5w%3D%3D
+display,24,https://www.newhavendisplay.com/nhd22312832ucy3-p-3787.html,https://eu.mouser.com/ProductDetail/Newhaven-Display/NHD-223-12832UCB3/?qs=EQmeiuRlVUSLgZ2O%2Fplskg%3D%3D
+Jack inputs,1,https://eu.mouser.com/ProductDetail/CUI-Devices/SJ1-3533NG/?qs=WyjlAZoYn53GjNky%252BNFGCA%3D%3D,<
+pots,1.5,https://eu.mouser.com/ProductDetail/Alps-Alpine/RK09L114001T/?qs=Xb8IjHhkxj78e5CYccfZWg%3D%3D,<
+,,or,
+,0.7,https://eu.mouser.com/ProductDetail/Alps-Alpine/RK09D1130C3W/?qs=6EGMNY9ZYDQDoKirBauAog%3D%3D,<
+buttons,0.65,https://www.e-switch.com/product-catalog/tact/product-lines/tl1100-series-tact-switches,https://eu.mouser.com/ProductDetail/E-Switch/TL1100F160Q6JBLK/?qs=01kh3H%252BlXijHi9khJEdsAw%3D%3D
+big button,2.84,https://www.e-switch.com/product-catalog/pushbutton/product-lines/pb300-series-long-travel-pushbutton-switch,https://eu.mouser.com/ProductDetail/E-Switch/PB300STQ/?qs=4NsIomN5447l2q20l%2Fla%2Fg%3D%3D

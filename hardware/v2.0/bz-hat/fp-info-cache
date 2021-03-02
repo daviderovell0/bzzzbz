@@ -1,4 +1,4 @@
-18365189846814057
+18370001819448741
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -80877,6 +80877,27 @@ varistor SIOV
 0
 2
 2
+bzzzbz
+Crystal_2pins_L11.5_P4.88_(9B-12.000MAAJ-B)
+Crystal THT HC-52/8mm, http://www.kvg-gmbh.de/assets/uploads/files/product_pdfs/XS71xx.pdf
+THT crystalHC-49/U
+0
+2
+2
+bzzzbz
+SSOP28-0.65-10.2X5.2MM
+<b>Shrink Small Outline Package</b> SSOP-28<p>http://www.ftdichip.com/Documents/DataSheets/DS_FT232R_v104.pdf
+
+0
+28
+28
+bzzzbz
+SW_PUSH_e-switch_PB300_SPST_12x12
+
+
+0
+0
+0
 custom
 Crystal_2pins_L11.5_P4.88_(9B-12.000MAAJ-B)
 Crystal THT HC-52/8mm, http://www.kvg-gmbh.de/assets/uploads/files/product_pdfs/XS71xx.pdf
