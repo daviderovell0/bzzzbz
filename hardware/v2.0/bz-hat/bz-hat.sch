@@ -949,7 +949,7 @@ U 1 1 60411F78
 P 2800 8950
 F 0 "J4" H 3450 10200 50  0000 C CNN
 F 1 "Raspberry_Pi_4" H 2800 8100 50  0000 C CNB
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical" H 2800 8950 50  0001 C CNN
+F 2 "custom:PinHeader_2x20_P2.54mm_Vertical_RaspberryPI_HAT" H 2800 8950 50  0001 C CNN
 F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 2800 8950 50  0001 C CNN
 	1    2800 8950
 	1    0    0    -1  
