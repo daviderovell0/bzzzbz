@@ -469,7 +469,7 @@ U 1 1 5E6BD4D8
 P 5550 3000
 F 0 "C13" H 5665 3046 50  0000 L CNN
 F 1 "0.1uF" H 5665 2955 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 5588 2850 50  0001 C CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 5588 2850 50  0001 C CNN
 F 3 "~" H 5550 3000 50  0001 C CNN
 	1    5550 3000
 	-1   0    0    -1  
@@ -949,7 +949,7 @@ U 1 1 60411F78
 P 2800 8950
 F 0 "J4" H 3450 10200 50  0000 C CNN
 F 1 "Raspberry_Pi_4" H 2800 8100 50  0000 C CNB
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical" H 2800 8950 50  0001 C CNN
+F 2 "custom:PinHeader_2x20_P2.54mm_Vertical_RaspberryPI_HAT" H 2800 8950 50  0001 C CNN
 F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 2800 8950 50  0001 C CNN
 	1    2800 8950
 	1    0    0    -1  
@@ -1497,7 +1497,7 @@ U 1 1 60647A7D
 P 8000 5300
 F 0 "C18" H 8118 5346 50  0000 L CNN
 F 1 "1uF" H 8118 5255 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 8038 5150 50  0001 C CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 8038 5150 50  0001 C CNN
 F 3 "~" H 8000 5300 50  0001 C CNN
 	1    8000 5300
 	1    0    0    -1  
@@ -1638,4 +1638,41 @@ Wire Notes Line
 	6850 7300 900  7300
 Text Notes 6200 10800 0    50   ~ 0
 Controller: RPI4
+$Comp
+L Device:CP C20
+U 1 1 6049D16C
+P 14700 2200
+F 0 "C20" H 14818 2246 50  0000 L CNN
+F 1 "1uF" H 14818 2155 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 14738 2050 50  0001 C CNN
+F 3 "~" H 14700 2200 50  0001 C CNN
+	1    14700 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR03
+U 1 1 6049D172
+P 14700 1950
+F 0 "#PWR03" H 14700 1800 50  0001 C CNN
+F 1 "+3.3V" H 14715 2123 50  0000 C CNN
+F 2 "" H 14700 1950 50  0001 C CNN
+F 3 "" H 14700 1950 50  0001 C CNN
+	1    14700 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDA #PWR04
+U 1 1 6049D178
+P 14700 2500
+F 0 "#PWR04" H 14700 2250 50  0001 C CNN
+F 1 "GNDA" H 14705 2327 50  0000 C CNN
+F 2 "" H 14700 2500 50  0001 C CNN
+F 3 "" H 14700 2500 50  0001 C CNN
+	1    14700 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14700 1950 14700 2050
+Wire Wire Line
+	14700 2350 14700 2500
 $EndSCHEMATC
