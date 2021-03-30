@@ -1,9 +1,8 @@
 Comment,Designator,Footprint,LCSC
 220pF,"C1,C2",Capacitor_SMD:C_0603_1608Metric,C1603
 0.1uF,C13,Capacitor_SMD:C_1206_3216Metric,C24497
-10uF,"C9,C10,C11,C15",Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A,C7171
+10uF,"C9,C10,C11,C15,C19",Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A,C7171
 0.1uF,"C12,C14,C16,C17",Capacitor_SMD:C_0603_1608Metric,C14663
-10uF,C19,Capacitor_SMD:C_0603_1608Metric,C7171
 220uF,"C5,C6",Capacitor_SMD:CP_Elec_6.3x7.7,C127327
 1uF,"C3,C4,C7,C8,C18,C20",Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A,C7176
 LineIN,J1,custom:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal,

@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/davide/repos/bzzzbz/hardware/v2.0/bz-hat/bz-hat.sch</source>
-    <date>Thu 25 Mar 2021 23:37:41 CET</date>
+    <date>Tue 30 Mar 2021 09:24:10 CEST</date>
     <tool>Eeschema 5.1.6-c6e7f7d~87~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -251,7 +251,7 @@
     </comp>
     <comp ref="C19">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="LCSC"> C7171</field>
