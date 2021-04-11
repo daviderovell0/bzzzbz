@@ -21,7 +21,11 @@ F 0 "U2" H 6775 3715 50  0000 C CNN
 F 1 "WM8731" H 6775 3624 50  0000 C CNB
 F 2 "custom:SSOP28-0.65-10.2X5.2MM" H 6750 3650 50  0001 C CNN
 F 3 "" H 6750 3650 50  0001 C CNN
-F 4 " C323837" H 6750 2800 50  0001 C CNN "LCSC"
+F 4 "-" H 6750 2800 50  0001 C CNN "LCSC"
+F 5 "https://www.mouser.it/ProductDetail/Cirrus-Logic/WM8731SEDS-RV?qs=%2F%252BPMR94VuMbaPuq%252BeWIkQQ%3D%3D" H 6750 2800 50  0001 C CNN "Distributor"
+F 6 "Cirrus Logic" H 6750 2800 50  0001 C CNN "Manufacturer name"
+F 7 "WM8731SEDS/V" H 6750 2800 50  0001 C CNN "Manufacturer part #"
+F 8 "3.62" H 6750 2800 50  0001 C CNN "Price (€)"
 	1    6750 2800
 	1    0    0    -1  
 $EndComp
@@ -40,6 +44,10 @@ F 1 "5.6k" V 2334 5100 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2380 5100 50  0001 C CNN
 F 3 "~" H 2450 5100 50  0001 C CNN
 F 4 "C4382" V 2450 5100 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2450 5100 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2450 5100 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F5601T5E" H 2450 5100 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 2450 5100 50  0001 C CNN "Price (€)"
 	1    2450 5100
 	0    -1   1    0   
 $EndComp
@@ -52,6 +60,10 @@ F 1 "5.6k" V 2584 5300 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2630 5300 50  0001 C CNN
 F 3 "~" H 2700 5300 50  0001 C CNN
 F 4 "C4382" V 2700 5300 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2700 5300 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2700 5300 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F5601T5E" H 2700 5300 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 2700 5300 50  0001 C CNN "Price (€)"
 	1    2700 5300
 	1    0    0    1   
 $EndComp
@@ -64,6 +76,10 @@ F 1 "220pF" H 3215 5255 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 3138 5150 50  0001 C CNN
 F 3 "~" H 3100 5300 50  0001 C CNN
 F 4 "C1603" H 3100 5300 50  0001 C CNN "LCSC"
+F 5 "Samsung Electro-Mechanics" H 3100 5300 50  0001 C CNN "Manufacturer name"
+F 6 "CL10B221KB8NNNC" H 3100 5300 50  0001 C CNN "Manufacturer part #"
+F 7 "JLCPCB parts" H 3100 5300 50  0001 C CNN "Distributor"
+F 8 "0.006" H 3100 5300 50  0001 C CNN "Price (€)"
 	1    3100 5300
 	-1   0    0    -1  
 $EndComp
@@ -76,6 +92,10 @@ F 1 "1uF" V 3564 5100 50  0000 C CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 3438 4950 50  0001 C CNN
 F 3 "~" H 3400 5100 50  0001 C CNN
 F 4 "C7176" V 3400 5100 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3400 5100 50  0001 C CNN "Distributor"
+F 6 "AVX" H 3400 5100 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA105K035RNJ" H 3400 5100 50  0001 C CNN "Manufacturer part #"
+F 8 "0.13" H 3400 5100 50  0001 C CNN "Price (€)"
 	1    3400 5100
 	0    1    -1   0   
 $EndComp
@@ -88,6 +108,10 @@ F 1 "5.6k" V 2334 5950 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2380 5950 50  0001 C CNN
 F 3 "~" H 2450 5950 50  0001 C CNN
 F 4 "C4382" V 2450 5950 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2450 5950 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2450 5950 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F5601T5E" H 2450 5950 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 2450 5950 50  0001 C CNN "Price (€)"
 	1    2450 5950
 	0    -1   1    0   
 $EndComp
@@ -100,6 +124,10 @@ F 1 "5.6k" V 2584 6150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2630 6150 50  0001 C CNN
 F 3 "~" H 2700 6150 50  0001 C CNN
 F 4 "C4382" V 2700 6150 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2700 6150 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2700 6150 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F5601T5E" H 2700 6150 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 2700 6150 50  0001 C CNN "Price (€)"
 	1    2700 6150
 	1    0    0    1   
 $EndComp
@@ -112,6 +140,10 @@ F 1 "220pF" H 3215 6105 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 3138 6000 50  0001 C CNN
 F 3 "~" H 3100 6150 50  0001 C CNN
 F 4 "C1603" H 3100 6150 50  0001 C CNN "LCSC"
+F 5 "Samsung Electro-Mechanics" H 3100 6150 50  0001 C CNN "Manufacturer name"
+F 6 "CL10B221KB8NNNC" H 3100 6150 50  0001 C CNN "Manufacturer part #"
+F 7 "JLCPCB parts" H 3100 6150 50  0001 C CNN "Distributor"
+F 8 "0.006" H 3100 6150 50  0001 C CNN "Price (€)"
 	1    3100 6150
 	-1   0    0    -1  
 $EndComp
@@ -124,6 +156,10 @@ F 1 "1uF" V 3564 5950 50  0000 C CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 3438 5800 50  0001 C CNN
 F 3 "~" H 3400 5950 50  0001 C CNN
 F 4 "C7176" V 3400 5950 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3400 5950 50  0001 C CNN "Distributor"
+F 6 "AVX" H 3400 5950 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA105K035RNJ" H 3400 5950 50  0001 C CNN "Manufacturer part #"
+F 8 "0.13" H 3400 5950 50  0001 C CNN "Price (€)"
 	1    3400 5950
 	0    1    -1   0   
 $EndComp
@@ -182,6 +218,10 @@ F 1 "1uF" V 3514 1800 50  0000 C CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 3388 1650 50  0001 C CNN
 F 3 "~" H 3350 1800 50  0001 C CNN
 F 4 "C7176" V 3350 1800 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3350 1800 50  0001 C CNN "Distributor"
+F 6 "AVX" H 3350 1800 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA105K035RNJ" H 3350 1800 50  0001 C CNN "Manufacturer part #"
+F 8 "0.13" H 3350 1800 50  0001 C CNN "Price (€)"
 	1    3350 1800
 	0    1    1    0   
 $EndComp
@@ -193,7 +233,11 @@ F 0 "R7" H 3020 1996 50  0000 L CNN
 F 1 "47k" H 3020 1905 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2880 1950 50  0001 C CNN
 F 3 "~" H 2950 1950 50  0001 C CNN
-F 4 " C17713" H 2950 1950 50  0001 C CNN "LCSC"
+F 4 "C17713" H 2950 1950 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2950 1950 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2950 1950 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F4702T5E" H 2950 1950 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 2950 1950 50  0001 C CNN "Price (€)"
 	1    2950 1950
 	1    0    0    -1  
 $EndComp
@@ -206,6 +250,10 @@ F 1 "100" V 2384 1800 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2430 1800 50  0001 C CNN
 F 3 "~" H 2500 1800 50  0001 C CNN
 F 4 "C17408" V 2500 1800 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2500 1800 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2500 1800 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F1000T5E" H 2500 1800 50  0001 C CNN "Manufacturer part #"
+F 8 "0.003" H 2500 1800 50  0001 C CNN "Price (€)"
 	1    2500 1800
 	0    1    1    0   
 $EndComp
@@ -218,6 +266,10 @@ F 1 "1uF" V 3564 2600 50  0000 C CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 3438 2450 50  0001 C CNN
 F 3 "~" H 3400 2600 50  0001 C CNN
 F 4 "C7176" V 3400 2600 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3400 2600 50  0001 C CNN "Distributor"
+F 6 "AVX" H 3400 2600 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA105K035RNJ" H 3400 2600 50  0001 C CNN "Manufacturer part #"
+F 8 "0.13" H 3400 2600 50  0001 C CNN "Price (€)"
 	1    3400 2600
 	0    1    1    0   
 $EndComp
@@ -229,7 +281,11 @@ F 0 "R8" H 3070 2796 50  0000 L CNN
 F 1 "47k" H 3070 2705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2930 2750 50  0001 C CNN
 F 3 "~" H 3000 2750 50  0001 C CNN
-F 4 " C17713" H 3000 2750 50  0001 C CNN "LCSC"
+F 4 "C17713" H 3000 2750 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3000 2750 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 3000 2750 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F4702T5E" H 3000 2750 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 3000 2750 50  0001 C CNN "Price (€)"
 	1    3000 2750
 	1    0    0    -1  
 $EndComp
@@ -242,6 +298,10 @@ F 1 "100" V 2434 2600 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2480 2600 50  0001 C CNN
 F 3 "~" H 2550 2600 50  0001 C CNN
 F 4 "C17408" V 2550 2600 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 2550 2600 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 2550 2600 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F1000T5E" H 2550 2600 50  0001 C CNN "Manufacturer part #"
+F 8 "0.003" H 2550 2600 50  0001 C CNN "Price (€)"
 	1    2550 2600
 	0    1    1    0   
 $EndComp
@@ -271,7 +331,11 @@ F 0 "C5" V 3145 3450 50  0000 C CNN
 F 1 "220uF" V 3236 3450 50  0000 C CNN
 F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 3438 3300 50  0001 C CNN
 F 3 "~" H 3400 3450 50  0001 C CNN
-F 4 " C127327" V 3400 3450 50  0001 C CNN "LCSC"
+F 4 "C127327" V 3400 3450 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3400 3450 50  0001 C CNN "Distributor"
+F 6 "LELON" H 3400 3450 50  0001 C CNN "Manufacturer name"
+F 7 "VES221M1CTR-0607" H 3400 3450 50  0001 C CNN "Manufacturer part #"
+F 8 "0.04" H 3400 3450 50  0001 C CNN "Price (€)"
 	1    3400 3450
 	0    1    1    0   
 $EndComp
@@ -288,7 +352,11 @@ F 0 "R10" H 3070 4446 50  0000 L CNN
 F 1 "47k" H 3070 4355 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2930 4400 50  0001 C CNN
 F 3 "~" H 3000 4400 50  0001 C CNN
-F 4 " C17713" H 3000 4400 50  0001 C CNN "LCSC"
+F 4 "C17713" H 3000 4400 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3000 4400 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 3000 4400 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F4702T5E" H 3000 4400 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 3000 4400 50  0001 C CNN "Price (€)"
 	1    3000 4400
 	1    0    0    -1  
 $EndComp
@@ -300,7 +368,11 @@ F 0 "C6" V 3145 4250 50  0000 C CNN
 F 1 "220uF" V 3236 4250 50  0000 C CNN
 F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 3438 4100 50  0001 C CNN
 F 3 "~" H 3400 4250 50  0001 C CNN
-F 4 " C127327" V 3400 4250 50  0001 C CNN "LCSC"
+F 4 "C127327" V 3400 4250 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3400 4250 50  0001 C CNN "Distributor"
+F 6 "LELON" H 3400 4250 50  0001 C CNN "Manufacturer name"
+F 7 "VES221M1CTR-0607" H 3400 4250 50  0001 C CNN "Manufacturer part #"
+F 8 "0.04" H 3400 4250 50  0001 C CNN "Price (€)"
 	1    3400 4250
 	0    1    1    0   
 $EndComp
@@ -312,7 +384,11 @@ F 0 "R9" H 3070 3646 50  0000 L CNN
 F 1 "47k" H 3070 3555 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 2930 3600 50  0001 C CNN
 F 3 "~" H 3000 3600 50  0001 C CNN
-F 4 " C17713" H 3000 3600 50  0001 C CNN "LCSC"
+F 4 "C17713" H 3000 3600 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 3000 3600 50  0001 C CNN "Distributor"
+F 6 "Uniroyal Elec" H 3000 3600 50  0001 C CNN "Manufacturer name"
+F 7 "0805W8F4702T5E" H 3000 3600 50  0001 C CNN "Manufacturer part #"
+F 8 "0.004" H 3000 3600 50  0001 C CNN "Price (€)"
 	1    3000 3600
 	1    0    0    -1  
 $EndComp
@@ -384,7 +460,11 @@ F 0 "C15" H 7482 2054 50  0000 R CNN
 F 1 "10uF" H 7482 2145 50  0000 R CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 7638 1950 50  0001 C CNN
 F 3 "~" H 7600 2100 50  0001 C CNN
-F 4 " C7171" H 7600 2100 50  0001 C CNN "LCSC"
+F 4 "C7171" H 7600 2100 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 7600 2100 50  0001 C CNN "Distributor"
+F 6 "AVX" H 7600 2100 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA106K016RNJ" H 7600 2100 50  0001 C CNN "Manufacturer part #"
+F 8 "0.17" H 7600 2100 50  0001 C CNN "Price (€)"
 	1    7600 2100
 	-1   0    0    1   
 $EndComp
@@ -397,6 +477,10 @@ F 1 "0.1uF" H 7885 2055 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 8038 1950 50  0001 C CNN
 F 3 "~" H 8000 2100 50  0001 C CNN
 F 4 "C14663" H 8000 2100 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 8000 2100 50  0001 C CNN "Distributor"
+F 6 "Yageo" H 8000 2100 50  0001 C CNN "Manufacturer name"
+F 7 "CC0603KRX7R9BB104" H 8000 2100 50  0001 C CNN "Manufacturer part #"
+F 8 "0.006" H 8000 2100 50  0001 C CNN "Price (€)"
 	1    8000 2100
 	-1   0    0    -1  
 $EndComp
@@ -421,7 +505,11 @@ F 0 "C19" H 7982 3454 50  0000 R CNN
 F 1 "10uF" H 7982 3545 50  0000 R CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 8138 3350 50  0001 C CNN
 F 3 "~" H 8100 3500 50  0001 C CNN
-F 4 " C7171" H 8100 3500 50  0001 C CNN "LCSC"
+F 4 "C7171" H 8100 3500 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 8100 3500 50  0001 C CNN "Distributor"
+F 6 "AVX" H 8100 3500 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA106K016RNJ" H 8100 3500 50  0001 C CNN "Manufacturer part #"
+F 8 "0.17" H 8100 3500 50  0001 C CNN "Price (€)"
 	1    8100 3500
 	1    0    0    -1  
 $EndComp
@@ -434,6 +522,10 @@ F 1 "0.1uF" H 7585 3455 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 7738 3350 50  0001 C CNN
 F 3 "~" H 7700 3500 50  0001 C CNN
 F 4 "C14663" H 7700 3500 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 7700 3500 50  0001 C CNN "Distributor"
+F 6 "Yageo" H 7700 3500 50  0001 C CNN "Manufacturer name"
+F 7 "CC0603KRX7R9BB104" H 7700 3500 50  0001 C CNN "Manufacturer part #"
+F 8 "0.006" H 7700 3500 50  0001 C CNN "Price (€)"
 	1    7700 3500
 	1    0    0    1   
 $EndComp
@@ -457,7 +549,11 @@ F 0 "C9" H 5032 1954 50  0000 R CNN
 F 1 "10uF" H 5032 2045 50  0000 R CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 5188 1850 50  0001 C CNN
 F 3 "~" H 5150 2000 50  0001 C CNN
-F 4 " C7171" H 5150 2000 50  0001 C CNN "LCSC"
+F 4 "C7171" H 5150 2000 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 5150 2000 50  0001 C CNN "Distributor"
+F 6 "AVX" H 5150 2000 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA106K016RNJ" H 5150 2000 50  0001 C CNN "Manufacturer part #"
+F 8 "0.17" H 5150 2000 50  0001 C CNN "Price (€)"
 	1    5150 2000
 	1    0    0    1   
 $EndComp
@@ -470,6 +566,10 @@ F 1 "0.1uF" H 5435 1955 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 5588 1850 50  0001 C CNN
 F 3 "~" H 5550 2000 50  0001 C CNN
 F 4 "C14663" H 5550 2000 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 5550 2000 50  0001 C CNN "Distributor"
+F 6 "Yageo" H 5550 2000 50  0001 C CNN "Manufacturer name"
+F 7 "CC0603KRX7R9BB104" H 5550 2000 50  0001 C CNN "Manufacturer part #"
+F 8 "0.006" H 5550 2000 50  0001 C CNN "Price (€)"
 	1    5550 2000
 	-1   0    0    1   
 $EndComp
@@ -485,7 +585,11 @@ F 0 "C10" H 5032 2954 50  0000 R CNN
 F 1 "10uF" H 5032 3045 50  0000 R CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 5188 2850 50  0001 C CNN
 F 3 "~" H 5150 3000 50  0001 C CNN
-F 4 " C7171" H 5150 3000 50  0001 C CNN "LCSC"
+F 4 "C7171" H 5150 3000 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 5150 3000 50  0001 C CNN "Distributor"
+F 6 "AVX" H 5150 3000 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA106K016RNJ" H 5150 3000 50  0001 C CNN "Manufacturer part #"
+F 8 "0.17" H 5150 3000 50  0001 C CNN "Price (€)"
 	1    5150 3000
 	1    0    0    -1  
 $EndComp
@@ -498,6 +602,10 @@ F 1 "0.1uF" H 5665 2955 50  0000 L CNN
 F 2 "Capacitor_SMD:C_1206_3216Metric" H 5588 2850 50  0001 C CNN
 F 3 "~" H 5550 3000 50  0001 C CNN
 F 4 "C24497" H 5550 3000 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 5550 3000 50  0001 C CNN "Distributor"
+F 6 "Samsung Electro-Mechanics" H 5550 3000 50  0001 C CNN "Manufacturer name"
+F 7 "CL31B104KBCNNNC" H 5550 3000 50  0001 C CNN "Manufacturer part #"
+F 8 "0.02" H 5550 3000 50  0001 C CNN "Price (€)"
 	1    5550 3000
 	-1   0    0    -1  
 $EndComp
@@ -520,7 +628,11 @@ F 0 "C11" H 5032 3554 50  0000 R CNN
 F 1 "10uF" H 5032 3645 50  0000 R CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 5188 3450 50  0001 C CNN
 F 3 "~" H 5150 3600 50  0001 C CNN
-F 4 " C7171" H 5150 3600 50  0001 C CNN "LCSC"
+F 4 "C7171" H 5150 3600 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 5150 3600 50  0001 C CNN "Distributor"
+F 6 "AVX" H 5150 3600 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA106K016RNJ" H 5150 3600 50  0001 C CNN "Manufacturer part #"
+F 8 "0.17" H 5150 3600 50  0001 C CNN "Price (€)"
 	1    5150 3600
 	1    0    0    -1  
 $EndComp
@@ -533,6 +645,10 @@ F 1 "0.1uF" H 5435 3555 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 5588 3450 50  0001 C CNN
 F 3 "~" H 5550 3600 50  0001 C CNN
 F 4 "C14663" H 5550 3600 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 5550 3600 50  0001 C CNN "Distributor"
+F 6 "Yageo" H 5550 3600 50  0001 C CNN "Manufacturer name"
+F 7 "CC0603KRX7R9BB104" H 5550 3600 50  0001 C CNN "Manufacturer part #"
+F 8 "0.006" H 5550 3600 50  0001 C CNN "Price (€)"
 	1    5550 3600
 	-1   0    0    -1  
 $EndComp
@@ -564,6 +680,11 @@ F 0 "J1" H 1271 5483 50  0000 R CNN
 F 1 "LineIN" H 1271 5574 50  0000 R CNB
 F 2 "custom:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal" H 1550 5550 50  0001 C CNN
 F 3 "~" H 1550 5550 50  0001 C CNN
+F 4 "-" H 1550 5550 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/CUI-Devices/SJ1-3533NG/?qs=WyjlAZoYn53GjNky%252BNFGCA==" H 1550 5550 50  0001 C CNN "Distributor"
+F 6 "CUI Devices" H 1550 5550 50  0001 C CNN "Manufacturer name"
+F 7 "SJ1-3533NG" H 1550 5550 50  0001 C CNN "Manufacturer part #"
+F 8 "0.98" H 1550 5550 50  0001 C CNN "Price (€)"
 	1    1550 5550
 	1    0    0    1   
 $EndComp
@@ -575,6 +696,11 @@ F 0 "J2" H 1471 2233 50  0000 R CNN
 F 1 "LineOUT" H 1471 2324 50  0000 R CNB
 F 2 "custom:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal" H 1750 2300 50  0001 C CNN
 F 3 "~" H 1750 2300 50  0001 C CNN
+F 4 "-" H 1750 2300 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/CUI-Devices/SJ1-3533NG/?qs=WyjlAZoYn53GjNky%252BNFGCA==" H 1750 2300 50  0001 C CNN "Distributor"
+F 6 "CUI Devices" H 1750 2300 50  0001 C CNN "Manufacturer name"
+F 7 "SJ1-3533NG" H 1750 2300 50  0001 C CNN "Manufacturer part #"
+F 8 "0.98" H 1750 2300 50  0001 C CNN "Price (€)"
 	1    1750 2300
 	1    0    0    1   
 $EndComp
@@ -587,6 +713,11 @@ F 0 "J3" H 1520 3783 50  0000 R CNN
 F 1 "Headphones" H 1520 3874 50  0000 R CNB
 F 2 "custom:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal" H 1800 3850 50  0001 C CNN
 F 3 "~" H 1800 3850 50  0001 C CNN
+F 4 "-" H 1800 3850 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/CUI-Devices/SJ1-3533NG/?qs=WyjlAZoYn53GjNky%252BNFGCA==" H 1800 3850 50  0001 C CNN "Distributor"
+F 6 "CUI Devices" H 1800 3850 50  0001 C CNN "Manufacturer name"
+F 7 "SJ1-3533NG" H 1800 3850 50  0001 C CNN "Manufacturer part #"
+F 8 "0.98" H 1800 3850 50  0001 C CNN "Price (€)"
 	1    1800 3850
 	1    0    0    1   
 $EndComp
@@ -724,7 +855,11 @@ F 0 "U1" H 7100 5600 50  0000 C CNN
 F 1 "MCP3004" H 6950 5500 50  0000 C CNB
 F 2 "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm" H 7550 4950 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21295C.pdf" H 7550 4950 50  0001 C CNN
-F 4 " C512186" H 6650 5250 50  0001 C CNN "LCSC"
+F 4 " -" H 6650 5250 50  0001 C CNN "LCSC"
+F 5 "https://www.mouser.it/ProductDetail/Microchip-Technology/MCP3004-I-SL?qs=mehPC4wL4j%2FaEb1%252Bx2zmIg%3D%3D" H 6650 5250 50  0001 C CNN "Distributor"
+F 6 "Microchip Technology " H 6650 5250 50  0001 C CNN "Manufacturer name"
+F 7 "MCP3004-I/SL" H 6650 5250 50  0001 C CNN "Manufacturer part #"
+F 8 "1.85" H 6650 5250 50  0001 C CNN "Price (€)"
 	1    6650 5250
 	1    0    0    -1  
 $EndComp
@@ -736,7 +871,11 @@ F 0 "U3" H 13800 2550 50  0000 C CNN
 F 1 "MCP3004" H 13650 2450 50  0000 C CNB
 F 2 "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm" H 14250 1900 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21295C.pdf" H 14250 1900 50  0001 C CNN
-F 4 " C512186" H 13350 2200 50  0001 C CNN "LCSC"
+F 4 " -" H 13350 2200 50  0001 C CNN "LCSC"
+F 5 "https://www.mouser.it/ProductDetail/Microchip-Technology/MCP3004-I-SL?qs=mehPC4wL4j%2FaEb1%252Bx2zmIg%3D%3D" H 13350 2200 50  0001 C CNN "Distributor"
+F 6 "Microchip Technology " H 13350 2200 50  0001 C CNN "Manufacturer name"
+F 7 "MCP3004-I/SL" H 13350 2200 50  0001 C CNN "Manufacturer part #"
+F 8 "1.85" H 13350 2200 50  0001 C CNN "Price (€)"
 	1    13350 2200
 	1    0    0    -1  
 $EndComp
@@ -982,6 +1121,10 @@ F 0 "J4" H 3450 10200 50  0000 C CNN
 F 1 "Raspberry_Pi_4" H 2800 8100 50  0000 C CNB
 F 2 "custom:PinHeader_2x20_P2.54mm_Vertical_RaspberryPI_HAT" H 2800 8950 50  0001 C CNN
 F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 2800 8950 50  0001 C CNN
+F 4 "-" H 2800 8950 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Adafruit/1992/?qs=GURawfaeGuBPldm8Estq5w%3D%3D" H 2800 8950 50  0001 C CNN "Distributor"
+F 6 "Adafruit" H 2800 8950 50  0001 C CNN "Manufacturer name"
+F 7 "2.50" H 2800 8950 50  0001 C CNN "Price (€)"
 	1    2800 8950
 	1    0    0    -1  
 $EndComp
@@ -999,6 +1142,11 @@ F 0 "RV3" H 11331 1596 50  0000 R CNN
 F 1 "10k" H 11331 1505 50  0000 R CNN
 F 2 "Potentiometer_THT:Potentiometer_Alps_RK09L_Single_Vertical" H 11400 1550 50  0001 C CNN
 F 3 "~" H 11400 1550 50  0001 C CNN
+F 4 "-" H 11400 1550 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Alps-Alpine/RK09L114001T/?qs=Xb8IjHhkxj78e5CYccfZWg%3D%3D" H 11400 1550 50  0001 C CNN "Distributor"
+F 6 "Alps" H 11400 1550 50  0001 C CNN "Manufacturer name"
+F 7 "RK09L114001T " H 11400 1550 50  0001 C CNN "Manufacturer part #"
+F 8 "1.5" H 11400 1550 50  0001 C CNN "Price (€)"
 	1    11400 1550
 	1    0    0    -1  
 $EndComp
@@ -1010,6 +1158,11 @@ F 0 "RV4" H 11831 1596 50  0000 R CNN
 F 1 "10k" H 11831 1505 50  0000 R CNN
 F 2 "Potentiometer_THT:Potentiometer_Alps_RK09L_Single_Vertical" H 11900 1550 50  0001 C CNN
 F 3 "~" H 11900 1550 50  0001 C CNN
+F 4 "-" H 11900 1550 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Alps-Alpine/RK09L114001T/?qs=Xb8IjHhkxj78e5CYccfZWg%3D%3D" H 11900 1550 50  0001 C CNN "Distributor"
+F 6 "Alps" H 11900 1550 50  0001 C CNN "Manufacturer name"
+F 7 "RK09L114001T " H 11900 1550 50  0001 C CNN "Manufacturer part #"
+F 8 "1.5" H 11900 1550 50  0001 C CNN "Price (€)"
 	1    11900 1550
 	1    0    0    -1  
 $EndComp
@@ -1021,6 +1174,11 @@ F 0 "RV2" H 10831 1596 50  0000 R CNN
 F 1 "10k" H 10831 1505 50  0000 R CNN
 F 2 "Potentiometer_THT:Potentiometer_Alps_RK09L_Single_Vertical" H 10900 1550 50  0001 C CNN
 F 3 "~" H 10900 1550 50  0001 C CNN
+F 4 "-" H 10900 1550 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Alps-Alpine/RK09L114001T/?qs=Xb8IjHhkxj78e5CYccfZWg%3D%3D" H 10900 1550 50  0001 C CNN "Distributor"
+F 6 "Alps" H 10900 1550 50  0001 C CNN "Manufacturer name"
+F 7 "RK09L114001T " H 10900 1550 50  0001 C CNN "Manufacturer part #"
+F 8 "1.5" H 10900 1550 50  0001 C CNN "Price (€)"
 	1    10900 1550
 	1    0    0    -1  
 $EndComp
@@ -1032,6 +1190,11 @@ F 0 "RV1" H 10331 1596 50  0000 R CNN
 F 1 "10k" H 10331 1505 50  0000 R CNN
 F 2 "Potentiometer_THT:Potentiometer_Alps_RK09L_Single_Vertical" H 10400 1550 50  0001 C CNN
 F 3 "~" H 10400 1550 50  0001 C CNN
+F 4 "-" H 10400 1550 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Alps-Alpine/RK09L114001T/?qs=Xb8IjHhkxj78e5CYccfZWg%3D%3D" H 10400 1550 50  0001 C CNN "Distributor"
+F 6 "Alps" H 10400 1550 50  0001 C CNN "Manufacturer name"
+F 7 "RK09L114001T " H 10400 1550 50  0001 C CNN "Manufacturer part #"
+F 8 "1.5" H 10400 1550 50  0001 C CNN "Price (€)"
 	1    10400 1550
 	1    0    0    -1  
 $EndComp
@@ -1133,6 +1296,11 @@ F 0 "J5" H 5550 5600 50  0000 C CNN
 F 1 "CVs+CLK_connector" H 5550 5500 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 5550 5250 50  0001 C CNN
 F 3 "~" H 5550 5250 50  0001 C CNN
+F 4 "-" H 5550 5250 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Preci-dip/801-87-004-10-001101?qs=%2Fha2pyFaduiBiyA5df4TqSBBrWj5a4LkA2hML%252BpupX55FhxAMVvFgzGJAW%252B4B4Zp" H 5550 5250 50  0001 C CNN "Distributor"
+F 6 "Preci-dip " H 5550 5250 50  0001 C CNN "Manufacturer name"
+F 7 "801-87-004-10-001101" H 5550 5250 50  0001 C CNN "Manufacturer part #"
+F 8 "0.36" H 5550 5250 50  0001 C CNN "Price (€)"
 	1    5550 5250
 	-1   0    0    -1  
 $EndComp
@@ -1261,6 +1429,11 @@ F 0 "SW1" H 10800 3785 50  0000 C CNN
 F 1 "BTN_f" H 10800 3694 50  0000 C CNN
 F 2 "custom:SW_PUSH-12mm+3d" H 10800 3700 50  0001 C CNN
 F 3 "~" H 10800 3700 50  0001 C CNN
+F 4 "-" H 10800 3500 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/E-Switch/TL1100F160Q6JBLK/?qs=01kh3H%252BlXijHi9khJEdsAw%3D%3D" H 10800 3500 50  0001 C CNN "Distributor"
+F 6 "E-Switch" H 10800 3500 50  0001 C CNN "Manufacturer name"
+F 7 "TL1100F160Q6JBLK" H 10800 3500 50  0001 C CNN "Manufacturer part #"
+F 8 "0.65" H 10800 3500 50  0001 C CNN "Price (€)"
 	1    10800 3500
 	1    0    0    -1  
 $EndComp
@@ -1272,6 +1445,11 @@ F 0 "SW2" H 10800 4185 50  0000 C CNN
 F 1 "BTN_big" H 10800 4094 50  0000 C CNN
 F 2 "custom:SW_PUSH_e-switch_PB300_SPST_12x12" H 10800 4100 50  0001 C CNN
 F 3 "~" H 10800 4100 50  0001 C CNN
+F 4 "-" H 10800 3900 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/E-Switch/PB300STQ/?qs=4NsIomN5447l2q20l%2Fla%2Fg%3D%3D" H 10800 3900 50  0001 C CNN "Distributor"
+F 6 "E-Switch" H 10800 3900 50  0001 C CNN "Manufacturer name"
+F 7 "PB300STQ" H 10800 3900 50  0001 C CNN "Manufacturer part #"
+F 8 "1.41" H 10800 3900 50  0001 C CNN "Price (€)"
 	1    10800 3900
 	1    0    0    -1  
 $EndComp
@@ -1283,6 +1461,11 @@ F 0 "SW3" H 10800 4585 50  0000 C CNN
 F 1 "BTN_1" H 10800 4494 50  0000 C CNN
 F 2 "custom:SW_PUSH-12mm+3d" H 10800 4500 50  0001 C CNN
 F 3 "~" H 10800 4500 50  0001 C CNN
+F 4 "-" H 10800 4300 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/E-Switch/TL1100F160Q6JBLK/?qs=01kh3H%252BlXijHi9khJEdsAw%3D%3D" H 10800 4300 50  0001 C CNN "Distributor"
+F 6 "E-Switch" H 10800 4300 50  0001 C CNN "Manufacturer name"
+F 7 "TL1100F160Q6JBLK" H 10800 4300 50  0001 C CNN "Manufacturer part #"
+F 8 "0.65" H 10800 4300 50  0001 C CNN "Price (€)"
 	1    10800 4300
 	1    0    0    -1  
 $EndComp
@@ -1294,6 +1477,11 @@ F 0 "SW4" H 10800 4985 50  0000 C CNN
 F 1 "BTN_2" H 10800 4894 50  0000 C CNN
 F 2 "custom:SW_PUSH-12mm+3d" H 10800 4900 50  0001 C CNN
 F 3 "~" H 10800 4900 50  0001 C CNN
+F 4 "-" H 10800 4700 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/E-Switch/TL1100F160Q6JBLK/?qs=01kh3H%252BlXijHi9khJEdsAw%3D%3D" H 10800 4700 50  0001 C CNN "Distributor"
+F 6 "E-Switch" H 10800 4700 50  0001 C CNN "Manufacturer name"
+F 7 "TL1100F160Q6JBLK" H 10800 4700 50  0001 C CNN "Manufacturer part #"
+F 8 "0.65" H 10800 4700 50  0001 C CNN "Price (€)"
 	1    10800 4700
 	1    0    0    -1  
 $EndComp
@@ -1305,6 +1493,11 @@ F 0 "SW5" H 10800 5385 50  0000 C CNN
 F 1 "BTN_3" H 10800 5294 50  0000 C CNN
 F 2 "custom:SW_PUSH-12mm+3d" H 10800 5300 50  0001 C CNN
 F 3 "~" H 10800 5300 50  0001 C CNN
+F 4 "-" H 10800 5100 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/E-Switch/TL1100F160Q6JBLK/?qs=01kh3H%252BlXijHi9khJEdsAw%3D%3D" H 10800 5100 50  0001 C CNN "Distributor"
+F 6 "E-Switch" H 10800 5100 50  0001 C CNN "Manufacturer name"
+F 7 "TL1100F160Q6JBLK" H 10800 5100 50  0001 C CNN "Manufacturer part #"
+F 8 "0.65" H 10800 5100 50  0001 C CNN "Price (€)"
 	1    10800 5100
 	1    0    0    -1  
 $EndComp
@@ -1416,6 +1609,11 @@ F 0 "J6" H 14100 4150 50  0000 C CNN
 F 1 "NHD-2.23-12832UCB3" H 14500 4050 50  0000 C CNN
 F 2 "custom:Display_NHD-2.23-12832" H 13950 4200 50  0001 C CNN
 F 3 "~" H 13950 4200 50  0001 C CNN
+F 4 "-" H 13950 4200 50  0001 C CNN "LCSC"
+F 5 "https://eu.mouser.com/ProductDetail/Newhaven-Display/NHD-223-12832UCB3/?qs=EQmeiuRlVUSLgZ2O%2Fplskg%3D%3D" H 13950 4200 50  0001 C CNN "Distributor"
+F 6 "Newhaven Displays" H 13950 4200 50  0001 C CNN "Manufacturer name"
+F 7 "NHD-2.23-12832UCB3" H 13950 4200 50  0001 C CNN "Manufacturer part #"
+F 8 "23.43" H 13950 4200 50  0001 C CNN "Price (€)"
 	1    13950 4200
 	1    0    0    -1  
 $EndComp
@@ -1530,7 +1728,11 @@ F 0 "C18" H 8118 5346 50  0000 L CNN
 F 1 "1uF" H 8118 5255 50  0000 L CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 8038 5150 50  0001 C CNN
 F 3 "~" H 8000 5300 50  0001 C CNN
-F 4 " C7176" H 8000 5300 50  0001 C CNN "LCSC"
+F 4 "C7176" H 8000 5300 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 8000 5300 50  0001 C CNN "Distributor"
+F 6 "AVX" H 8000 5300 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA105K035RNJ" H 8000 5300 50  0001 C CNN "Manufacturer part #"
+F 8 "0.13" H 8000 5300 50  0001 C CNN "Price (€)"
 	1    8000 5300
 	1    0    0    -1  
 $EndComp
@@ -1678,7 +1880,11 @@ F 0 "C20" H 14818 2246 50  0000 L CNN
 F 1 "1uF" H 14818 2155 50  0000 L CNN
 F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 14738 2050 50  0001 C CNN
 F 3 "~" H 14700 2200 50  0001 C CNN
-F 4 " C7176" H 14700 2200 50  0001 C CNN "LCSC"
+F 4 "C7176" H 14700 2200 50  0001 C CNN "LCSC"
+F 5 "JLCPCB parts" H 14700 2200 50  0001 C CNN "Distributor"
+F 6 "AVX" H 14700 2200 50  0001 C CNN "Manufacturer name"
+F 7 "TAJA105K035RNJ" H 14700 2200 50  0001 C CNN "Manufacturer part #"
+F 8 "0.13" H 14700 2200 50  0001 C CNN "Price (€)"
 	1    14700 2200
 	1    0    0    -1  
 $EndComp
