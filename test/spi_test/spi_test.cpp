@@ -16,18 +16,18 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-#include "../MCP3008Comm.h"
+#include "../../src/MCP3004Comm.h"
 
-class MCP3008printSampleCallback : public MCP3008callback {
-	virtual void hasSample(int v, int c) {
-		printf("CH%d, value = %d\n",c,v);
-	}
+class MCP3004printSampleCallback : public MCP3004callback {
+        virtual void hasSample(int v, int c) {
+                printf("CH%d, value = %d\n",c,v);
+        }
 };
 
 
 int main(int argc, char *argv[]) {
-	MCP3008Comm* m = new MCP3008Comm();
-    MCP3008printSampleCallback print_cb;
+        MCP3004Comm* m = new MCP3004Comm();
+    MCP3004printSampleCallback print_cb;
     m->setCallback(&print_cb);
     m->start();
 
@@ -35,5 +35,6 @@ int main(int argc, char *argv[]) {
     m->stop();
     delete m;
 
-	return 0;
+    return 0;
 }
+
