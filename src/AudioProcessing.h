@@ -93,7 +93,7 @@ private:
      * output_port is either LLINEOUT or RLINEOUT 
      * 
      * @TODO add extra port for stereo input
-     */
+     * */
     jack_port_t *input_port;
     jack_port_t *output_portL;
     jack_port_t *output_portR;

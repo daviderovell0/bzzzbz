@@ -1,0 +1,11 @@
+(module JLCPCB_Order_ID (layer F.Cu) (tedit 603ACAF1)
+  (fp_text reference REF** (at 0.58 2.85) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value JLCPCB_Order_ID (at -0.01 1.04) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text user JLCJLCJLCJLC (at 0.01 -0.63) (layer F.SilkS)
+    (effects (font (size 0.8 0.8) (thickness 0.15)))
+  )
+)
