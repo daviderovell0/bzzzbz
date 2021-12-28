@@ -3,6 +3,8 @@
 *.out
 *.o
 *.zip
+*.ipynb_checkpoints/
+
 
 # Libraries
 *.a
@@ -17,4 +19,3 @@
 
 # VScode local settings for local machine
 .vscode
-
