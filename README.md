@@ -6,8 +6,8 @@ If you are a musician, a visual artist or are curious about the mesmerizing vide
 ## Documentation
 Visit our [wiki](https://github.com/daviderovell0/bzzzbz/wiki) for the full documentation. 
 ## Contributions
-Real Time Embedded Programming 5 repository. Team 9:
-- Davide Rovelli (daviderovell0) - 2202008r
-- Peter Nagy (deetrone)- 2202553n
-- Marcell Illyes (marcellillyes)- 2148723i 
+- Davide Rovelli (daviderovell0)
+- Peter Nagy (deetrone)
+- Marcell Illyes (marcellillyes)
 
+This project was born at the University of Glasgow, School of Engineering. Credits to Dr.Bernd Porr, Dr. Nicholas Bailey and their Real Time Embedded Programming course.
