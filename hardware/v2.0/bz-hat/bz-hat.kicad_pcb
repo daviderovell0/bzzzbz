@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew 5.1.6-c6e7f7d~87~ubuntu18.04.1)
+(kicad_pcb (version 20171130) (host pcbnew 5.1.5+dfsg1-2build2)
 
   (general
     (thickness 1.6)
@@ -11,8 +11,8 @@
 
   (page A4)
   (layers
-    (0 F.Cu signal hide)
-    (31 B.Cu signal)
+    (0 F.Cu signal)
+    (31 B.Cu signal hide)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -3503,7 +3503,7 @@
   (segment (start 195.6 89.8) (end 145.2 89.8) (width 0.2) (layer F.Cu) (net 23))
   (segment (start 145.2 89.8) (end 140.2 84.8) (width 0.2) (layer F.Cu) (net 23))
   (segment (start 140.2 84.8) (end 140.2 84.8) (width 0.2) (layer F.Cu) (net 23) (tstamp 60480D56))
-  (via (at 140.2 84.8) (size 0.8) (drill 0.4) (layers F.Cu B.Cu) (net 23))
+  (via (at 140.2 84.8) (size 0.8) (drill 0.4) (layers F.Cu B.Cu) (net 23) (status 1000000))
   (segment (start 140.2 85.04) (end 140.2 84.8) (width 0.2) (layer B.Cu) (net 23))
   (segment (start 133.77 91.47) (end 140.2 85.04) (width 0.2) (layer B.Cu) (net 23))
   (segment (start 110.81 61.275) (end 110.81 64.81) (width 0.2) (layer B.Cu) (net 28))

@@ -14,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L custom:WM8731 U2
+L bz-hat-rescue:WM8731-custom U2
 U 1 1 5E566C4B
 P 6750 2800
 F 0 "U2" H 6775 3715 50  0000 C CNN
@@ -673,7 +673,7 @@ Wire Wire Line
 Wire Wire Line
 	5900 2750 6200 2750
 $Comp
-L custom:AudioJack3_numbered J1
+L bz-hat-rescue:AudioJack3_numbered-custom J1
 U 1 1 5E660B0F
 P 1550 5550
 F 0 "J1" H 1271 5483 50  0000 R CNN
@@ -689,7 +689,7 @@ F 8 "0.98" H 1550 5550 50  0001 C CNN "Price (€)"
 	1    0    0    1   
 $EndComp
 $Comp
-L custom:AudioJack3_numbered J2
+L bz-hat-rescue:AudioJack3_numbered-custom J2
 U 1 1 5E66FF01
 P 1750 2300
 F 0 "J2" H 1471 2233 50  0000 R CNN
@@ -706,7 +706,7 @@ F 8 "0.98" H 1750 2300 50  0001 C CNN "Price (€)"
 $EndComp
 Connection ~ 3000 3450
 $Comp
-L custom:AudioJack3_numbered J3
+L bz-hat-rescue:AudioJack3_numbered-custom J3
 U 1 1 5E67CC5E
 P 1800 3850
 F 0 "J3" H 1520 3783 50  0000 R CNN
@@ -848,7 +848,7 @@ Wire Wire Line
 Wire Wire Line
 	7300 2650 7600 2650
 $Comp
-L Analog_ADC:MCP3004 U1
+L bz-hat-rescue:MCP3004-Analog_ADC U1
 U 1 1 6034A0E0
 P 6650 5250
 F 0 "U1" H 7100 5600 50  0000 C CNN
@@ -864,7 +864,7 @@ F 8 "1.85" H 6650 5250 50  0001 C CNN "Price (€)"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Analog_ADC:MCP3004 U3
+L bz-hat-rescue:MCP3004-Analog_ADC U3
 U 1 1 6034D84F
 P 13350 2200
 F 0 "U3" H 13800 2550 50  0000 C CNN
@@ -1114,7 +1114,7 @@ Wire Wire Line
 Wire Wire Line
 	2950 10250 3000 10250
 $Comp
-L Connector:Raspberry_Pi_4 J4
+L bz-hat-rescue:Raspberry_Pi_4-Connector J4
 U 1 1 60411F78
 P 2800 8950
 F 0 "J4" H 3450 10200 50  0000 C CNN

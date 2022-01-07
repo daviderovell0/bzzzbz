@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name bz-hat-rescue)(type Legacy)(uri ${KIPRJMOD}/bz-hat-rescue.lib)(options "")(descr ""))
+)
