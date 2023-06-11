@@ -13,11 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
-#include <thread>  
-
 
 class NHD223Comm {
     public:
@@ -28,16 +25,21 @@ class NHD223Comm {
          * \param const char* spiDevice - the SPI interface of the Raspberry Pi.
          **/
 	     NHD223Comm(const char* spiDevice = "/dev/spidev3.0");
-         int spi_transfer(int fd, uint8_t* tx, uint8_t* rx, int n);
-         int fd = 0;
+         int spi_transfer(uint8_t* tx, uint8_t* rx, int n);
+         int on();
+         int off();
+
+         void close();
+         
 
     private:
-        
+
+        int fd = 0;
+        struct spi_ioc_transfer tr;
         const uint8_t mode = SPI_MODE_0;
 	    const uint32_t speed = 500000;
 	    const uint16_t delay = 0;
 	    const uint8_t bpw   = 8;
-        // int spi_transfer(int fd, uint8_t* tx, uint8_t* rx, int n);
 };
 
 #endif
