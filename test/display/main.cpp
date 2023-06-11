@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     // set spi_transfer args
     int fd = 0;
 	const uint8_t mode = SPI_MODE_0;
-	const char *device = "/dev/spidev3.0";
+	const char *device = "/dev/spidev5.0";
     
 	fd = open(device, O_RDWR);
 	if (fd < 0)

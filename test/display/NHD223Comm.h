@@ -24,7 +24,7 @@ class NHD223Comm {
          * 
          * \param const char* spiDevice - the SPI interface of the Raspberry Pi.
          **/
-	     NHD223Comm(const char* spiDevice = "/dev/spidev3.0");
+	     NHD223Comm(const char* spiDevice = "/dev/spidev5.0");
          int spi_transfer(uint8_t* tx, uint8_t* rx, int n);
          int on();
          int off();
